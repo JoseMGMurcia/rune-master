@@ -5,4 +5,5 @@
  - Modulation
  - Stylelint, eslint.
  - Idexed db service.
-
+ - Character model.
+ - Characters module

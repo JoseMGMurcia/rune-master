@@ -7,7 +7,11 @@ import { Component } from '@angular/core';
 })
 export class MenubarComponent {
 
-  public myFunction(){
-    console.log("myccccccFunction");
+  public navigateCharacters(){
+    //
+  }
+
+  public navigateDetail(){
+    //
   }
 }

@@ -8,8 +8,8 @@
 
   <mat-menu #appMenu="matMenu">
     <ng-template matMenuContent>
-      <button mat-menu-item (click)="myFunction()">Item 1</button>
-      <button mat-menu-item (click)="myFunction()">Item 2</button>
+      <button mat-menu-item (click)="navigateCharacters()">{{ "MENU.CHARACTERS" | translate }}</button>
+      <button mat-menu-item (click)="navigateDetail()">{{ "MENU.DETAIL" | translate }}</button>
     </ng-template>
   </mat-menu>
 

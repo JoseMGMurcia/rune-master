@@ -1,3 +1,7 @@
 {
-  "RUNEQUEST_MASTER": "RuneQuest Master"
+  "RUNEQUEST_MASTER": "RuneQuest Master",
+  "MENU": {
+    "CHARACTERS": "Personajes",
+    "DETAIL": "Detalle"
+  }
 }

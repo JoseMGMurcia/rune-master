@@ -8,20 +8,33 @@ import { DB_DEFINITION, DB_NAME } from '../constants/db.constants';
 })
 export class DatabaseService {
 
-  createDatabase() {
+  static swConected = false;
+  private db = new Dexie(DB_NAME);
 
-    const db = new Dexie(DB_NAME);
-
+  async createDatabase() {
+    this.closeDatabase();
     // Declare tables, IDs and indexes
-    db.version(1).stores(DB_DEFINITION);
+    this.db.version(2).stores(DB_DEFINITION);
 
-    db.open().catch((error) => {
+    this.db.open().catch((error) => {
+      DatabaseService.swConected = false;
       console.error('Failed to open database: ' + error);
     }).then(() => {
+      DatabaseService.swConected = true;
       console.log('Database opened successfully');
     });
+  }
 
+  async closeDatabase() {
+    this.db.close();
+  }
 
+  async saveData(table: string, data: any) {
+    return this.db.table(table).put(data);
+  }
+
+  async getData(table: string, id: number) {
+    return this.db.table(table).get(id);
   }
 
 }
