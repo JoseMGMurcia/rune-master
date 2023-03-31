@@ -1,0 +1,16 @@
+<mat-toolbar>
+    <span>
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </span>
+  <span>{{ "RUNEQUEST_MASTER" | translate }}</span>
+
+  <mat-menu #appMenu="matMenu">
+    <ng-template matMenuContent>
+      <button mat-menu-item (click)="myFunction()">Item 1</button>
+      <button mat-menu-item (click)="myFunction()">Item 2</button>
+    </ng-template>
+  </mat-menu>
+
+</mat-toolbar>
