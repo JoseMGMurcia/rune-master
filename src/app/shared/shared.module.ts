@@ -8,6 +8,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MenubarComponent } from './components/menubar/menubar.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { EasyDialogComponent } from './components/easy-dialog/easy-dialog.component';
+import { MatInputModule } from '@angular/material/input';
+
 
 export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -15,11 +19,15 @@ export const createTranslateLoader = (http: HttpClient) =>
 const matModules = [
   MatToolbarModule,
   MatIconModule,
-  MatMenuModule
+  MatMenuModule,
+  MatButtonModule,
+  MatInputModule,
+
 ];
 
 const components = [
-  MenubarComponent
+  MenubarComponent,
+  EasyDialogComponent
 ];
 
 

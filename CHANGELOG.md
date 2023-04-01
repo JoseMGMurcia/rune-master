@@ -6,4 +6,8 @@
  - Stylelint, eslint.
  - Idexed db service.
  - Character model.
- - Characters module
+ - Characters module.
+ - Character service.
+ - Characters page first display.
+ - Easy alert added
+ 

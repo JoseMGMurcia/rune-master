@@ -1,15 +1,16 @@
-<mat-toolbar>
-    <span>
+<mat-toolbar color="primary">
+    <span class="rQItem">
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
         <mat-icon>menu</mat-icon>
       </button>
     </span>
-  <span>{{ "RUNEQUEST_MASTER" | translate }}</span>
+  <span class="rQItem">{{ "RUNEQUEST_MASTER" | translate }}</span>
 
   <mat-menu #appMenu="matMenu">
     <ng-template matMenuContent>
-      <button mat-menu-item (click)="navigateCharacters()">{{ "MENU.CHARACTERS" | translate }}</button>
-      <button mat-menu-item (click)="navigateDetail()">{{ "MENU.DETAIL" | translate }}</button>
+      <button mat-menu-item (click)="navigateHome()"><mat-icon>home</mat-icon>{{ "MENU.HOME" | translate }}</button>
+      <button mat-menu-item (click)="navigateCharacters()"><mat-icon>people</mat-icon>{{ "MENU.CHARACTERS" | translate }}</button>
+      <button mat-menu-item (click)="navigateDetail()"><mat-icon>visibility</mat-icon>{{ "MENU.DETAIL" | translate }}</button>
     </ng-template>
   </mat-menu>
 

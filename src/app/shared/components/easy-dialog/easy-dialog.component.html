@@ -1,0 +1,10 @@
+
+<div class="light-back padding-all">
+  <p class="rQItem title">{{ data.title }}</p>
+  <p class="rQItem">{{ data.text }}</p>
+  <div class="rQItem">
+    <button mat-button color="primary" (click)="handleCancel()"class="rQItem">{{ 'COMMONS.CANCEL' | translate }}</button>
+    <button mat-raised-button color="primary" (click)="handleConfirm()" class="rQItem">{{ 'COMMONS.CONFIRM' | translate }}</button>
+  </div>
+</div>
+

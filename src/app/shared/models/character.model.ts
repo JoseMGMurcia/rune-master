@@ -4,89 +4,97 @@ export class Character {
   public id = '';
   public name = '';
   public player = '';
-  public pnj = false;
+  public pnj = true;
   public race = '';
   public sex = '';
   public age = 0;
   public height = 0;
   public weight = 0;
   public description = '';
-  public characteristics: Characteristics[] = [];
+  public characteristics : Characteristics = new Characteristics();
   public skills: Skill[] = [];
   public personalityTraits: PersonalityTrait[] = [];
-  public culture = '';
+  public culture: cultureType = cultureTypeEnum.PRIMITIVE;
   public profesion = '';
   public bornIn = '';
   public country = '';
   public family = '';
-  public religions: string[] = [];
+  public religions: CultMember[] = [];
   public notes: string[] = [];
   public spells: spell[] = [];
   public movement = 3;
+  public markedPOW = false;
+
   public equipment: Equipment[] = [];
   public weapons: Weapon[] = [];
   public armor: Armor[] = [];
   public locations: Location[] = [];
+
+  public powers: string[] = [];
   public bonusHP = 0;
   public bonusAP = 0;
   public bonugMP = 0;
   public bonusFP = 0;
-  public powers: string[] = [];
   public sideKidIds: string[] = [];
   public creationDate = new Date();
   public lastUpdate = new Date();
   public alive = true;
+  public favorite = false;
 
   constructor(name: string, player: string = '') {
     this.id = getUniqueID(name);
     this.name = name;
     this.player = player;
-    this.pnj = player ? true : false;
+    this.pnj = player ? false : true;
   }
 }
 
 export class Characteristics {
-  public name = '';
+  public STR: Characteristic = new Characteristic(0);
+  public DEX: Characteristic = new Characteristic(0);
+  public CON: Characteristic = new Characteristic(0);
+  public INT: Characteristic = new Characteristic(0);
+  public SIZ: Characteristic = new Characteristic(0);
+  public POW: Characteristic = new Characteristic(0);
+  public CHA: Characteristic = new Characteristic(0);
+}
+
+export class Characteristic {
   public value = 0;
   public initialValue = 0;
   public bonus = 0;
+  public notInrace = false;
 
-  constructor(name: string, value: number, initialValue: number = 0) {
-    this.name = name;
+  constructor(value: number, initialValue: number = 0) {
     this.value = value;
     this.initialValue = initialValue ? initialValue : value;
   }
 }
 
-export enum skillTypeEnum {
-  COMUNICATION = 'COMUNICATION',
-  AGILITY = 'AGILITY',
-  MANIPULATION = 'MANIPULATION',
-  STEALTH = 'STEALTH',
-  KNOWLEDGE = 'KNOWLEDGE',
-  AWARENESS = 'AWARENESS',
-  MAGICAL = 'MAGICAL'
+export class skills {
+  public COMUNICATION: Skill[] = [];
+  public AGILITY: Skill[] = [];
+  public MANIPULATION: Skill[] = [];
+  public STEALTH: Skill[] = [];
+  public KNOWLEDGE: Skill[] = [];
+  public AWARENESS: Skill[] = [];
+  public MAGICAL: Skill[] = [];
+  public ATTACK: Skill[] = [];
+  public DEFENSE: Skill[] = [];
+  public OTHER: Skill[] = [];
 }
 
-export type skillType =
-  skillTypeEnum.COMUNICATION |
-  skillTypeEnum.AGILITY |
-  skillTypeEnum.MANIPULATION |
-  skillTypeEnum.STEALTH |
-  skillTypeEnum.KNOWLEDGE |
-  skillTypeEnum.AWARENESS |
-  skillTypeEnum.MAGICAL;
 
 export class Skill {
   public name = '';
   public speciality = '';
-  public type: skillType = skillTypeEnum.MAGICAL;
   public value = 0;
   public modifier = ''; //ie CARx5
+  public markable = false;
+  public marked = false;
 
-  constructor(name: string, type: skillType, value: number, speciality: string = '') {
+  constructor(name: string, value: number, speciality: string = '') {
     this.name = name;
-    this.type = type;
     this.value = value;
     this.speciality = speciality;
   }
@@ -118,6 +126,7 @@ export class spell {
   public ritualSkill = '';
   public reusable = false;
   public stackable = false;
+  public memorized = false;
 }
 
 export enum spellTypeEnum {
@@ -319,6 +328,43 @@ export enum cultureTypeEnum {
   PRIMITIVE = 'PRIMITIVE',
   NOMAD = 'NOMAD',
   BARBARIAN = 'BARBARIAN',
-  CIVILIZATED = 'CIVILIZATED'
+  CIVILIZED = 'CIVILIZED'
+}
+
+export type cultureType =
+  cultureTypeEnum.PRIMITIVE |
+  cultureTypeEnum.NOMAD |
+  cultureTypeEnum.BARBARIAN |
+  cultureTypeEnum.CIVILIZED;
+
+export enum cultMemberTypeEnum {
+  LAIC = 'LAIC',
+  INITIATE = 'INITIATE',
+  ACOLITE = 'ACOLITE',
+  PRIEST = 'PRIEST',
+  RUNE_LORD = 'RUNE_LORD',
+  RUNE_PRIEST = 'RUNE_PRIEST',
+  SHAMAN = 'SHAMAN'
+}
+
+export type cultMemberType =
+  cultMemberTypeEnum.LAIC |
+  cultMemberTypeEnum.INITIATE |
+  cultMemberTypeEnum.ACOLITE |
+  cultMemberTypeEnum.PRIEST |
+  cultMemberTypeEnum.RUNE_LORD |
+  cultMemberTypeEnum.RUNE_PRIEST |
+  cultMemberTypeEnum.SHAMAN;
+
+export class CultMember {
+  public deity: string = '';
+  public memberType: cultMemberType = cultMemberTypeEnum.LAIC;
+  public phanteon: string = '';
+
+  constructor(deity: string, memberType: cultMemberType, phanteon: string = '') {
+    this.deity = deity;
+    this.memberType = memberType;
+    this.phanteon = phanteon;
+  }
 }
 

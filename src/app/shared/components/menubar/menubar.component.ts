@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,11 +8,19 @@ import { Component } from '@angular/core';
 })
 export class MenubarComponent {
 
+  constructor(
+    private router: Router
+  ) { }
+
   public navigateCharacters(){
-    //
+    this.router.navigate(['characters']);
   }
 
   public navigateDetail(){
     //
+  }
+
+  public navigateHome(){
+    this.router.navigate(['home']);
   }
 }

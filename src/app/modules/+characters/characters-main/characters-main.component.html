@@ -1,1 +1,42 @@
-<p>characters-main works!</p>
+<div class="rQItem u-width-100 u-flex">
+  <button mat-raised-button><mat-icon>person_add</mat-icon>{{ "ACTIONS.CREATE_CHAC" | translate  }}</button>
+  <!-- TODO ADD FILTERS HERE -->
+</div>
+<div *ngFor="let character of characters" class="rQItem">
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ character.name }}
+        <mat-chip-listbox aria-label="Fish selection" class="rQItem">
+          <mat-chip-option color="prinary" *ngIf="character.pnj">PNJ</mat-chip-option>
+          <mat-chip-option color="warn" *ngIf="!character.pnj">PJ</mat-chip-option>
+        </mat-chip-listbox>
+        {{ character.race }} {{ character.profesion }} {{ "PJ.CULTURE_TYPES." + character.culture | translate  }} {{ character.age }} {{ "PJ.YEARS" | translate  }}
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.STR" | translate  }} {{ character.characteristics.STR.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.DEX" | translate  }} {{ character.characteristics.DEX.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CON" | translate  }} {{ character.characteristics.CON.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.INT" | translate  }} {{ character.characteristics.INT.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.SIZ" | translate  }} {{ character.characteristics.SIZ.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.POW" | translate  }} {{ character.characteristics.POW.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CHA" | translate  }} {{ character.characteristics.CHA.value }}</mat-label>
+      </mat-panel-description>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="manageFavourite($event, character)"> <mat-icon>{{ character.favorite ? 'star' : 'star_border' }}</mat-icon></button>
+      <button mat-icon-button (click)="preventAcordionExpansion($event)"> <mat-icon>visibility</mat-icon> </button>
+      <button mat-icon-button (click)="handleDelete($event, character)"> <mat-icon>delete</mat-icon></button>
+    </mat-expansion-panel-header>
+    <p>{{ character.name }} {{ character.id }}</p>
+    <mat-form-field>
+      <!-- <mat-label>Clearable input</mat-label>
+      <input matInput type="text" [(ngModel)]="value">
+      <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button> -->
+      <mat-label>Name</mat-label>
+      <input matInput type="text"  [value]="character.name">
+    </mat-form-field>
+  </mat-expansion-panel>
+</div>
+

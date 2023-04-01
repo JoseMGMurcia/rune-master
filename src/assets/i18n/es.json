@@ -1,7 +1,38 @@
 {
   "RUNEQUEST_MASTER": "RuneQuest Master",
+  "COMMONS":{
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar"
+  },
   "MENU": {
+    "HOME": "Inicio",
     "CHARACTERS": "Personajes",
     "DETAIL": "Detalle"
+  },
+  "ACTIONS": {
+    "CREATE_CHAC": "Crear personaje"
+  },
+  "PJ": {
+    "CULTURE": "Cultura",
+    "CATACTERISTICS": "Características",
+    "AGE": "Edad",
+    "YEARS": "años",
+    "HEIGHT": "Altura",
+    "WEIGHT": "Peso",
+    "CULTURE_TYPES": {
+      "PRIMITIVE": "Primitivo",
+      "NOMAD": "Nómada",
+      "BARBARIAN": "Bárbaro",
+      "CIVILIZED": "Civilizado"
+    },
+    "CATACTERISTICS_TYPES":{
+      "STR": "FUE",
+      "CON": "CON",
+      "DEX": "DES",
+      "INT": "INT",
+      "SIZ": "TAM",
+      "POW": "PER",
+      "CHA": "ASP"
+    }
   }
 }
