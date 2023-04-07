@@ -1,8 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 @use 'assets/scss/custom-colors.scss' as colors;
-@import 'assets/scss/basic.scss';
 
+@import 'assets/scss/basic.scss';
 
 @include mat.core();
 
@@ -20,16 +19,16 @@ body {
   margin: 0.2rem 0.4rem;
 
   &.title {
+    color: colors.$text-primary;
     font-size: 1.2rem;
     font-weight: 500;
     padding: 0.4rem;
-    color: colors.$text-primary;
   }
 }
 
 .light-back {
   background-color: colors.$background;
- }
+}
 
 .dark-back {
   background-color: colors.$background-dark;

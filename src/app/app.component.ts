@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DB_TABLES } from './shared/constants/db.constants';
-import { Character, Characteristic, CultMember, cultMemberTypeEnum, cultureTypeEnum, Skill } from './shared/models/character.model';
+import { Character } from './shared/models/character.model';
 import { CharactersService } from './shared/services/character.service';
 import { DatabaseService } from './shared/services/db.service';
-import { setInitialHumanCharacter } from './shared/utils/character-creation.utils';
 
 @Component({
   selector: 'app-root',

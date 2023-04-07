@@ -1,7 +1,6 @@
 import { TranslateService } from "@ngx-translate/core";
-import { Character, Location, Skill, Weapon, hitpointsRatioEnum, weaponTypeEnum } from "../models/character.model";
+import { Character, Location, Skill, hitpointsRatioEnum, weaponTypeEnum } from "../models/character.model";
 import { NUMBERS } from "../constants/number.constants";
-import { DiceRoll } from "../models/dices.model";
 import { WeaponNameEnum, createWeapon } from "./weapon.factory";
 
 export const setInitialHumanCharacter = (pj: Character, translate: TranslateService): Character => {
