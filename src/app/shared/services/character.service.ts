@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Character } from '../models/character.model';
 import { DatabaseService } from './db.service';
+import { DB_TABLES } from '../constants/db.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,7 @@ export class CharactersService {
 
 
   public setCharacters(characters: Character[]): void {
-    // this.db.deleteAllData('characters');
-    // this.db.saveData
+    this.db.saveData(DB_TABLES.PJS, characters);
     this.characters.next(characters);
   }
 
@@ -30,4 +30,11 @@ export class CharactersService {
     this.character.next(character);
   }
 
+  public updateOrAddCharacter(character: Character): void {
+    this.db.saveData(DB_TABLES.PJS, [character]);
+  }
+
+  public deleteCharacter(character: Character): void {
+    this.db.deleteData(DB_TABLES.PJS, character.id);
+  }
 }

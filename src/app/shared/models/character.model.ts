@@ -1,18 +1,20 @@
+import { NUMBERS } from "../constants/number.constants";
 import { getUniqueID } from "../controllers/character-creation.controller";
+import { DiceRoll } from "./dices.model";
 
 export class Character {
   public id = '';
   public name = '';
   public player = '';
   public pnj = true;
-  public race = '';
-  public sex = '';
-  public age = 0;
-  public height = 0;
-  public weight = 0;
+  public race = 'Humano';
+  public sex: SexType = SexTypeEnum.U;
+  public age = NUMBERS.N_15;
+  public height = NUMBERS.N_0;
+  public weight = NUMBERS.N_0;
   public description = '';
-  public characteristics : Characteristics = new Characteristics();
-  public skills: Skill[] = [];
+  public stats : Characteristics = new Characteristics();
+  public skills: skills = new skills();
   public personalityTraits: PersonalityTrait[] = [];
   public culture: cultureType = cultureTypeEnum.PRIMITIVE;
   public profesion = '';
@@ -21,8 +23,8 @@ export class Character {
   public family = '';
   public religions: CultMember[] = [];
   public notes: string[] = [];
-  public spells: spell[] = [];
-  public movement = 3;
+  public spells: Spells = new Spells();
+  public movement = NUMBERS.N_3;
   public markedPOW = false;
 
   public equipment: Equipment[] = [];
@@ -31,17 +33,17 @@ export class Character {
   public locations: Location[] = [];
 
   public powers: string[] = [];
-  public bonusHP = 0;
-  public bonusAP = 0;
-  public bonugMP = 0;
-  public bonusFP = 0;
+  public bonusHP = NUMBERS.N_0;
+  public bonusAP = NUMBERS.N_0;
+  public bonugMP = NUMBERS.N_0;
+  public bonusFP = NUMBERS.N_0;
   public sideKidIds: string[] = [];
   public creationDate = new Date();
   public lastUpdate = new Date();
   public alive = true;
   public favorite = false;
 
-  constructor(name: string, player: string = '') {
+  constructor(name: string, player = '') {
     this.id = getUniqueID(name);
     this.name = name;
     this.player = player;
@@ -60,16 +62,23 @@ export class Characteristics {
 }
 
 export class Characteristic {
-  public value = 0;
-  public initialValue = 0;
-  public bonus = 0;
+  public value = NUMBERS.N_0;
+  public initialValue = NUMBERS.N_0;
+  public bonus = NUMBERS.N_0;
   public notInrace = false;
 
-  constructor(value: number, initialValue: number = 0) {
+  constructor(value: number, initialValue = NUMBERS.N_0) {
     this.value = value;
     this.initialValue = initialValue ? initialValue : value;
   }
 }
+export enum SexTypeEnum {
+  M = 'M',
+  F = 'F',
+  U = 'U'
+}
+
+export type SexType = 'M' | 'F' | 'U';
 
 export class skills {
   public COMUNICATION: Skill[] = [];
@@ -88,12 +97,12 @@ export class skills {
 export class Skill {
   public name = '';
   public speciality = '';
-  public value = 0;
+  public value = NUMBERS.N_0;
   public modifier = ''; //ie CARx5
   public markable = false;
   public marked = false;
 
-  constructor(name: string, value: number, speciality: string = '') {
+  constructor(name: string, value: number, speciality = '') {
     this.name = name;
     this.value = value;
     this.speciality = speciality;
@@ -103,8 +112,8 @@ export class Skill {
 export class PersonalityTrait {
   public name1 = '';
   public name2 = '';
-  public value1 = 0;
-  public value2 = 0;
+  public value1 = NUMBERS.N_0;
+  public value2 = NUMBERS.N_0;
 
   constructor(name1: string, name2: string, value1: number, value2: number) {
     this.name1 = name1;
@@ -114,109 +123,131 @@ export class PersonalityTrait {
   }
 }
 
-export class spell {
+export class Spells {
+  public SPIRITUAL: Spell[] = [];
+  public SORCERY: Spell[] = [];
+  public DIVINE: Spell[] = [];
+  public DRAGON: Spell[] = [];
+  public KI: Spell[] = [];
+  public OTHER: Spell[] = [];
+}
+
+export class Spell {
   public name = '';
   public description = '';
-  public type: spellType = spellTypeEnum.OTHER;
   public range = '';
   public duration = '';
-  public points = 0;
+  public points = NUMBERS.N_1;
+  public divineStack = NUMBERS.N_1;
+  public sorcerySkillValue = NUMBERS.N_0;
   public pasive = false;
   public ritual = false;
   public ritualSkill = '';
   public reusable = false;
+  public god = '';
   public stackable = false;
   public memorized = false;
+  public matrix = false;
+
+  constructor(name: string, points = NUMBERS.N_1, reusable = false, memoriced = true, skill = NUMBERS.N_0) {
+    this.name = name;
+    this.points = points;
+    this.reusable = reusable;
+    this.memorized = memoriced;
+    this.sorcerySkillValue = skill;
+  }
 }
-
-export enum spellTypeEnum {
-  SPIRITUAL = 'SPIRITUAL',
-  SORCERY = 'SORCERY',
-  DIVINE = 'DIVINE',
-  DRAGON = 'DRAGON',
-  KI = 'KI',
-  OTHER = 'OTHER'
-}
-
-export type spellType =
-  spellTypeEnum.SPIRITUAL |
-  spellTypeEnum.SORCERY |
-  spellTypeEnum.DIVINE |
-  spellTypeEnum.DRAGON |
-  spellTypeEnum.KI |
-  spellTypeEnum.OTHER;
-
 
   export class Equipment {
     public name = '';
     public description = '';
-    public weight = 0;
-    public combatWeight = 0;
-    public price = 0;
-    public quantity = 0;
-    public type: equipmentType = equipmentTypeEnum.OTHER;
+    public weight = NUMBERS.N_0;
+    public combatWeight = NUMBERS.N_0;
+    public price = NUMBERS.N_0;
+    public quantity = NUMBERS.N_0;
+    public inCombat = false;
+    public visible = true;
 
     constructor(name: string) {
       this.name = name;
     }
   }
 
-  export enum equipmentTypeEnum {
-    WEAPON = 'WEAPON',
-    ARMOR = 'ARMOR',
-    OTHER = 'OTHER'
+  export enum DamageTypeEnum {
+    SLASHING = 'SLASHING',
+    PIERCING = 'PIERCING',
+    BLUNT = 'BLUNT'
   }
 
-  export type equipmentType =
-    equipmentTypeEnum.WEAPON |
-    equipmentTypeEnum.ARMOR |
-    equipmentTypeEnum.OTHER;
+  export type DamageType =
+    DamageTypeEnum.SLASHING |
+    DamageTypeEnum.PIERCING |
+    DamageTypeEnum.BLUNT;
 
   export class Weapon extends Equipment {
-    public damage = '';
+    public damage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
+    public damageType: DamageType = DamageTypeEnum.BLUNT;
     public ranged = false;
-    public range = 0;
+    public range = NUMBERS.N_0;
+    public maxRange = NUMBERS.N_0;
+    public fireRate = '';
     public twoHanded = false;
-    public armorPoints = 0;
-    public reactionMoment = 0;
+    public armorPoints = NUMBERS.N_0;
+    public reactionMoment = NUMBERS.N_0;
     public shield = false;
     public weaponType: weaponType = weaponTypeEnum.AXE1H;
-    public bonusAttack = 0;
-    public bonusParry = 0;
+    public bonusAttack = NUMBERS.N_0;
+    public bonusParry = NUMBERS.N_0;
+    public minimumSTR = NUMBERS.N_0;
+    public minimumDEX = NUMBERS.N_0;
 
     constructor(
       name: string,
-      damage: string = '',
-      ranged: boolean = false,
-      range: number = 0,
-      twoHanded: boolean = false,
-      armorPoints: number = 0,
-      reactionMoment: number = 0,
-      shield: boolean = false,
-      weaponType: weaponType = weaponTypeEnum.AXE1H
+      damage: DiceRoll,
+      damageType: DamageType,
+      weight: number,
+      ranged = false,
+      range = NUMBERS.N_0,
+      maxRange = NUMBERS.N_0,
+      fireRate = '',
+      twoHanded = false,
+      armorPoints = NUMBERS.N_0,
+      reactionMoment = NUMBERS.N_0,
+      shield = false,
+      weaponType: weaponType = weaponTypeEnum.AXE1H,
+      minimumSTR = NUMBERS.N_0,
+      minimumDEX = NUMBERS.N_0
       ) {
         super(name);
         this.damage = damage;
+        this.damageType = damageType;
+        this.weight = weight;
         this.ranged = ranged;
         this.range = range;
+        this.maxRange = maxRange;
+        this.fireRate = fireRate;
         this.twoHanded = twoHanded;
         this.armorPoints = armorPoints;
         this.reactionMoment = reactionMoment;
         this.shield = shield;
         this.weaponType = weaponType;
-      }
+        this.minimumSTR = minimumSTR;
+        this.minimumDEX = minimumDEX;
+    }
+
   }
 
   export class Armor extends Equipment {
-    public armorPoints = 0;
-    public location = '';
+    public armorPoints = NUMBERS.N_0;
+    public locations: string[] = [];
     public soft = false;
     public natural = false;
+    public equipped = false;
 
-    constructor(name: string , armorPoints: number = 0, location: string = '', soft: boolean = false) {
+    constructor(name: string , armorPoints = NUMBERS.N_0, locations: string[] = [], soft = false) {
       super(name);
       this.armorPoints = armorPoints;
-      this.location = location;
+      this.locations = locations;
       this.soft = soft;
     }
   }
@@ -229,7 +260,6 @@ export type spellType =
     PEASANT_MACE2M = 'PEASANT_MACE2M',
     HAMMER1H = 'HAMMER1H',
     HAMMER2H = 'HAMMER2H',
-    CLUB2M = 'CLUB2M',
     RAPIER = 'RAPIER',
     SHORT_SWORD = 'SHORT_SWORD',
     SHIELD = 'SHIELD',
@@ -250,22 +280,29 @@ export type spellType =
     THROWING_KNIFE = 'THROWING_KNIFE',
     THROWING_ROCK = 'THROWING_ROCK',
     FIST = 'FIST',
+    KICK = 'KICK',
+    CLAW = 'CLAW',
+    BRAWL = 'BRAWL',
+    HORN = 'HORN',
     MACE1H = 'MACE1H',
     MACE2H = 'MACE2H',
-    TOOL = 'TOOL',
-    ATHAL = 'ATHAL',
+    TOOL_HOE = 'TOOL_HOE',
+    TOOL_SCYTHE = 'TOOL_SCYTHE',
+    TOOL_SICKLE = 'TOOL_SICKLE',
+    TOOL_SHOVEL = 'TOOL_SHOVEL',
+    ATLATL = 'ATLATL',
     ROCK_LAUNCHER = 'ROCK_LAUNCHER',
     BLOWGUN = 'BLOWGUN',
     BOLAS = 'BOLAS',
     WAR_BOOMERANG = 'WAR_BOOMERANG',
     HUNTING_BOOMERANG = 'HUNTING_BOOMERANG',
-    JAVELIN = 'JAVELIN',
+    JABELIN = 'JABELIN',
     DART = 'DART',
     SHURIKEN = 'SHURIKEN',
     ROPE_LACE = 'ROPE_LACE',
     POLE_LACE = 'POLE_LACE',
     NET = 'NET',
-    FLAIL = 'FLAIL',
+    WHIP = 'FLAIL',
     OTHER = 'OTHER'
   }
 
@@ -277,7 +314,6 @@ export type spellType =
     weaponTypeEnum.PEASANT_MACE2M |
     weaponTypeEnum.HAMMER1H |
     weaponTypeEnum.HAMMER2H |
-    weaponTypeEnum.CLUB2M |
     weaponTypeEnum.RAPIER |
     weaponTypeEnum.SHORT_SWORD |
     weaponTypeEnum.SHIELD |
@@ -300,28 +336,55 @@ export type spellType =
     weaponTypeEnum.FIST |
     weaponTypeEnum.MACE1H |
     weaponTypeEnum.MACE2H |
-    weaponTypeEnum.TOOL |
-    weaponTypeEnum.ATHAL |
+    weaponTypeEnum.ATLATL |
     weaponTypeEnum.ROCK_LAUNCHER |
     weaponTypeEnum.BLOWGUN |
     weaponTypeEnum.BOLAS |
     weaponTypeEnum.WAR_BOOMERANG |
     weaponTypeEnum.HUNTING_BOOMERANG |
-    weaponTypeEnum.JAVELIN |
+    weaponTypeEnum.JABELIN |
     weaponTypeEnum.DART |
     weaponTypeEnum.SHURIKEN |
     weaponTypeEnum.ROPE_LACE |
     weaponTypeEnum.POLE_LACE |
     weaponTypeEnum.NET |
-    weaponTypeEnum.FLAIL |
-    weaponTypeEnum.OTHER;
+    weaponTypeEnum.WHIP |
+    weaponTypeEnum.OTHER |
+    weaponTypeEnum.KICK |
+    weaponTypeEnum.CLAW |
+    weaponTypeEnum.BRAWL |
+    weaponTypeEnum.HORN |
+    weaponTypeEnum.TOOL_HOE |
+    weaponTypeEnum.TOOL_SCYTHE |
+    weaponTypeEnum.TOOL_SICKLE |
+    weaponTypeEnum.TOOL_SHOVEL;
+
+export enum hitpointsRatioEnum {
+  X16 = 0.16,
+  X33 = 0.33,
+  X40 = 0.40,
+  X25 = 0.25
+}
+
+export type hitpointsRatioType =
+  hitpointsRatioEnum.X33 |
+  hitpointsRatioEnum.X40 |
+  hitpointsRatioEnum.X25 |
+  hitpointsRatioEnum.X16;
 
 export class Location {
   public name = '';
-  public hitpointsRatio = 0;
-  public armorPoints = 0;
-  public bonusHP = 0;
-  public equipedArmor: Armor[] = [];
+  public hitpointsRatio: hitpointsRatioType = hitpointsRatioEnum.X33;
+  public armorPoints = NUMBERS.N_0;
+  public bonusAP = NUMBERS.N_0;
+  public bonusHP = NUMBERS.N_0;
+
+  constructor(name: string, hitpointsRatio = hitpointsRatioEnum.X33, armorPoints = NUMBERS.N_0, bonusHP = NUMBERS.N_0) {
+    this.name = name;
+    this.hitpointsRatio = hitpointsRatio;
+    this.armorPoints = armorPoints;
+    this.bonusHP = bonusHP;
+  }
 }
 
 export enum cultureTypeEnum {
@@ -357,11 +420,11 @@ export type cultMemberType =
   cultMemberTypeEnum.SHAMAN;
 
 export class CultMember {
-  public deity: string = '';
+  public deity = '';
   public memberType: cultMemberType = cultMemberTypeEnum.LAIC;
-  public phanteon: string = '';
+  public phanteon = '';
 
-  constructor(deity: string, memberType: cultMemberType, phanteon: string = '') {
+  constructor(deity: string, memberType: cultMemberType, phanteon = '') {
     this.deity = deity;
     this.memberType = memberType;
     this.phanteon = phanteon;

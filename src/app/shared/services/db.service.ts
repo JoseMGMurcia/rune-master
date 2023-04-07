@@ -31,8 +31,10 @@ export class DatabaseService {
     this.db.close();
   }
 
-  async saveData(table: string, data: any) {
-    return this.db.table(table).put(data);
+  async saveData(table: string, data: any[]) {
+    data.forEach((element) => {
+      this.db.table(table).put(element);
+    });
   }
 
   async getData(table: string, id: number | string) {
@@ -45,10 +47,10 @@ export class DatabaseService {
 
   async deleteData(table: string, id: number | string) {
     return this.db.table(table).delete(id);
-  };
+  }
 
   async deleteAllData(table: string) {
     return this.db.table(table).clear();
-  };
+  }
 
 }

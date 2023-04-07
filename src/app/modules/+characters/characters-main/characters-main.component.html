@@ -1,42 +1,333 @@
 <div class="rQItem u-width-100 u-flex">
-  <button mat-raised-button><mat-icon>person_add</mat-icon>{{ "ACTIONS.CREATE_CHAC" | translate  }}</button>
+  <button
+    mat-raised-button (click)="handleCreate()">
+      <mat-icon>person_add</mat-icon>{{ "ACTIONS.CREATE_CHAC" | translate  }}
+  </button>
   <!-- TODO ADD FILTERS HERE -->
 </div>
-<div *ngFor="let character of characters" class="rQItem">
+<div *ngFor="let pj of characters" class="rQItem">
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ character.name }}
-        <mat-chip-listbox aria-label="Fish selection" class="rQItem">
-          <mat-chip-option color="prinary" *ngIf="character.pnj">PNJ</mat-chip-option>
-          <mat-chip-option color="warn" *ngIf="!character.pnj">PJ</mat-chip-option>
-        </mat-chip-listbox>
-        {{ character.race }} {{ character.profesion }} {{ "PJ.CULTURE_TYPES." + character.culture | translate  }} {{ character.age }} {{ "PJ.YEARS" | translate  }}
+        <span class="padding-right">{{ pj.name }} </span>
+        <mat-label class="rQItem"> {{ pj.profesion }} {{ pj.race }} {{ "PJ.CULTURE_TYPES." + pj.culture | translate  }} {{ pj.age }} {{ "PJ.YEARS_SHORT" | translate  }}</mat-label>
+
       </mat-panel-title>
       <mat-panel-description>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.STR" | translate  }} {{ character.characteristics.STR.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.DEX" | translate  }} {{ character.characteristics.DEX.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CON" | translate  }} {{ character.characteristics.CON.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.INT" | translate  }} {{ character.characteristics.INT.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.SIZ" | translate  }} {{ character.characteristics.SIZ.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.POW" | translate  }} {{ character.characteristics.POW.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CHA" | translate  }} {{ character.characteristics.CHA.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.STR" | translate  }} {{ pj.stats.STR.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.DEX" | translate  }} {{ pj.stats.DEX.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CON" | translate  }} {{ pj.stats.CON.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.INT" | translate  }} {{ pj.stats.INT.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.SIZ" | translate  }} {{ pj.stats.SIZ.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.POW" | translate  }} {{ pj.stats.POW.value }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CHA" | translate  }} {{ pj.stats.CHA.value }}</mat-label>
+        <mat-label class="rQItem padding-left">{{ "PJ.HP" | translate  }} {{ getHP(pj) }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.MP" | translate  }} {{ getMP(pj) }}</mat-label>
+        <mat-label class="rQItem">{{ "PJ.FP" | translate  }} {{ getFP(pj) }}</mat-label>
+        <mat-label class="rQItem">{{ getCultText(pj) }}</mat-label>
       </mat-panel-description>
-      <span class="spacer"></span>
-      <button mat-icon-button (click)="manageFavourite($event, character)"> <mat-icon>{{ character.favorite ? 'star' : 'star_border' }}</mat-icon></button>
-      <button mat-icon-button (click)="preventAcordionExpansion($event)"> <mat-icon>visibility</mat-icon> </button>
-      <button mat-icon-button (click)="handleDelete($event, character)"> <mat-icon>delete</mat-icon></button>
+      <span>
+        <button mat-icon-button (click)="manageFavourite($event, pj)"> <mat-icon>{{ pj.favorite ? 'star' : 'star_border' }}</mat-icon></button>
+        <button mat-icon-button (click)="preventAcordionExpansion($event)"> <mat-icon>visibility</mat-icon> </button>
+        <button mat-icon-button (click)="handleDelete($event, pj)"> <mat-icon>delete</mat-icon></button>
+      </span>
     </mat-expansion-panel-header>
-    <p>{{ character.name }} {{ character.id }}</p>
-    <mat-form-field>
-      <!-- <mat-label>Clearable input</mat-label>
-      <input matInput type="text" [(ngModel)]="value">
-      <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-        <mat-icon>close</mat-icon>
-      </button> -->
+    <div class="u-flex padding-top">
+      <p>{{ "PJ.BORN_IN" | translate  }} {{ pj.bornIn || '' }} {{ pj.country || '' }}</p>
+      <p class="padding-left">ID: {{ pj.id }}</p><mat-icon class="padding-left icon-small">{{ getGenderIcon(pj) }}</mat-icon>
+      <p *ngIf="!pj.pnj">{{ "PJ.PLAYER" | translate  }}: {{ pj.player }}</p>
+    </div>
+
+    <!-- <mat-form-field>
+
       <mat-label>Name</mat-label>
-      <input matInput type="text"  [value]="character.name">
-    </mat-form-field>
+      <input matInput type="text"  [value]="pj.name">
+    </mat-form-field> -->
+    <div class="rQItem"><p class="rQItem title">{{ "PJ.SKILLS" | translate  }}</p></div>
+    <div class="u-flex">
+      <div class="u-width-16 rQItem" *ngIf="pj.skills.AGILITY.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SKILL_TYPE.AGILITY" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">{{ getAgilityMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.AGILITY">{{ skill.name }} {{ skill.value }}</mat-label>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.skills.COMUNICATION.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SKILL_TYPE.COMUNICATION" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">{{ getComunicationMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.COMUNICATION">{{ skill.name }} {{ skill.value }}</mat-label>
+          </div>
+          </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.skills.MANIPULATION.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SKILL_TYPE.MANIPULATION" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">{{ getManipulationMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.MANIPULATION">{{ skill.name }} {{ skill.value }}</mat-label>
+          </div>
+          </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.skills.KNOWLEDGE.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SKILL_TYPE.KNOWLEDGE" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">{{ getKnowledgeMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.KNOWLEDGE">{{ skill.name }} {{ skill.value }}</mat-label>
+          </div>
+          </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.skills.STEALTH.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SKILL_TYPE.STEALTH" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">{{ getStealthMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.STEALTH">{{ skill.name }} {{ skill.value }}</mat-label>
+          </div>
+          </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.skills.AWARENESS.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SKILL_TYPE.AWARENESS" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">{{ getPerceptionMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+            <div class="u-flex u-flex-column">
+              <mat-label class="rQItem" *ngFor="let skill of pj.skills.AWARENESS">{{ skill.name }} {{ skill.value }}</mat-label>
+            </div>
+        </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.skills.OTHER.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SKILL_TYPE.OTHER" | translate  }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.OTHER">{{ skill.name }} {{ skill.value }}</mat-label>
+          </div>
+          </mat-expansion-panel>
+      </div>
+    </div>
+
+    <div class="rQItem margin-top">
+      <p class="rQItem title">{{ "PJ.MAGIC" | translate  }}</p>
+      <div class="u-flex">
+        <p class="padding-right">{{ "PJ.MP" | translate  }}: {{ getMP(pj) }}</p>
+        <p class="margin-right">{{ "PJ.FREE_INT" | translate  }}: {{ getFreeINTPoints(pj) }}</p>
+      </div>
+    </div>
+
+    <div class="u-flex">
+      <div class="u-width-16 rQItem">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.MAGICAL_SKILLS" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">{{ getMagicalMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.MAGICAL">{{ skill.name }} {{ skill.value }}</mat-label>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.spells.SPIRITUAL.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SPELL_TYPE.SPIRITUAL" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">{{ pj.stats.POW.value*5 }} + {{ getMagicalMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.SPIRITUAL">{{ spell.name }}-{{ spell.points }}</mat-label>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.spells.DIVINE.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SPELL_TYPE.DIVINE" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">100 + {{ getMagicalMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.DIVINE">{{ spell.name }}({{ spell.points }})x{{ spell.divineStack }}</mat-label>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.spells.SORCERY.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SPELL_TYPE.SORCERY" | translate  }}</mat-panel-title>
+            <mat-label class="rQItem padding-right">{{ getMagicalMod(pj) }}</mat-label>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.SORCERY">{{ spell.name }}({{ getSpellStatus(spell) }}): {{ spell.sorcerySkillValue }} </mat-label>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.spells.DRAGON.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SPELL_TYPE.DRAGON" | translate  }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.DRAGON">{{ spell.name }}</mat-label>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.spells.KI.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SPELL_TYPE.KI" | translate  }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.KI">{{ spell.name }}</mat-label>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-16 rQItem" *ngIf="pj.spells.OTHER.length > 0">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.SPELL_TYPE.OTHER" | translate  }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column">
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.OTHER">{{ spell.name }}</mat-label>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </div>
+
+    <div class="rQItem margin-top">
+      <p class="rQItem title">{{ "PJ.COMBAT" | translate  }}</p>
+      <div class="u-flex">
+        <p class="padding-right">{{ "PJ.HP" | translate  }}: {{ getHP(pj) + pj.bonusHP }}</p>
+        <p class="padding-right">{{ "PJ.FP" | translate  }}: {{ getFP(pj) }}</p>
+        <p class="padding-right">{{ "PJ.DAMAGE_MOD" | translate  }}: {{ getDMGMod(pj) }}</p>
+        <p class="padding-right">{{ getDodgeLine(pj) }}</p>
+
+      </div>
+      <div class="u-flex">
+        <p class="padding-">{{ "PJ.MRCC" | translate  }}: {{ getMRDESC(pj)+getMRSIZ(pj) }} = {{ "PJ.MRDEX" | translate  }}: {{ getMRDESC(pj) }} + {{ "PJ.MRSIZ" | translate  }}: {{ getMRSIZ(pj) }}</p>
+      </div>
+    </div>
+
+    <div class="u-flex">
+
+      <div class="u-width-20 rQItem">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.LOCATIONS" | translate }}</mat-panel-title>
+          </mat-expansion-panel-header>
+            <div class="u-flex u-flex-column margin-top">
+              <div class="u-flex">
+                <p class="u-width-35"><b>{{ "PJ.LOC_SHORT" | translate }}</b></p>
+                <p class="u-width-15"><b>{{ "PJ.HP" | translate }}</b></p>
+                <p class="u-width-35"><b>{{ "PJ.ARMOR_SHORT" | translate }}</b></p>
+                <p class="u-width-15"><b>{{ "PJ.AP" | translate }}</b></p>
+              </div>
+              <div class="u-flex" *ngFor="let loc of pj.locations">
+                <p class="u-width-35">{{ loc.name }}</p>
+                <p class="u-width-15">{{ getHpByLocation(pj, loc)}}</p>
+                <p class="u-width-35" [matTooltip]="getArmorTypeByLocation(pj, loc)">{{ getArmorTypeByLocation(pj, loc) }}</p>
+                <p class="u-width-15">{{ getArmorByLocation(pj, loc) }}</p>
+              </div>
+            </div>
+        </mat-expansion-panel>
+      </div>
+
+      <div class="u-width-35 rQItem">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.WEAPONS" | translate  }}</mat-panel-title>
+            <mat-panel-description>
+                <mat-label class="margin-right">{{ "PJ.ATTACK" | translate }}: {{ getManipulationMod(pj) }}</mat-label>
+                <mat-label>{{ "PJ.PARRY" | translate }}: {{ getAgilityMod(pj) }}</mat-label>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column margin-top">
+            <div class="u-flex">
+              <p class="u-width-15"><b>{{ "PJ.WEAPON" | translate }}</b></p>
+              <p class="u-width-10"><b>{{ "PJ.ATTACK_SHORT" | translate }}</b></p>
+              <p class="u-width-10"><b>{{ "PJ.PARRY_SHORT" | translate }}</b></p>
+              <p class="u-width-10"><b>{{ "PJ.AP" | translate }}</b></p>
+              <p class="u-width-10"><b>{{ "PJ.MR" | translate }}</b></p>
+              <p class="u-width-15"><b>{{ "PJ.DAMAGE" | translate }}</b></p>
+              <p class="u-width-15"><b>{{ "PJ.RANGE" | translate }}</b></p>
+              <p class="u-width-15"><b>{{ "PJ.FIRE_RATE" | translate }}</b></p>
+            </div>
+            <div class="u-flex" *ngFor="let weapon of getWeaponList(pj)">
+              <p class="u-width-15">{{ weapon }}</p>
+              <p class="u-width-10">{{ getAttSkill(pj, weapon)?.value }}</p>
+              <p class="u-width-10">{{ getDefSkill(pj, weapon)?.value }}</p>
+              <p class="u-width-10">{{ getWeaponByName(pj, weapon)?.armorPoints }}</p>
+              <p class="u-width-10">{{ getWeaponByName(pj, weapon)?.reactionMoment }}</p>
+              <p class="u-width-15">{{ getWeaoponRollString(pj, weapon) }}</p>
+              <p class="u-width-15">{{ getWeaponByName(pj, weapon)?.range }} / {{ getWeaponByName(pj, weapon)?.maxRange }}</p>
+              <p class="u-width-15">{{ getWeaponByName(pj, weapon)?.fireRate }}</p>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <div class="u-width-20 rQItem">
+        <mat-expansion-panel class="rQItem tertiary-expansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "PJ.EQUIPMENT" | translate  }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="u-flex u-flex-column margin-top">
+            <div class="u-flex">
+              <p class="u-width-30"><b>{{ "PJ.EQUIPMENT" | translate  }}</b></p>
+              <p class="u-width-60"><b>{{ "PJ.DESCRIPTION" | translate  }}</b></p>
+              <p class="u-width-10"><b>{{ "PJ.WEIGHT" | translate  }}</b></p>
+            </div>
+          </div>
+          <div class="u-flex u-flex-column">
+            <div class="u-flex" *ngFor="let item of pj.equipment">
+              <p class="u-width-30" *ngIf="item.visible">{{ item.name }}</p>
+              <p class="u-width-60" *ngIf="item.visible">{{ item.description }}</p>
+              <p class="u-width-10" *ngIf="item.visible">{{ item.weight }}</p>
+            </div>
+            <div class="u-flex" *ngFor="let item of pj.weapons">
+              <p class="u-width-30" *ngIf="item.visible">{{ item.name }}</p>
+              <p class="u-width-60" *ngIf="item.visible">{{ item.description }}</p>
+              <p class="u-width-10" *ngIf="item.visible">{{ item.weight }}</p>
+            </div>
+            <div class="u-flex" *ngFor="let item of pj.armor">
+              <p class="u-width-30" *ngIf="item.visible">{{ item.name }}</p>
+              <p class="u-width-60" *ngIf="item.visible">{{ item.description }}</p>
+              <p class="u-width-10" *ngIf="item.visible">{{ item.weight }}</p>
+            </div>
+            <div class="u-flex">
+              <p class="u-width-65"></p>
+              <p class="u-width-25"><b>{{ "COMMONS.TOTAL" | translate  }}:</b></p>
+              <p class="u-width-10 border-top"><b>{{ getTotalCAR(pj) }}</b></p>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </div>
   </mat-expansion-panel>
 </div>
 

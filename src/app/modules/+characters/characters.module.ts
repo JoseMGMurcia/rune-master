@@ -11,6 +11,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DialogService } from "src/app/shared/services/dialog.service";
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -21,7 +23,8 @@ export const createTranslateLoader = (http: HttpClient) =>
     MatChipsModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule,
   ];
 
 @NgModule({
@@ -39,6 +42,9 @@ export const createTranslateLoader = (http: HttpClient) =>
         deps: [HttpClient]
       }
     })
+  ],
+  providers: [
+    DialogService
   ],
 })
 export class CharactersModule { }

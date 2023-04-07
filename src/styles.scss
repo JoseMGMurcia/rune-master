@@ -28,6 +28,59 @@ body {
 }
 
 .light-back {
-  background-color: colors.$background-light;
+  background-color: colors.$background;
  }
+
+.dark-back {
+  background-color: colors.$background-dark;
+
+  &.dark-back:hover,
+  &.dark-back:focus {
+    background-color: colors.$background-dark-hover !important;
+  }
+}
+
+.dark-contrast {
+  background-color: colors.$backgroung-contrast;
+}
+
+
+// ANGULAR MATERIAL REDESING STYLES
+
+.mat-expansion-panel-header {
+  background-color: colors.$background-dark;
+  color: colors.$white !important;
+
+  &.mat-expansion-panel-header:hover,
+  &.mat-expansion-panel-header:focus {
+    background-color: colors.$background-dark-hover !important;
+  }
+}
+
+.mat-expansion-panel-body {
+  background-color: colors.$background;
+  color: colors.$tema-contrast-light;
+}
+
+.secondary-expansion {
+  .mat-expansion-panel-header {
+    background-color: colors.$background-sec !important;
+
+    &.mat-expansion-panel-header:hover,
+    &.mat-expansion-panel-header:focus {
+      background-color: colors.$background-sec-hover !important;
+    }
+  }
+}
+
+.tertiary-expansion {
+  .mat-expansion-panel-header {
+    background-color: colors.$background-tertiary !important;
+
+    &.mat-expansion-panel-header:hover,
+    &.mat-expansion-panel-header:focus {
+      background-color: colors.$background-tertiary-hover !important;
+    }
+  }
+}
 
