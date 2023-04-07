@@ -291,38 +291,42 @@
           </div>
         </mat-expansion-panel>
       </div>
-      <div class="u-width-20 rQItem">
+      <div class="u-width-30 rQItem">
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.EQUIPMENT" | translate  }}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column margin-top">
             <div class="u-flex">
-              <p class="u-width-30"><b>{{ "PJ.EQUIPMENT" | translate  }}</b></p>
+              <p class="u-width-25"><b>{{ "PJ.EQUIPMENT" | translate  }}</b></p>
+              <p class="u-width-10"><b>{{ "COMMONS.QUANTITY_SHORT" | translate  }}</b></p>
               <p class="u-width-60"><b>{{ "PJ.DESCRIPTION" | translate  }}</b></p>
-              <p class="u-width-10"><b>{{ "PJ.WEIGHT" | translate  }}</b></p>
+              <p class="u-width-5"><b>{{ "PJ.WEIGHT" | translate  }}</b></p>
             </div>
           </div>
           <div class="u-flex u-flex-column">
             <div class="u-flex" *ngFor="let item of pj.equipment">
-              <p class="u-width-30" *ngIf="item.visible">{{ item.name }}</p>
+              <p class="u-width-25" *ngIf="item.visible">{{ item.name }}</p>
+              <p class="u-width-10" *ngIf="item.visible">{{ item.quantity }}</p>
               <p class="u-width-60" *ngIf="item.visible">{{ item.description }}</p>
-              <p class="u-width-10" *ngIf="item.visible">{{ item.weight }}</p>
+              <p class="u-width-5" *ngIf="item.visible">{{ item.weight }}</p>
             </div>
             <div class="u-flex" *ngFor="let item of pj.weapons">
-              <p class="u-width-30" *ngIf="item.visible">{{ item.name }}</p>
+              <p class="u-width-25" *ngIf="item.visible">{{ item.name }}</p>
+              <p class="u-width-10" *ngIf="item.visible">{{ item.quantity }}</p>
               <p class="u-width-60" *ngIf="item.visible">{{ item.description }}</p>
-              <p class="u-width-10" *ngIf="item.visible">{{ item.weight }}</p>
+              <p class="u-width-5" *ngIf="item.visible">{{ item.weight }}</p>
             </div>
             <div class="u-flex" *ngFor="let item of pj.armor">
-              <p class="u-width-30" *ngIf="item.visible">{{ item.name }}</p>
+              <p class="u-width-25" *ngIf="item.visible">{{ item.name }}</p>
+              <p class="u-width-10" *ngIf="item.visible">{{ item.quantity }}</p>
               <p class="u-width-60" *ngIf="item.visible">{{ item.description }}</p>
-              <p class="u-width-10" *ngIf="item.visible">{{ item.weight }}</p>
+              <p class="u-width-5" *ngIf="item.visible">{{ item.weight }}</p>
             </div>
             <div class="u-flex">
-              <p class="u-width-65"></p>
-              <p class="u-width-25"><b>{{ "COMMONS.TOTAL" | translate  }}:</b></p>
-              <p class="u-width-10 border-top"><b>{{ getTotalCAR(pj) }}</b></p>
+              <p class="u-width-80"></p>
+              <p class="u-width-15"><b>{{ "COMMONS.TOTAL" | translate  }}:</b></p>
+              <p class="u-width-5 border-top"><b>{{ getTotalCAR(pj) }}</b></p>
             </div>
           </div>
         </mat-expansion-panel>

@@ -20,4 +20,5 @@
  - Combat section in character page.
  - Equip in character page.
  - Weapon factory added.
+ - Special success damage added.
   

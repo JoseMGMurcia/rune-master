@@ -213,7 +213,8 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
 
   handleDelete($event:any, pj: Character): void {
     this.preventAcordionExpansion($event);
-    this.dialogService.openEasyDialog('¿Estás seguro?' , () => {this.deleteCharacter(pj);});
+    const text = this.translate.instant('ACTIONS.DELETE_CONFIRM', {name: pj.name});
+    this.dialogService.openEasyDialog(text , () => {this.deleteCharacter(pj);});
   }
 
   private deleteCharacter(pj: Character) {

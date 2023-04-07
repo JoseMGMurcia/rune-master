@@ -164,7 +164,7 @@ export class Spell {
     public weight = NUMBERS.N_0;
     public combatWeight = NUMBERS.N_0;
     public price = NUMBERS.N_0;
-    public quantity = NUMBERS.N_0;
+    public quantity = NUMBERS.N_1;
     public inCombat = false;
     public visible = true;
 
@@ -186,6 +186,7 @@ export class Spell {
 
   export class Weapon extends Equipment {
     public damage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
+    public specialDamage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
     public damageType: DamageType = DamageTypeEnum.BLUNT;
     public ranged = false;
     public range = NUMBERS.N_0;
@@ -216,7 +217,8 @@ export class Spell {
       shield = false,
       weaponType: weaponType = weaponTypeEnum.AXE1H,
       minimumSTR = NUMBERS.N_0,
-      minimumDEX = NUMBERS.N_0
+      minimumDEX = NUMBERS.N_0,
+      specialDMG = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0),
       ) {
         super(name);
         this.damage = damage;
@@ -233,6 +235,7 @@ export class Spell {
         this.weaponType = weaponType;
         this.minimumSTR = minimumSTR;
         this.minimumDEX = minimumDEX;
+        this.specialDamage = specialDMG;
     }
 
   }

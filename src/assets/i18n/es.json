@@ -3,8 +3,10 @@
   "COMMONS":{
     "CONFIRM": "Confirmar",
     "CANCEL": "Cancelar",
-    "WARNING": "Advertencia",
-    "TOTAL": "Total"
+    "QUANTITY": "Cantidad",
+    "QUANTITY_SHORT": "Cant.",
+    "TOTAL": "Total",
+    "WARNING": "Advertencia"
   },
   "MENU": {
     "HOME": "Inicio",
@@ -12,7 +14,8 @@
     "DETAIL": "Detalle"
   },
   "ACTIONS": {
-    "CREATE_CHAC": "Crear personaje"
+    "CREATE_CHAC": "Crear personaje",
+    "DELETE_CONFIRM": "¿Si continuas {{name}} sera borrado permanentemente?"
   },
   "PJ": {
     "AP": "PA",
