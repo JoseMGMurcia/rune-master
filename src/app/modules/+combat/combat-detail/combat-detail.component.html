@@ -1,0 +1,136 @@
+<div class="u-width-98" *ngIf="character.name">
+  <div class="u-width-100 u-flex u-flex-space-around">
+    <mat-label class="rQItem title u-text-center">{{ character.name }}</mat-label>
+    <button mat-icon-button class="rQItem u-width-20" (click)="saveCharacter()">
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+  <div class="u-width-100 rQItem u-flex">
+    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.STR" | translate  }}</b></p>
+    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.CON" | translate  }}</b></p>
+    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.DEX" | translate  }}</b></p>
+    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.INT" | translate  }}</b></p>
+    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.SIZ" | translate  }}</b></p>
+    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.POW" | translate  }}</b></p>
+    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.CHA" | translate  }}</b></p>
+  </div>
+  <div class="u-width-100 rQItem u-flex">
+    <p class="u-width-14 u-text-center">{{ character.stats.STR.value }}</p>
+    <p class="u-width-14 u-text-center">{{ character.stats.CON.value }}</p>
+    <p class="u-width-14 u-text-center">{{ character.stats.DEX.value }}</p>
+    <p class="u-width-14 u-text-center">{{ character.stats.INT.value }}</p>
+    <p class="u-width-14 u-text-center">{{ character.stats.SIZ.value }}</p>
+    <p class="u-width-14 u-text-center">{{ character.stats.POW.value }}</p>
+    <p class="u-width-14 u-text-center">{{ character.stats.CHA.value }}</p>
+  </div>
+  <div class="u-width-100 u-flex">
+    <div class="border-all u-width-85-padding">
+        <div class="u-width- rQItem u-flex">
+          <p class="u-width-33 u-text-center"><b>{{ "PJ.HP" | translate  }}</b></p>
+          <p class="u-width-33 u-text-center"><b>{{ "PJ.FP" | translate  }}</b></p>
+          <p class="u-width-33 u-text-center"><b>{{ "PJ.MP" | translate  }}</b></p>
+        </div>
+        <div class="u-width-100 rQItem u-flex">
+          <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
+            <button mat-mini-fab class="minibutton" (click)="addHpMod(-1)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <p class="u-text-center">{{ getHp() + this.character.tempHPMod }}({{ getHp() }})</p>
+            <button mat-mini-fab class="minibutton" (click)="addHpMod(1)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
+            <button mat-mini-fab class="minibutton" (click)="addFpMod(-1)">
+              <mat-icon>remove</mat-icon>
+            </button>
+
+            <p class="u-text-center">{{ getFP() + this.character.tempFPMod - this.turn }}({{ getFP() }})</p>
+            <button mat-mini-fab class="minibutton" (click)="addFpMod(1)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
+            <button mat-mini-fab class="minibutton" (click)="addMpMod(-1)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <p class="u-text-center">{{ getMP()  + this.character.tempMPMod }}({{ getMP() }})</p>
+            <button mat-mini-fab class="minibutton" (click)="addMpMod(1)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+    </div>
+    <div class="rQItem u-width-15 u-flex u-flex-column border-all padding-left" (click)="resetCharacterTemps()">
+      <button mat-icon-button >
+        <mat-icon>health_and_safety</mat-icon>
+      </button>
+      <p>{{ "ACTIONS.UTILS.RESEL_ALL" | translate }}</p>
+    </div>
+
+  </div>
+
+
+  <div class=" u-width-100-padding u-flex u-flex-column border-all">
+    <div class="u-width-100 u-flex listItem" (click)="swShowLocs = !swShowLocs">
+      <p class="u-width-35"><b>{{ "PJ.LOC_SHORT" | translate }}</b></p>
+      <p class="u-width-15"><b>{{ "PJ.HP" | translate }}</b></p>
+      <p class="u-width-35 "><b>{{ "PJ.ARMOR_SHORT" | translate }}</b></p>
+      <p class="u-width-15"><b>{{ "PJ.AP" | translate }}</b></p>
+    </div>
+    <div *ngIf="swShowLocs">
+      <div class="u-width-100-padding u-flex" *ngFor="let loc of character.locations">
+        <p class="u-width-30">{{ loc.name }}</p>
+        <div class="u-width-20">
+          <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
+            <button mat-mini-fab class="minibutton" (click)="addLocHpMod(-1, loc)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <p class="u-text-center">{{ getHpByLocation(character, loc)  + loc.bonusHP }}({{ getHpByLocation(character, loc) }})</p>
+            <button mat-mini-fab class="minibutton" (click)="addLocHpMod(1, loc)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+        <p class="u-width-35" [matTooltip]="getArmorTypeByLocation(character, loc)">{{ getArmorTypeByLocation(character, loc) }}</p>
+        <p class="u-width-15">{{ getArmorByLocation(character, loc) }}</p>
+      </div>
+    </div>
+  </div>
+  <div class=" u-width-100-padding u-flex border-all">
+    <p class="u-width-50 u-flex u-flex-center u-flex-space-center"><b>{{ "PJ.ARMOR_BONUS" | translate }}:</b> </p>
+    <div class="u-width-50 u-flex u-flex-center u-flex-space-center">
+      <button mat-mini-fab class="minibutton" (click)="addApMod(-1)">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <p class="u-text-center">{{ character.tempAPMod }}</p>
+      <button mat-mini-fab class="minibutton" (click)="addApMod(1)">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+
+
+
+  <div class="u-width-100-padding">
+    <mat-expansion-panel class="rQItem tertiary-expansion">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ "ACTIONS.UTILS.UTILS" | translate  }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="u-flex">
+        <div class="u-width-33 rQItem">
+          <button mat-raised-button (click)="handleHumanice()" class="u-width-100">
+            <mat-icon>manage_accounts</mat-icon>{{ "ACTIONS.UTILS.HUMANICE" | translate  }}
+          </button>
+        </div>
+        <div class="u-width-33 rQItem">
+          <button mat-raised-button (click)="setRandomHumanStats()" class="u-width-100">
+            <mat-icon>cached</mat-icon>{{ "ACTIONS.UTILS.RND_HUMAN_STATS" | translate  }}
+          </button>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+  </div>
+</div>
+

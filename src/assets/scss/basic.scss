@@ -1,14 +1,70 @@
+@use './custom-colors.scss' as colors;
+
 .spacer {
   flex: 1;
 }
 
+.u-text {
+  margin: 0;
+
+  &-center {
+    text-align: center;
+  }
+
+  &-left {
+    text-align: left;
+  }
+
+  &-right {
+    text-align: right;
+  }
+}
+
+.u-border {
+  &-top {
+    border-top: 1px solid colors.$text-primary;
+  }
+
+  &-bottom {
+    border-bottom: 1px solid colors.$text-primary;
+  }
+
+  &-left {
+    border-left: 1px solid colors.$text-primary;
+  }
+
+  &-right {
+    border-right: 1px solid colors.$text-primary;
+  }
+
+  &-all {
+    border: 1px solid colors.$text-primary;
+  }
+}
+
 .u-width {
+  &-2 {
+    width: 2%;
+  }
+
+  &-3 {
+    width: 3%;
+  }
+
   &-5 {
     width: 5%;
   }
 
   &-10 {
     width: 10%;
+  }
+
+  &-13{
+    width: 13%;
+  }
+
+  &-14 {
+    width: 14.2%;
   }
 
   &-15 {
@@ -71,8 +127,41 @@
     width: 80%;
   }
 
+  &-85 {
+    width: 85%;
+
+    &-padding {
+      width: calc(85% - 1rem);
+      margin: 0.5rem;
+    }
+  }
+
+  &-98 {
+    width: 98%;
+  }
+
   &-100 {
     width: 100%;
+
+    &-padding {
+      width: calc(100% - 1rem);
+      margin: 0.5rem;
+    }
+  }
+}
+
+.u-height {
+  &-100 {
+    height: 100%;
+
+    &-padding {
+      height: calc(100% - 1rem);
+      margin: 0.5rem;
+    }
+  }
+
+  &-min {
+    height: min-content;
   }
 }
 
@@ -97,6 +186,10 @@
 
   &-space-around {
     justify-content: space-around;
+  }
+
+  &-space-center {
+    justify-content: center;
   }
 
   &-space-evenly {
@@ -186,5 +279,6 @@
 
   &-all {
     border: 1px solid #e0e0e0;
+    border-radius: 8px;
   }
 }

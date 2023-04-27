@@ -25,5 +25,12 @@ export const NUMBERS = {
   N_41: 41,
   N_56: 56,
   N_57: 57,
+  N_60: 60,
+  N_64: 64,
+  N_65: 65,
+  N_70: 70,
+  N_75: 75,
   N_100: 100,
 }
+
+export const DICE_SEPARATOR = 'D';

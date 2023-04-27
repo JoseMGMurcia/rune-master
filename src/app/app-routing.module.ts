@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'characters',
     loadChildren: () => import('./modules/+characters/characters.module').then( m => m.CharactersModule)
   },
+  {
+    path: 'combat',
+    loadChildren: () => import('./modules/+combat/combat.module').then( m => m.CombatModule)
+  },
 ];
 
 

@@ -16,6 +16,10 @@ export class MenubarComponent {
     this.router.navigate(['characters']);
   }
 
+  public navigateCombat(){
+    this.router.navigate(['combat']);
+  }
+
   public navigateDetail(){
     //
   }

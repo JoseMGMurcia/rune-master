@@ -178,7 +178,6 @@ export const getWeaponList = (pj: Character): string[] => {
     weapons.push(skill.name);
   });
 
-
   return Array.from(new Set(weapons));
 }
 

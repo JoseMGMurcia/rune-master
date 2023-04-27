@@ -21,4 +21,12 @@
  - Equip in character page.
  - Weapon factory added.
  - Special success damage added.
+ - Local Host mode
+
+## 0.0.3 
+- Combat section added
+- Roll dices added to combat section
+- New characters creation in combat section.
+- Saved character can be used in commbat section.
+
   

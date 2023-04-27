@@ -81,8 +81,7 @@ export type WeaponNameType =
   WeaponNameEnum.WHIP |
   WeaponNameEnum.GREAT_AXE |
   WeaponNameEnum.STAFF |
-  WeaponNameEnum.JABELIN |
-  WeaponNameEnum.THROWING_ROCK;
+  WeaponNameEnum.JABELIN;
 
 export enum WeaponNameEnum {
   FIST = "FIST",
@@ -163,7 +162,6 @@ export enum WeaponNameEnum {
   POLE_LACE = "POLE_LACE",
   WHIP = "WHIP",
   STAFF = "STAFF",
-  THROWING_ROCK = "THROWING_ROCK",
 }
 
 
@@ -398,7 +396,7 @@ export const createWeapon = (type: weaponType, name: WeaponNameType, translate: 
      return new Weapon(literal, new DiceRoll(1,4),  DamageTypeEnum.PIERCING, 0.2, true, 20, 20 , '1/MR', true, 0, 4, false, weaponTypeEnum.THROWING_KNIFE, 0, 11, new DiceRoll(2,4));
     }
   } else if (type === weaponTypeEnum.THROWING_ROCK) {
-    if (name === WeaponNameEnum.THROWING_ROCK) {
+    if (name === WeaponNameEnum.THROWING_STONE) {
      return new Weapon(literal, new DiceRoll(1,3),  DamageTypeEnum.PIERCING, 0.5, true, 20, 20 , '1/MR', true, 0, 0, false, weaponTypeEnum.THROWING_ROCK, 0, 0, new DiceRoll(2,3));
     }
   } else if (type === weaponTypeEnum.BOLAS) {
@@ -435,4 +433,147 @@ export const createWeapon = (type: weaponType, name: WeaponNameType, translate: 
     }
   }
   return new Weapon('No weapon', new DiceRoll(0,0),  DamageTypeEnum.PIERCING, 0, true, 0, 0 , '', true, 0, 0, false, weaponTypeEnum.FIST, 0, 0);
+}
+
+export const getWeaponTypeByName = (name: string): weaponType[] => {
+  if (name === WeaponNameEnum.FIST) {
+    return [weaponTypeEnum.FIST];
+  } else if (name === WeaponNameEnum.KICK) {
+    return [weaponTypeEnum.KICK];
+  } else if (name === WeaponNameEnum.CLAW) {
+    return [weaponTypeEnum.CLAW];
+  } else if (name === WeaponNameEnum.HORN) {
+    return [weaponTypeEnum.HORN];
+  } else if (name === WeaponNameEnum.COMBAT_AXE) {
+    return [weaponTypeEnum.AXE1H, weaponTypeEnum.AXE2H];
+  } else if (name === WeaponNameEnum.HAND_AXE) {
+    return [weaponTypeEnum.AXE1H];
+  } else if (name === WeaponNameEnum.GREAT_AXE) {
+    return [weaponTypeEnum.AXE2H];
+  } else if (name === WeaponNameEnum.DAGGER) {
+    return [weaponTypeEnum.DAGGER];
+  } else if (name === WeaponNameEnum.CHAIN_AND_BALL) {
+    return [weaponTypeEnum.PEASANT_MACE1M];
+  } else if (name === WeaponNameEnum.TRIPPLE_CHAIN) {
+    return [weaponTypeEnum.PEASANT_MACE1M];
+  } else if (name === WeaponNameEnum.GRAIN_MACE) {
+    return [weaponTypeEnum.PEASANT_MACE1M];
+  } else if (name === WeaponNameEnum.MILITARY) {
+    return [weaponTypeEnum.PEASANT_MACE2M];
+  } else if (name === WeaponNameEnum.WARHAMMER) {
+    return [weaponTypeEnum.HAMMER2H];
+  } else if (name === WeaponNameEnum.HEAVY_MACE) {
+    return [weaponTypeEnum.MACE1H, weaponTypeEnum.MACE2H];
+  } else if (name === WeaponNameEnum.LIGHT_MACE) {
+    return [weaponTypeEnum.MACE1H];
+  } else if (name === WeaponNameEnum.WOOD_CLUB) {
+    return [weaponTypeEnum.MACE1H];
+  } else if (name === WeaponNameEnum.STAFF) {
+    return [weaponTypeEnum.MACE1H];
+  } else if (name === WeaponNameEnum.CROOK) {
+    return [weaponTypeEnum.MACE2H];
+  } else if (name === WeaponNameEnum.WAR_CLUB) {
+    return [weaponTypeEnum.MACE2H];
+  } else if (name === WeaponNameEnum.WORK_CLUB) {
+    return [weaponTypeEnum.MACE2H];
+  } else if (name === WeaponNameEnum.TROLL_CLUB) {
+    return [weaponTypeEnum.MACE2H];
+  } else if (name === WeaponNameEnum.RAPIER) {
+    return [weaponTypeEnum.RAPIER];
+  } else if (name === WeaponNameEnum.GLADIUS) {
+    return [weaponTypeEnum.SHORT_SWORD];
+  } else if (name === WeaponNameEnum.KUKRI) {
+    return [weaponTypeEnum.SHORT_SWORD];
+  } else if (name === WeaponNameEnum.BUCKER) {
+    return [weaponTypeEnum.SHIELD];
+  } else if (name === WeaponNameEnum.DIANE) {
+    return [weaponTypeEnum.SHIELD];
+  } else if (name === WeaponNameEnum.HERALD) {
+    return [weaponTypeEnum.SHIELD];
+  } else if (name === WeaponNameEnum.LARGE_RECTANGULAR) {
+    return [weaponTypeEnum.SHIELD];
+  } else if (name === WeaponNameEnum.ROUND_SHIELD) {
+    return [weaponTypeEnum.SHIELD];
+  } else if (name === WeaponNameEnum.COMMET) {
+    return [weaponTypeEnum.SHIELD];
+  } else if (name === WeaponNameEnum.JABELIN) {
+    return [weaponTypeEnum.JABELIN, weaponTypeEnum.SPEAR1H];
+  } else if (name === WeaponNameEnum.CABALRY_SPEAR) {
+    return [weaponTypeEnum.SPEAR1H];
+  } else if (name === WeaponNameEnum.SHORT_SPEAR) {
+    return [weaponTypeEnum.SPEAR1H, weaponTypeEnum.SPEAR2H];
+  } else if (name === WeaponNameEnum.PILUM) {
+    return [weaponTypeEnum.SPEAR1H];
+  } else if (name === WeaponNameEnum.LONG_SPEAR) {
+    return [weaponTypeEnum.SPEAR2H];
+  } else if (name === WeaponNameEnum.NAGINATA) {
+    return [weaponTypeEnum.SPEAR2H];
+  } else if (name === WeaponNameEnum.PIQUE) {
+    return [weaponTypeEnum.SPEAR2H];
+  } else if (name === WeaponNameEnum.BASTARD_SWORD) {
+    return [weaponTypeEnum.SWORD1H, weaponTypeEnum.SWORD2H];
+  } else if (name === WeaponNameEnum.BROAD_SWORD) {
+    return [weaponTypeEnum.SWORD1H];
+  } else if (name === WeaponNameEnum.SCIMITAR) {
+    return [weaponTypeEnum.SWORD1H];
+  } else if (name === WeaponNameEnum.DOUBLE_FISTED_SWORD) {
+    return [weaponTypeEnum.SWORD2H];
+  } else if (name === WeaponNameEnum.HOE) {
+    return [weaponTypeEnum.TOOL_HOE];
+  } else if (name === WeaponNameEnum.SICKLE) {
+    return [weaponTypeEnum.TOOL_SICKLE];
+  } else if (name === WeaponNameEnum.SCYTHE) {
+    return [weaponTypeEnum.TOOL_SCYTHE];
+  } else if (name === WeaponNameEnum.SHOVEL) {
+    return [weaponTypeEnum.TOOL_SHOVEL];
+  } else if (name === WeaponNameEnum.SHORT_BOW) {
+    return [weaponTypeEnum.SHORT_BOW];
+  } else if (name === WeaponNameEnum.COMPOSITE_BOW) {
+    return [weaponTypeEnum.COMPOSITE_BOW];
+  } else if (name === WeaponNameEnum.ATLATL) {
+    return [weaponTypeEnum.ATLATL];
+  } else if (name === WeaponNameEnum.LONGBOW) {
+    return [weaponTypeEnum.LONGBOW];
+  } else if (name === WeaponNameEnum.HEAVY_CROSSBOW) {
+    return [weaponTypeEnum.HEAVY_CROSSBOW];
+  } else if (name === WeaponNameEnum.MEDIUM_CROSSBOW) {
+    return [weaponTypeEnum.MEDIUM_CROSSBOW];
+  } else if (name === WeaponNameEnum.LIGHT_CROSSBOW) {
+    return [weaponTypeEnum.LIGHT_CROSSBOW];
+  } else if (name === WeaponNameEnum.REPEATING_CROSSBOW) {
+    return [weaponTypeEnum.REPEATING_CROSSBOW];
+  } else if (name === WeaponNameEnum.ROCK_LAUNCHER) {
+    return [weaponTypeEnum.ROCK_LAUNCHER];
+  } else if (name === WeaponNameEnum.BLOWGUN) {
+    return [weaponTypeEnum.BLOWGUN];
+  } else if (name === WeaponNameEnum.SLING) {
+    return [weaponTypeEnum.SLING];
+  } else if (name === WeaponNameEnum.CROOK_SLING) {
+    return [weaponTypeEnum.CROOK_SLING];
+  } else if (name === WeaponNameEnum.THROWING_AXE) {
+    return [weaponTypeEnum.THROWING_AXE];
+  } else if (name === WeaponNameEnum.THROWING_KNIFE) {
+    return [weaponTypeEnum.THROWING_KNIFE];
+  } else if (name === WeaponNameEnum.THROWING_STONE) {
+    return [weaponTypeEnum.THROWING_ROCK];
+  } else if (name === WeaponNameEnum.BOLAS) {
+    return [weaponTypeEnum.BOLAS];
+  } else if (name === WeaponNameEnum.WAR_BOOMERANG) {
+    return [weaponTypeEnum.WAR_BOOMERANG];
+  } else if (name === WeaponNameEnum.HUNTING_BOOMERANG) {
+    return [weaponTypeEnum.HUNTING_BOOMERANG];
+  } else if (name === WeaponNameEnum.DART) {
+    return [weaponTypeEnum.DART];
+  } else if (name === WeaponNameEnum.SHURIKEN) {
+    return [weaponTypeEnum.SHURIKEN];
+  } else if (name === WeaponNameEnum.POLE_LACE) {
+    return [weaponTypeEnum.POLE_LACE];
+  } else if (name === WeaponNameEnum.ROPE_LACE) {
+    return [weaponTypeEnum.ROPE_LACE];
+  } else if (name === WeaponNameEnum.WHIP) {
+    return [weaponTypeEnum.WHIP];
+  }
+    //TODO Undefined weapon type
+    return [weaponTypeEnum.WHIP];
+
 }

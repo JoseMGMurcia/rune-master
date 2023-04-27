@@ -1,2 +1,27 @@
-
-HOME
+<div class="u-width-50 rQItem">
+  <mat-expansion-panel class="rQItem tertiary-expansion">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ "PJ.ARMORS" | translate  }}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="u-flex u-flex-column margin-top">
+      <div class="u-flex">
+        <div class="u-width-2"></div>
+        <p class="u-width-13"><b>{{ "COMMONS.TYPE" | translate }}</b></p>
+        <p class="u-width-5 u-flex u-flex-space-center"><b>{{ "PJ.AP" | translate }}</b></p>
+        <p class="u-width-20 u-flex u-flex-space-center"><b>{{ "PJ.ARMOR_SIZES.SMALL" | translate }} {{ "PJ.WEIGHT" | translate }}({{ "COMMONS.VALUE" | translate }})</b></p>
+        <p class="u-width-20 u-flex u-flex-space-center"><b>{{ "PJ.ARMOR_SIZES.MEDIUM" | translate }} {{ "PJ.WEIGHT" | translate }}({{ "COMMONS.VALUE" | translate }})</b></p>
+        <p class="u-width-20 u-flex u-flex-space-center"><b>{{ "PJ.ARMOR_SIZES.LARGE" | translate }} {{ "PJ.WEIGHT" | translate }}({{ "COMMONS.VALUE" | translate }})</b></p>
+        <p class="u-width-20 u-flex u-flex-space-center"><b>{{ "PJ.ARMOR_SIZES.TROLL" | translate }} {{ "PJ.WEIGHT" | translate }}({{ "COMMONS.VALUE" | translate }})</b></p>
+      </div>
+      <div class="u-flex" *ngFor="let armor of armors; let i = index" [ngClass]="getLitsLineClass(i)">
+        <div class="u-width-2"></div>
+        <p class="u-width-13">{{ getArmorName(armor) }}</p>
+        <p class="u-width-5 u-flex u-flex-space-center">{{ armor.armor }}</p>
+        <p class="u-width-20 u-flex u-flex-space-center">{{ armor.weights[0] }} ({{ armor.values[0] }})</p>
+        <p class="u-width-20 u-flex u-flex-space-center">{{ armor.weights[1] }} ({{ armor.values[1] }})</p>
+        <p class="u-width-20 u-flex u-flex-space-center">{{ armor.weights[2] }} ({{ armor.values[2] }})</p>
+        <p class="u-width-20 u-flex u-flex-space-center">{{ armor.weights[3] }} ({{ armor.values[3] }})</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</div>

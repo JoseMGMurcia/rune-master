@@ -32,9 +32,17 @@ export class CharactersService {
 
   public updateOrAddCharacter(character: Character): void {
     this.db.saveData(DB_TABLES.PJS, [character]);
+    this.updateCharacters();
   }
 
   public deleteCharacter(character: Character): void {
     this.db.deleteData(DB_TABLES.PJS, character.id);
+    this.updateCharacters();
+  }
+
+  private updateCharacters(): void {
+    this.db.getAllData(DB_TABLES.PJS).then((characters: Character[]) => {
+      this.setCharacters(characters);
+    });
   }
 }

@@ -5,7 +5,7 @@
   </button>
   <!-- TODO ADD FILTERS HERE -->
 </div>
-<div *ngFor="let pj of characters" class="rQItem">
+<div *ngFor="let pj of characters; let i = index" [ngClass]="getLitsLineClass(i)" class="rQItem">
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -52,7 +52,7 @@
             <mat-label class="rQItem padding-right">{{ getAgilityMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.AGILITY">{{ skill.name }} {{ skill.value }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.AGILITY; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
           </div>
         </mat-expansion-panel>
       </div>
@@ -64,7 +64,7 @@
             <mat-label class="rQItem padding-right">{{ getComunicationMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.COMUNICATION">{{ skill.name }} {{ skill.value }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.COMUNICATION; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
           </div>
           </mat-expansion-panel>
       </div>
@@ -76,7 +76,7 @@
             <mat-label class="rQItem padding-right">{{ getManipulationMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.MANIPULATION">{{ skill.name }} {{ skill.value }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.MANIPULATION; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
           </div>
           </mat-expansion-panel>
       </div>
@@ -88,7 +88,7 @@
             <mat-label class="rQItem padding-right">{{ getKnowledgeMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.KNOWLEDGE">{{ skill.name }} {{ skill.value }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.KNOWLEDGE; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
           </div>
           </mat-expansion-panel>
       </div>
@@ -100,7 +100,7 @@
             <mat-label class="rQItem padding-right">{{ getStealthMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.STEALTH">{{ skill.name }} {{ skill.value }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.STEALTH; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
           </div>
           </mat-expansion-panel>
       </div>
@@ -112,7 +112,7 @@
             <mat-label class="rQItem padding-right">{{ getPerceptionMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
             <div class="u-flex u-flex-column">
-              <mat-label class="rQItem" *ngFor="let skill of pj.skills.AWARENESS">{{ skill.name }} {{ skill.value }}</mat-label>
+              <mat-label class="rQItem" *ngFor="let skill of pj.skills.AWARENESS; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
             </div>
         </mat-expansion-panel>
       </div>
@@ -123,7 +123,7 @@
             <mat-panel-title>{{ "PJ.SKILL_TYPE.OTHER" | translate  }}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.OTHER">{{ skill.name }} {{ skill.value }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.OTHER; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
           </div>
           </mat-expansion-panel>
       </div>
@@ -145,7 +145,7 @@
             <mat-label class="rQItem padding-right">{{ getMagicalMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.MAGICAL">{{ skill.name }} {{ skill.value }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let skill of pj.skills.MAGICAL; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
           </div>
         </mat-expansion-panel>
       </div>
@@ -157,7 +157,7 @@
             <mat-label class="rQItem padding-right">{{ pj.stats.POW.value*5 }} + {{ getMagicalMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.SPIRITUAL">{{ spell.name }}-{{ spell.points }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.SPIRITUAL; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}-{{ spell.points }}</mat-label>
           </div>
         </mat-expansion-panel>
       </div>
@@ -169,7 +169,7 @@
             <mat-label class="rQItem padding-right">100 + {{ getMagicalMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.DIVINE">{{ spell.name }}({{ spell.points }})x{{ spell.divineStack }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.DIVINE; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}({{ spell.points }})x{{ spell.divineStack }}</mat-label>
           </div>
         </mat-expansion-panel>
       </div>
@@ -181,7 +181,7 @@
             <mat-label class="rQItem padding-right">{{ getMagicalMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.SORCERY">{{ spell.name }}({{ getSpellStatus(spell) }}): {{ spell.sorcerySkillValue }} </mat-label>
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.SORCERY; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}({{ getSpellStatus(spell) }}): {{ spell.sorcerySkillValue }} </mat-label>
           </div>
         </mat-expansion-panel>
       </div>
@@ -192,7 +192,7 @@
             <mat-panel-title>{{ "PJ.SPELL_TYPE.DRAGON" | translate  }}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.DRAGON">{{ spell.name }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.DRAGON; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</mat-label>
           </div>
         </mat-expansion-panel>
       </div>
@@ -203,7 +203,7 @@
             <mat-panel-title>{{ "PJ.SPELL_TYPE.KI" | translate  }}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.KI">{{ spell.name }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.KI; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</mat-label>
           </div>
         </mat-expansion-panel>
       </div>
@@ -214,7 +214,7 @@
             <mat-panel-title>{{ "PJ.SPELL_TYPE.OTHER" | translate  }}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.OTHER">{{ spell.name }}</mat-label>
+            <mat-label class="rQItem" *ngFor="let spell of pj.spells.OTHER; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</mat-label>
           </div>
         </mat-expansion-panel>
       </div>
@@ -248,7 +248,7 @@
                 <p class="u-width-35"><b>{{ "PJ.ARMOR_SHORT" | translate }}</b></p>
                 <p class="u-width-15"><b>{{ "PJ.AP" | translate }}</b></p>
               </div>
-              <div class="u-flex" *ngFor="let loc of pj.locations">
+              <div class="u-flex" *ngFor="let loc of pj.locations; let i = index" [ngClass]="getLitsLineClass(i)">
                 <p class="u-width-35">{{ loc.name }}</p>
                 <p class="u-width-15">{{ getHpByLocation(pj, loc)}}</p>
                 <p class="u-width-35" [matTooltip]="getArmorTypeByLocation(pj, loc)">{{ getArmorTypeByLocation(pj, loc) }}</p>
@@ -278,7 +278,7 @@
               <p class="u-width-15"><b>{{ "PJ.RANGE" | translate }}</b></p>
               <p class="u-width-15"><b>{{ "PJ.FIRE_RATE" | translate }}</b></p>
             </div>
-            <div class="u-flex" *ngFor="let weapon of getWeaponList(pj)">
+            <div class="u-flex" *ngFor="let weapon of getWeaponList(pj); let i = index" [ngClass]="getLitsLineClass(i)">
               <p class="u-width-15">{{ weapon }}</p>
               <p class="u-width-10">{{ getAttSkill(pj, weapon)?.value }}</p>
               <p class="u-width-10">{{ getDefSkill(pj, weapon)?.value }}</p>
@@ -305,19 +305,19 @@
             </div>
           </div>
           <div class="u-flex u-flex-column">
-            <div class="u-flex" *ngFor="let item of pj.equipment">
+            <div class="u-flex" *ngFor="let item of pj.equipment; let i = index" [ngClass]="getLitsLineClass(i)">
               <p class="u-width-25" *ngIf="item.visible">{{ item.name }}</p>
               <p class="u-width-10" *ngIf="item.visible">{{ item.quantity }}</p>
               <p class="u-width-60" *ngIf="item.visible">{{ item.description }}</p>
               <p class="u-width-5" *ngIf="item.visible">{{ item.weight }}</p>
             </div>
-            <div class="u-flex" *ngFor="let item of pj.weapons">
+            <div class="u-flex" *ngFor="let item of pj.weapons; let i = index" [ngClass]="getLitsLineClass(i)">
               <p class="u-width-25" *ngIf="item.visible">{{ item.name }}</p>
               <p class="u-width-10" *ngIf="item.visible">{{ item.quantity }}</p>
               <p class="u-width-60" *ngIf="item.visible">{{ item.description }}</p>
               <p class="u-width-5" *ngIf="item.visible">{{ item.weight }}</p>
             </div>
-            <div class="u-flex" *ngFor="let item of pj.armor">
+            <div class="u-flex" *ngFor="let item of pj.armor; let i = index" [ngClass]="getLitsLineClass(i)">
               <p class="u-width-25" *ngIf="item.visible">{{ item.name }}</p>
               <p class="u-width-10" *ngIf="item.visible">{{ item.quantity }}</p>
               <p class="u-width-60" *ngIf="item.visible">{{ item.description }}</p>

@@ -43,6 +43,37 @@ body {
   background-color: colors.$backgroung-contrast;
 }
 
+.body {
+  background-color: colors.$background;
+  color: colors.$tema-contrast-light;
+}
+
+.card {
+  background-color: colors.$card-background;
+  border-radius: 16px;
+  color: colors.$card-color;
+}
+
+.listItem {
+  background-color: colors.$background-sec;
+  color: colors.$white-50;
+  border-radius: 8px
+}
+
+.listLine-odd {
+  background-color: colors.$background-light-tertiary;
+}
+
+.listLine-even {
+  background-color: colors.$background-light-tertiary-even;
+}
+
+button {
+  &.minibutton{
+    background-color: colors.$background-tertiary;
+    scale: 0.6
+  }
+}
 
 // ANGULAR MATERIAL REDESING STYLES
 
@@ -81,5 +112,14 @@ body {
       background-color: colors.$background-tertiary-hover !important;
     }
   }
+
+  .mat-expansion-panel-body {
+    background-color:  colors.$background-light-tertiary
+  }
 }
 
+.mat-typography {
+  p {
+    margin: 0;
+  }
+}

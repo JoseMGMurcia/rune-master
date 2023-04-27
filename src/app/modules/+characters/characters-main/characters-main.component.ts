@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil} from 'rxjs';
-import { Character, Characteristic, CultMember, SexTypeEnum, Skill, cultMemberTypeEnum, cultureTypeEnum, Spell, Location, Armor, Weapon } from 'src/app/shared/models/character.model';
+import { Character, Characteristic, CultMember, SexTypeEnum, Skill, cultMemberTypeEnum, cultureTypeEnum, Spell, Location, Armor, Weapon, weaponTypeEnum } from 'src/app/shared/models/character.model';
 import { CharactersService } from 'src/app/shared/services/character.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { DatabaseService } from 'src/app/shared/services/db.service';
@@ -14,6 +14,7 @@ import { getMagMod } from 'src/app/shared/utils/character-calculated.-fields.uti
 import { setInitialHumanCharacter } from 'src/app/shared/utils/character-creation.utils';
 import { NUMBERS } from 'src/app/shared/constants/number.constants';
 import { DiceRoll } from 'src/app/shared/models/dices.model';
+import { WeaponNameEnum, createWeapon } from 'src/app/shared/utils/equip.factory';
 
 @Component({
   selector: 'app-characters-main',
@@ -127,8 +128,9 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
   }
 
   public getWeaponByName(pj: Character, name: string): Weapon | undefined {
-    const weapon = pj.weapons.find(w => w.name === name);
-    return weapon;
+    //TODO refactor this, now only reconoce if weapon type is similar to weapon nanme
+    const  weapon = pj.weapons.find(w => w.name === name);
+    return weapon
   }
 
   public getAttSkill(pj: Character, skillName: string): Skill | undefined {
@@ -164,6 +166,10 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     return ICONS.MALE_FEMALE;
   }
 
+  getLitsLineClass(index:  number): string {
+    return index % 2 === 0 ? 'listLine-odd' : 'listLine-even';
+  }
+
   handleCreate() {
     const pj = setInitialHumanCharacter( new Character('Pijus magníficus'), this.translate);
     pj.race = 'Humano';
@@ -177,13 +183,13 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     pj.culture = cultureTypeEnum.CIVILIZED;
     pj.bornIn = 'Glamour';
     pj.skills.MANIPULATION.push(new Skill('Ataque Espada', 75));
-    pj.stats.STR = new Characteristic( 14 );
-    pj.stats.DEX = new Characteristic( 16 );
-    pj.stats.CON = new Characteristic( 10 );
-    pj.stats.INT = new Characteristic( 10 );
-    pj.stats.SIZ = new Characteristic( 14 );
-    pj.stats.POW = new Characteristic( 10 );
-    pj.stats.CHA = new Characteristic( 12 );
+    pj.stats.STR = new Characteristic( 16 );
+    pj.stats.DEX = new Characteristic( 15 );
+    pj.stats.CON = new Characteristic( 14 );
+    pj.stats.INT = new Characteristic( 16 );
+    pj.stats.SIZ = new Characteristic( 15 );
+    pj.stats.POW = new Characteristic( 15 );
+    pj.stats.CHA = new Characteristic( 17 );
     pj.religions.push(new CultMember('Yanafal Tarnils', cultMemberTypeEnum.INITIATE));
     const locations =  this.translate.instant('PJ.LOCATION');
 
@@ -193,7 +199,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     coraza.description = 'Peto de coraza de bronce';
     pj.armor.push(coraza);
 
-    const lamelar = new Armor('Lamelar', NUMBERS.N_7, [locations.HEAD], false);
+    const lamelar = new Armor('Lamelar', NUMBERS.N_6, [locations.HEAD], false);
     lamelar.weight = NUMBERS.N_2;
     lamelar.inCombat = true;
     lamelar.description = 'Casco lamelar de bronce';
@@ -206,6 +212,13 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     hide.description = 'Pantalones de piel dura';
     pj.armor.push(hide);
 
+    const weapSkill =  this.translate.instant('PJ.SKILL_NAME.WEAPONS.MELEE.SWORD1H');
+    pj.skills.ATTACK.push(new Skill(weapSkill, NUMBERS.N_75));
+    pj.skills.DEFENSE.push(new Skill(weapSkill, NUMBERS.N_75));
+
+    const beoadsword = createWeapon(weaponTypeEnum.SWORD1H, WeaponNameEnum.BROAD_SWORD, this.translate);
+
+    pj.weapons.push(beoadsword);
     this.characters.push(pj);
     this.characterService.setCharacters(this.characters);
   }

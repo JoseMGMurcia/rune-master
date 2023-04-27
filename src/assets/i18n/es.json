@@ -3,24 +3,41 @@
   "COMMONS":{
     "CONFIRM": "Confirmar",
     "CANCEL": "Cancelar",
+    "DETAIL": "Detalle",
     "QUANTITY": "Cantidad",
     "QUANTITY_SHORT": "Cant.",
+    "RESULT": "Resultado",
     "TOTAL": "Total",
+    "TURN": "Turno",
+    "TYPE": "Tipo",
+    "VALUE": "Valor",
     "WARNING": "Advertencia"
   },
   "MENU": {
     "HOME": "Inicio",
     "CHARACTERS": "Personajes",
+    "COMBAT": "Combate",
     "DETAIL": "Detalle"
   },
   "ACTIONS": {
+    "ADD_COMBATANT": "Añadir nuevo luchador",
     "CREATE_CHAC": "Crear personaje",
-    "DELETE_CONFIRM": "¿Si continuas {{name}} sera borrado permanentemente?"
+    "DELETE_CONFIRM": "¿Si continuas {{name}} sera borrado permanentemente?",
+    "ROLL_DICES": "Tirar dados",
+    "SAVED_CHARACTERS": "Personajes guardados",
+    "UTILS": {
+      "UTILS": "Utilidades",
+      "HUMANICE": "Humano Inic.",
+      "RND_HUMAN_STATS": "RND Human Chars",
+      "RESEL_ALL": "Reset"
+    }
   },
   "PJ": {
     "AP": "PA",
     "AGE": "Edad",
     "ARMOR": "Armadura",
+    "ARMOR_BONUS": "Bono de Armadura",
+    "ARMORS": "Armaduras",
     "ARMOR_SHORT": "Arm.",
     "ATTACK": "Ataque",
     "ATTACK_SHORT": "A%",
@@ -38,6 +55,7 @@
     "LOC": "Localización",
     "LOC_SHORT": "Loc.",
     "LOCATIONS": "Localizaciones",
+    "NAME": "Nombre",
     "MAGIC": "Magia",
     "MAGICAL_SKILLS": "Habilidades mágicas",
     "MR": "MR",
@@ -58,6 +76,26 @@
     "MP": "PM",
     "HP": "PV",
     "FP": "PF",
+    "ARMOR_TYPES": {
+      "VEST": "Vestidos",
+      "SOFT_LEATHER": "Cuero Blando",
+      "HARD_LEATHER": "Cuero Duro",
+      "BOILED_LEATHER": "Cuirboulli",
+      "BEZANTED": "Bezanteada",
+      "RING_MAIL": "Cota de Anillos",
+      "RHINO_SKIN": "Piel de Rinoceronte",
+      "LAMELLAR": "Lamelar",
+      "SCALE_MAIL": "Escamas",
+      "CHAIN_MAIL": "Cota de Malla",
+      "BRIGANDINE": "Brigandina",
+      "PLATE_MAIL": "Coraza"
+    },
+    "ARMOR_SIZES": {
+      "SMALL": "Pequeña",
+      "MEDIUM": "Mediana",
+      "LARGE": "Grande",
+      "TROLL": "Troll"
+    },
     "CULTURE_TYPES": {
       "PRIMITIVE": "Primitivo",
       "NOMAD": "Nómada",
@@ -167,7 +205,8 @@
           "MACE": "Maza",
           "SPEAR": "Lanza",
           "STAFF": "Bastón",
-          "WHIP": "Látigo"
+          "WHIP": "Látigo",
+          "SWORD1H": "Espada 1 mano"
         }
       }
     },
@@ -276,5 +315,10 @@
       "STAFF": "Vara",
       "THROWING_ROCK": "Piedra arrojadiza"
     }
+  },
+  "HINTS":{
+    "DICES_STRING": "Nº dados D tipo Dado + mod",
+    "ADD_COMBATANT": "Añadir nuevo luchador sin estadísticas",
+    "ADD_SAVED_COMBATANT": "Añadir Personaje pregenerado"
   }
 }

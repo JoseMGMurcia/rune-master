@@ -1,5 +1,5 @@
 import { NUMBERS } from "../constants/number.constants";
-import { getUniqueID } from "../controllers/character-creation.controller";
+import { getUniqueID } from "../utils/character-creation.utils";
 import { DiceRoll } from "./dices.model";
 
 export class Character {
@@ -37,6 +37,10 @@ export class Character {
   public bonusAP = NUMBERS.N_0;
   public bonugMP = NUMBERS.N_0;
   public bonusFP = NUMBERS.N_0;
+  public tempHPMod = NUMBERS.N_0;
+  public tempAPMod = NUMBERS.N_0;
+  public tempFPMod = NUMBERS.N_0;
+  public tempMPMod = NUMBERS.N_0;
   public sideKidIds: string[] = [];
   public creationDate = new Date();
   public lastUpdate = new Date();
@@ -381,6 +385,8 @@ export class Location {
   public armorPoints = NUMBERS.N_0;
   public bonusAP = NUMBERS.N_0;
   public bonusHP = NUMBERS.N_0;
+  public tempHPMod = NUMBERS.N_0;
+  public tempAPMod = NUMBERS.N_0;
 
   constructor(name: string, hitpointsRatio = hitpointsRatioEnum.X33, armorPoints = NUMBERS.N_0, bonusHP = NUMBERS.N_0) {
     this.name = name;

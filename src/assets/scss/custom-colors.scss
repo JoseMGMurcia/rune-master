@@ -87,9 +87,15 @@ $orange-a1000: #ff00;
 
 // aplicacion colors
 $white: #fff;
+$white-50: #fffffe;
+$white-100: #fffffd;
 
 $background: $indigo-50;
 $background-light: $indigo-100;
+$background-light-even: $indigo-200;
+$background-light-tertiary: $white-50;
+$background-light-tertiary-even: $indigo-50;
+$background-light-hover: $indigo-300;
 $background-dark: $indigo-700;
 $background-dark-hover: $indigo-500;
 $backgroung-contrast: $indigo-1000;
@@ -103,3 +109,6 @@ $background-tertiary-hover: $orange-a200;
 $primary: $indigo-a700;
 
 $text-primary: $tema-contrast-light;
+
+$card-background: $blue-gray-300;
+$card-color: $blue-gray-900;

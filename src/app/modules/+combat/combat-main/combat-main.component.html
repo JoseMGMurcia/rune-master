@@ -1,0 +1,67 @@
+<div class="u-width-100 u-flex u-height-100 body">
+  <div class="u-width-75 u-height-min">
+    <form [formGroup]="dicesForm" class="u-width-100 u-flex u-border-bottom">
+      <div class="u-width-15 rQItem">
+          <mat-form-field class="rQItem u-width-100" >
+            <mat-label>{{ "ACTIONS.ROLL_DICES" | translate }}</mat-label>
+            <input matInput type="text"  [value]="" formControlName="dices">
+            <mat-hint>{{ "HINTS.DICES_STRING" | translate }}</mat-hint>
+          </mat-form-field>
+      </div>
+      <div class="u-width-3 rQItem">
+        <button mat-icon-button class="rQItem u-width-20" (click)="rollDices()">
+          <mat-icon>cached</mat-icon>
+        </button>
+      </div>
+      <div class="u-width-5 rQItem column">
+        <mat-label class="rQItem title u-flex u-flex-space-center" *ngIf="swShowResult">{{ "COMMONS.RESULT" | translate }}</mat-label>
+        <mat-label class="u-flex u-flex-space-center" *ngIf="swShowResult"><b>{{ dicesResult }}</b></mat-label>
+      </div>
+      <div class="u-width-5 rQItem column">
+        <mat-label class="rQItem title u-flex u-flex-space-center">{{ "COMMONS.TURN" | translate }}</mat-label>
+        <div class="u-flex u-flex-space-center">
+          <mat-icon (click)="substractTurn()">remove</mat-icon>
+          <mat-label class="u-flex u-flex-space-center rQItem"><b>{{ turn }}</b></mat-label>
+          <mat-icon (click)="addTurn()">add</mat-icon>
+        </div>
+      </div>
+      <div class="u-width-30 rQItem">
+        <mat-form-field class="rQItem u-width-100" >
+          <mat-label>{{ "ACTIONS.ADD_COMBATANT" | translate }}</mat-label>
+          <input matInput type="text"  [value]="" formControlName="combatant">
+          <mat-icon matSuffix (click)="addCombatant()">add</mat-icon>
+          <mat-hint>{{ "HINTS.ADD_COMBATANT" | translate }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="u-width-30 rQItem column">
+        <mat-form-field appearance="fill" class="rQItem u-width-100">
+          <mat-label>{{ "ACTIONS.SAVED_CHARACTERS" | translate }}</mat-label>
+          <mat-select formControlName="savedPJ">
+            <mat-option *ngFor="let pj of savedCharacters" [value]="pj.id">
+              {{ pj.name }}
+            </mat-option>
+          </mat-select>
+          <mat-hint>{{ "HINTS.ADD_SAVED_COMBATANT" | translate }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="u-width-3 rQItem">
+        <button mat-icon-button class="rQItem u-width-20" (click)="addSavedCharacter()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+    </form>
+    <div
+      *ngFor="let character of characters"
+      class="rQItem padding-all border-all listItem"
+      (click)="setCharacter(character)">
+        {{ character.name }}
+    </div>
+  </div>
+  <div class="u-width-25 u-height-100-padding card margin-right">
+    <app-combat-detail [character]="character" [turn]="turn"></app-combat-detail>
+  </div>
+</div>
+
+
+

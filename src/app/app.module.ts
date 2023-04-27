@@ -15,7 +15,7 @@ export const createTranslateLoader = (http: HttpClient) =>
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     MatSidenavModule,
