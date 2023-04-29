@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil} from 'rxjs';
-import { Character, Characteristic, CultMember, SexTypeEnum, Skill, cultMemberTypeEnum, cultureTypeEnum, Spell, Location, Armor, Weapon, weaponTypeEnum } from 'src/app/shared/models/character.model';
+import { Character, Characteristic, CultMember, SexTypeEnum, Skill, cultMemberTypeEnum, cultureTypeEnum, Spell, Location, Armor, Weapon, WeaponTypeEnum, CombatSkill } from 'src/app/shared/models/character.model';
 import { CharactersService } from 'src/app/shared/services/character.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { DatabaseService } from 'src/app/shared/services/db.service';
 import { getAgiMod, getArmorByLocation, getArmorTypeByLocation, getCAR, getComMod, getDMGMod, getFP, getFreeINTPoints, getHp, getHpByLocation, getMP, getMRDES, getMRSIZ, getManMod, getWeaponList } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { ICONS } from 'src/app/shared/constants/icon.constants';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,7 +31,6 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     public translate: TranslateService,
     private characterService: CharactersService,
     private dialogService: DialogService,
-    private dbService: DatabaseService,
   ) { }
 
   ngOnInit(): void {
@@ -127,20 +125,18 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     return DiceRoll.toString(getDMGMod(pj));
   }
 
-  public getWeaponByName(pj: Character, name: string): Weapon | undefined {
-    //TODO refactor this, now only reconoce if weapon type is similar to weapon nanme
-    const  weapon = pj.weapons.find(w => w.name === name);
-    return weapon
-  }
-
   public getAttSkill(pj: Character, skillName: string): Skill | undefined {
-    const skill = pj.skills.ATTACK.find(s => s.name === skillName);
+    const skill = pj.skills.ATTACK.find(s => s.weaponType === skillName);
     return skill;
   }
 
   public getDefSkill(pj: Character, skillName: string): Skill | undefined {
-    const skill = pj.skills.DEFENSE.find(s => s.name === skillName);
+    const skill = pj.skills.DEFENSE.find(s => s.weaponType === skillName);
     return skill;
+  }
+
+  public getWeaoponRollString(weapon: Weapon): string {
+    return DiceRoll.toString(weapon.damage);
   }
 
   public getTotalCAR(pj: Character): number {
@@ -153,11 +149,6 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     const value = dodgeSkill?.value ? dodgeSkill.value : NUMBERS.N_0;
 
     return `${dodge}: ${value}% + ${this.getAgilityMod(pj)}%(mod) - ${getCAR(pj)}%(CAR) = ${value + getAgiMod(pj) - getCAR(pj)}%`;
-  }
-
-  public getWeaoponRollString(pj: Character, weapon: string): string {
-    const roll = this.getWeaponByName(pj, weapon)?.damage
-    return DiceRoll.toString(roll);
   }
 
   public getGenderIcon(pj: Character): string {
@@ -191,7 +182,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     pj.stats.POW = new Characteristic( 15 );
     pj.stats.CHA = new Characteristic( 17 );
     pj.religions.push(new CultMember('Yanafal Tarnils', cultMemberTypeEnum.INITIATE));
-    const locations =  this.translate.instant('PJ.LOCATION');
+    const  locations =  this.translate.instant('PJ.LOCATION');
 
     const coraza = new Armor('Coraza', NUMBERS.N_8, [locations.CHEST, locations.ABDOMEN, locations.LEFT_ARM, locations.RIGHT_ARM], false);
     coraza.weight = NUMBERS.N_12;
@@ -213,16 +204,15 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     pj.armor.push(hide);
 
     const weapSkill =  this.translate.instant('PJ.SKILL_NAME.WEAPONS.MELEE.SWORD1H');
-    pj.skills.ATTACK.push(new Skill(weapSkill, NUMBERS.N_75));
-    pj.skills.DEFENSE.push(new Skill(weapSkill, NUMBERS.N_75));
+    pj.skills.ATTACK.push(new CombatSkill(weapSkill, NUMBERS.N_75, WeaponTypeEnum.SWORD1H));
+    pj.skills.DEFENSE.push(new CombatSkill(weapSkill, NUMBERS.N_75, WeaponTypeEnum.SWORD1H));
 
-    const beoadsword = createWeapon(weaponTypeEnum.SWORD1H, WeaponNameEnum.BROAD_SWORD, this.translate);
+    const broadsword = createWeapon(WeaponTypeEnum.SWORD1H, WeaponNameEnum.BROAD_SWORD, this.translate);
 
-    pj.weapons.push(beoadsword);
+    pj.weapons.push(broadsword);
     this.characters.push(pj);
     this.characterService.setCharacters(this.characters);
   }
-
 
   handleDelete($event:any, pj: Character): void {
     this.preventAcordionExpansion($event);

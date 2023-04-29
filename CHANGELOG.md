@@ -28,5 +28,5 @@
 - Roll dices added to combat section
 - New characters creation in combat section.
 - Saved character can be used in commbat section.
-
+- Combat detail utils
   

@@ -70,6 +70,11 @@ export const getMRSIZ = (pj: Character): number => {
   }
 }
 
+export const getMRCC = (pj: Character): number => {
+  return getMRSIZ(pj) + getMRDES(pj);
+}
+
+
 const getMod = (primary: number[], secondary: number[], negative: number[]): number => {
   let value = NUMBERS.N_0;
   for (const i of primary) {
@@ -143,7 +148,9 @@ export const getFreeINTPoints = (pj: Character): number => {
 }
 
 export const getHpByLocation = (pj: Character, loc: Location): number => {
-  const hp = getHp(pj) + pj.bonusHP;
+  let hp = getHp(pj) + pj.bonusHP;
+  // Next multiple of 3
+  hp = Math.ceil(hp / NUMBERS.N_3) * NUMBERS.N_3;
   const hpRatio = loc.hitpointsRatio;
   const locHP  =  Math.ceil((hp*hpRatio));
   return  locHP;

@@ -258,35 +258,33 @@
         </mat-expansion-panel>
       </div>
 
-      <div class="u-width-35 rQItem">
+      <div class="u-width-40 rQItem">
         <mat-expansion-panel class="rQItem tertiary-expansion">
-          <mat-expansion-panel-header>
+          <mat-expansion-panel-header class="u-flex">
             <mat-panel-title>{{ "PJ.WEAPONS" | translate  }}</mat-panel-title>
-            <mat-panel-description>
-                <mat-label class="margin-right">{{ "PJ.ATTACK" | translate }}: {{ getManipulationMod(pj) }}</mat-label>
-                <mat-label>{{ "PJ.PARRY" | translate }}: {{ getAgilityMod(pj) }}</mat-label>
-            </mat-panel-description>
+              <mat-label class="u-width-33 u-text-center">{{ "PJ.ATTACK_MOD" | translate }}: {{ getManipulationMod(pj) }}</mat-label>
+              <mat-label class="u-width-33 u-text-center">{{ "PJ.PARRY_MOD" | translate }}: {{ getAgilityMod(pj) }}</mat-label>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column margin-top">
             <div class="u-flex">
-              <p class="u-width-15"><b>{{ "PJ.WEAPON" | translate }}</b></p>
-              <p class="u-width-10"><b>{{ "PJ.ATTACK_SHORT" | translate }}</b></p>
-              <p class="u-width-10"><b>{{ "PJ.PARRY_SHORT" | translate }}</b></p>
-              <p class="u-width-10"><b>{{ "PJ.AP" | translate }}</b></p>
-              <p class="u-width-10"><b>{{ "PJ.MR" | translate }}</b></p>
+              <p class="u-width-23"><b>{{ "PJ.WEAPON" | translate }}</b></p>
+              <p class="u-width-8"><b>{{ "PJ.ATTACK_SHORT" | translate }}</b></p>
+              <p class="u-width-8"><b>{{ "PJ.PARRY_SHORT" | translate }}</b></p>
+              <p class="u-width-8"><b>{{ "PJ.AP" | translate }}</b></p>
+              <p class="u-width-8"><b>{{ "PJ.MR" | translate }}</b></p>
               <p class="u-width-15"><b>{{ "PJ.DAMAGE" | translate }}</b></p>
               <p class="u-width-15"><b>{{ "PJ.RANGE" | translate }}</b></p>
               <p class="u-width-15"><b>{{ "PJ.FIRE_RATE" | translate }}</b></p>
             </div>
-            <div class="u-flex" *ngFor="let weapon of getWeaponList(pj); let i = index" [ngClass]="getLitsLineClass(i)">
-              <p class="u-width-15">{{ weapon }}</p>
-              <p class="u-width-10">{{ getAttSkill(pj, weapon)?.value }}</p>
-              <p class="u-width-10">{{ getDefSkill(pj, weapon)?.value }}</p>
-              <p class="u-width-10">{{ getWeaponByName(pj, weapon)?.armorPoints }}</p>
-              <p class="u-width-10">{{ getWeaponByName(pj, weapon)?.reactionMoment }}</p>
-              <p class="u-width-15">{{ getWeaoponRollString(pj, weapon) }}</p>
-              <p class="u-width-15">{{ getWeaponByName(pj, weapon)?.range }} / {{ getWeaponByName(pj, weapon)?.maxRange }}</p>
-              <p class="u-width-15">{{ getWeaponByName(pj, weapon)?.fireRate }}</p>
+            <div class="u-flex" *ngFor="let weapon of pj.weapons; let i = index" [ngClass]="getLitsLineClass(i)">
+              <p class="u-width-23">{{ weapon.name }}</p>
+              <p class="u-width-8">{{ getAttSkill(pj, weapon.weaponType)?.value }}</p>
+              <p class="u-width-8">{{ getDefSkill(pj, weapon.weaponType)?.value }}</p>
+              <p class="u-width-8">{{ weapon.armorPoints }}</p>
+              <p class="u-width-8">{{ weapon.reactionMoment }}</p>
+              <p class="u-width-15">{{ getWeaoponRollString(weapon) }}</p>
+              <p class="u-width-15">{{ weapon.range }} / {{weapon.maxRange }}</p>
+              <p class="u-width-15">{{ weapon.fireRate }}</p>
             </div>
           </div>
         </mat-expansion-panel>

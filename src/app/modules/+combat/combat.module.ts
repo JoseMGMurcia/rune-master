@@ -15,6 +15,7 @@ import { CombatRoutingModule } from "./combat-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatSelectModule } from '@angular/material/select';
 import { CombatDetailComponent } from './combat-detail/combat-detail.component';
+import { DialogService } from "src/app/shared/services/dialog.service";
 
 export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,6 +48,9 @@ export const createTranslateLoader = (http: HttpClient) =>
         deps: [HttpClient]
       }
     })
+  ],
+  providers: [
+    DialogService
   ],
 })
 export class CombatModule { }

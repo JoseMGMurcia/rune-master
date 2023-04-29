@@ -92,8 +92,8 @@ export class skills {
   public KNOWLEDGE: Skill[] = [];
   public AWARENESS: Skill[] = [];
   public MAGICAL: Skill[] = [];
-  public ATTACK: Skill[] = [];
-  public DEFENSE: Skill[] = [];
+  public ATTACK: CombatSkill[] = [];
+  public DEFENSE: CombatSkill[] = [];
   public OTHER: Skill[] = [];
 }
 
@@ -110,6 +110,15 @@ export class Skill {
     this.name = name;
     this.value = value;
     this.speciality = speciality;
+  }
+}
+
+export class CombatSkill extends Skill {
+  public weaponType: WeaponType = WeaponTypeEnum.ATLATL;
+
+  constructor(name: string, value: number, weaponType: WeaponType, speciality = '') {
+    super(name, value, speciality);
+    this.weaponType = weaponType;
   }
 }
 
@@ -200,11 +209,13 @@ export class Spell {
     public armorPoints = NUMBERS.N_0;
     public reactionMoment = NUMBERS.N_0;
     public shield = false;
-    public weaponType: weaponType = weaponTypeEnum.AXE1H;
+    public weaponType: WeaponType = WeaponTypeEnum.AXE1H;
     public bonusAttack = NUMBERS.N_0;
     public bonusParry = NUMBERS.N_0;
     public minimumSTR = NUMBERS.N_0;
     public minimumDEX = NUMBERS.N_0;
+    public attackBS = NUMBERS.N_5;
+    public parryBS = NUMBERS.N_5;
 
     constructor(
       name: string,
@@ -219,10 +230,12 @@ export class Spell {
       armorPoints = NUMBERS.N_0,
       reactionMoment = NUMBERS.N_0,
       shield = false,
-      weaponType: weaponType = weaponTypeEnum.AXE1H,
+      weaponType: WeaponType = WeaponTypeEnum.AXE1H,
       minimumSTR = NUMBERS.N_0,
       minimumDEX = NUMBERS.N_0,
       specialDMG = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0),
+      attackBS = NUMBERS.N_5,
+      parryBS = NUMBERS.N_5
       ) {
         super(name);
         this.damage = damage;
@@ -240,6 +253,8 @@ export class Spell {
         this.minimumSTR = minimumSTR;
         this.minimumDEX = minimumDEX;
         this.specialDamage = specialDMG;
+        this.attackBS = attackBS;
+        this.parryBS = parryBS;
     }
 
   }
@@ -259,7 +274,7 @@ export class Spell {
     }
   }
 
-  export enum weaponTypeEnum {
+  export enum WeaponTypeEnum {
     AXE1H = 'AXE1H',
     AXE2H = 'AXE2H',
     DAGGER = 'DAGGER',
@@ -313,58 +328,58 @@ export class Spell {
     OTHER = 'OTHER'
   }
 
-  export type weaponType =
-    weaponTypeEnum.AXE1H |
-    weaponTypeEnum.AXE2H |
-    weaponTypeEnum.DAGGER |
-    weaponTypeEnum.PEASANT_MACE1M |
-    weaponTypeEnum.PEASANT_MACE2M |
-    weaponTypeEnum.HAMMER1H |
-    weaponTypeEnum.HAMMER2H |
-    weaponTypeEnum.RAPIER |
-    weaponTypeEnum.SHORT_SWORD |
-    weaponTypeEnum.SHIELD |
-    weaponTypeEnum.SPEAR1H |
-    weaponTypeEnum.SPEAR2H |
-    weaponTypeEnum.SWORD1H |
-    weaponTypeEnum.SWORD2H |
-    weaponTypeEnum.SHORT_BOW |
-    weaponTypeEnum.LONGBOW |
-    weaponTypeEnum.COMPOSITE_BOW |
-    weaponTypeEnum.LIGHT_CROSSBOW |
-    weaponTypeEnum.MEDIUM_CROSSBOW |
-    weaponTypeEnum.HEAVY_CROSSBOW |
-    weaponTypeEnum.REPEATING_CROSSBOW |
-    weaponTypeEnum.CROOK_SLING |
-    weaponTypeEnum.SLING |
-    weaponTypeEnum.THROWING_AXE |
-    weaponTypeEnum.THROWING_KNIFE |
-    weaponTypeEnum.THROWING_ROCK |
-    weaponTypeEnum.FIST |
-    weaponTypeEnum.MACE1H |
-    weaponTypeEnum.MACE2H |
-    weaponTypeEnum.ATLATL |
-    weaponTypeEnum.ROCK_LAUNCHER |
-    weaponTypeEnum.BLOWGUN |
-    weaponTypeEnum.BOLAS |
-    weaponTypeEnum.WAR_BOOMERANG |
-    weaponTypeEnum.HUNTING_BOOMERANG |
-    weaponTypeEnum.JABELIN |
-    weaponTypeEnum.DART |
-    weaponTypeEnum.SHURIKEN |
-    weaponTypeEnum.ROPE_LACE |
-    weaponTypeEnum.POLE_LACE |
-    weaponTypeEnum.NET |
-    weaponTypeEnum.WHIP |
-    weaponTypeEnum.OTHER |
-    weaponTypeEnum.KICK |
-    weaponTypeEnum.CLAW |
-    weaponTypeEnum.BRAWL |
-    weaponTypeEnum.HORN |
-    weaponTypeEnum.TOOL_HOE |
-    weaponTypeEnum.TOOL_SCYTHE |
-    weaponTypeEnum.TOOL_SICKLE |
-    weaponTypeEnum.TOOL_SHOVEL;
+  export type WeaponType =
+    WeaponTypeEnum.AXE1H |
+    WeaponTypeEnum.AXE2H |
+    WeaponTypeEnum.DAGGER |
+    WeaponTypeEnum.PEASANT_MACE1M |
+    WeaponTypeEnum.PEASANT_MACE2M |
+    WeaponTypeEnum.HAMMER1H |
+    WeaponTypeEnum.HAMMER2H |
+    WeaponTypeEnum.RAPIER |
+    WeaponTypeEnum.SHORT_SWORD |
+    WeaponTypeEnum.SHIELD |
+    WeaponTypeEnum.SPEAR1H |
+    WeaponTypeEnum.SPEAR2H |
+    WeaponTypeEnum.SWORD1H |
+    WeaponTypeEnum.SWORD2H |
+    WeaponTypeEnum.SHORT_BOW |
+    WeaponTypeEnum.LONGBOW |
+    WeaponTypeEnum.COMPOSITE_BOW |
+    WeaponTypeEnum.LIGHT_CROSSBOW |
+    WeaponTypeEnum.MEDIUM_CROSSBOW |
+    WeaponTypeEnum.HEAVY_CROSSBOW |
+    WeaponTypeEnum.REPEATING_CROSSBOW |
+    WeaponTypeEnum.CROOK_SLING |
+    WeaponTypeEnum.SLING |
+    WeaponTypeEnum.THROWING_AXE |
+    WeaponTypeEnum.THROWING_KNIFE |
+    WeaponTypeEnum.THROWING_ROCK |
+    WeaponTypeEnum.FIST |
+    WeaponTypeEnum.MACE1H |
+    WeaponTypeEnum.MACE2H |
+    WeaponTypeEnum.ATLATL |
+    WeaponTypeEnum.ROCK_LAUNCHER |
+    WeaponTypeEnum.BLOWGUN |
+    WeaponTypeEnum.BOLAS |
+    WeaponTypeEnum.WAR_BOOMERANG |
+    WeaponTypeEnum.HUNTING_BOOMERANG |
+    WeaponTypeEnum.JABELIN |
+    WeaponTypeEnum.DART |
+    WeaponTypeEnum.SHURIKEN |
+    WeaponTypeEnum.ROPE_LACE |
+    WeaponTypeEnum.POLE_LACE |
+    WeaponTypeEnum.NET |
+    WeaponTypeEnum.WHIP |
+    WeaponTypeEnum.OTHER |
+    WeaponTypeEnum.KICK |
+    WeaponTypeEnum.CLAW |
+    WeaponTypeEnum.BRAWL |
+    WeaponTypeEnum.HORN |
+    WeaponTypeEnum.TOOL_HOE |
+    WeaponTypeEnum.TOOL_SCYTHE |
+    WeaponTypeEnum.TOOL_SICKLE |
+    WeaponTypeEnum.TOOL_SHOVEL;
 
 export enum hitpointsRatioEnum {
   X16 = 0.16,

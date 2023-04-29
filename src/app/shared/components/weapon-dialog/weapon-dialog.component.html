@@ -1,0 +1,30 @@
+<div class="light-back padding-all">
+  <p class="rQItem title">{{ "ACTIONS.ADD_WEAPON" | translate  }}</p>
+  <form [formGroup]="form" class="rQItem u-flex column u-width-100 ">
+
+    <mat-form-field appearance="fill" class="rQItem u-width-100">
+      <mat-label>{{ "ACTIONS.SELECT_WEAPON_TYPE" | translate }}</mat-label>
+      <mat-select formControlName="type">
+        <mat-option *ngFor="let name of weapontypes | keyvalue" [value]="name.value">
+          {{ 'PJ.WEAPON_TYPES.' + name.key | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="rQItem u-width-100" *ngIf="typeSelected">
+      <mat-label>{{ "ACTIONS.SELECT_WEAPON_TYPE" | translate }}</mat-label>
+      <mat-select formControlName="name">
+        <mat-option *ngFor="let name of weaponNames" [value]="name">
+          {{ 'PJ.WEAPON_NAME.' + name | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+
+
+  <div class="rQItem u-flex u-flex-end">
+    <button mat-button color="primary" (click)="handleCancel()"class="rQItem">{{ 'COMMONS.CANCEL' | translate }}</button>
+    <button [disabled]="!typeSelected || !nameSelected" mat-raised-button color="primary" (click)="handleConfirm()" class="rQItem">{{ 'COMMONS.CONFIRM' | translate }}</button>
+  </div>
+</div>

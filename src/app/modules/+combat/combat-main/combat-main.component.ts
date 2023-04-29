@@ -40,6 +40,14 @@ export class CombatMainComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
+  public swichCharacterIndex(order: number) {
+    let index = this.characters.findIndex((character) => character.id === this.character.id);
+    index = index + order;
+    index = index < NUMBERS.N_0 ? this.characters.length - NUMBERS.N_1 : index;
+    index = index >= this.characters.length ? NUMBERS.N_0 : index;
+    this.character = this.characters[index];
+  }
+
   public addCombatant() {
     const combatant = this.dicesForm.controls['combatant'].value;
     if (combatant) {
@@ -55,7 +63,7 @@ export class CombatMainComponent implements OnInit, OnDestroy {
   public addSavedCharacter() {
     const savedId = this.dicesForm.controls['savedPJ'].value;
     const pJ = this.savedCharacters.find((pj) => pj.id === savedId);
-    if (pJ) {
+    if (pJ && !this.characters.some((pj) => pj.id === pJ.id) ) {
       this.characters.push(pJ);
     }
   }

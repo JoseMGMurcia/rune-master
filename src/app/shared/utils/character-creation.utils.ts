@@ -1,7 +1,7 @@
 import { TranslateService } from "@ngx-translate/core";
-import { Character, Location, Skill, hitpointsRatioEnum, weaponTypeEnum } from "../models/character.model";
+import { Character, CombatSkill, Location, Skill, hitpointsRatioEnum, WeaponTypeEnum, Weapon, WeaponType } from "../models/character.model";
 import { NUMBERS } from "../constants/number.constants";
-import { WeaponNameEnum, createWeapon } from "./equip.factory";
+import { WeaponNameEnum, WeaponNameType, createWeapon } from "./equip.factory";
 import { getTotal } from "./dices.utils";
 
 export const resetTemporals = (pj: Character): void => {
@@ -95,25 +95,15 @@ export const setInitialHumanCharacter = (pj: Character, translate: TranslateServ
   pj.skills.MAGICAL.push(new Skill(magSkills.RANGE, NUMBERS.N_0));
   pj.skills.MAGICAL.push(new Skill(magSkills.MULTISPELL, NUMBERS.N_0));
 
-  const weapSkills =  translate.instant('PJ.SKILL_NAME.WEAPONS');
   pj.skills.ATTACK = [];
-  pj.skills.ATTACK.push(new Skill(weapSkills.NATURALS.FIST, NUMBERS.N_25));
-  pj.skills.ATTACK.push(new Skill(weapSkills.NATURALS.KICK, NUMBERS.N_15));
-  pj.skills.ATTACK.push(new Skill(weapSkills.MELEE.DAGGER, NUMBERS.N_15));
-
   pj.skills.DEFENSE = [];
-  pj.skills.DEFENSE.push(new Skill(weapSkills.NATURALS.FIST, NUMBERS.N_25));
-  pj.skills.DEFENSE.push(new Skill(weapSkills.NATURALS.KICK, NUMBERS.N_15));
-  pj.skills.DEFENSE.push(new Skill(weapSkills.MELEE.DAGGER, NUMBERS.N_15));
+  pj.weapons = [];
+
+  addWeapon(pj, WeaponTypeEnum.FIST, WeaponNameEnum.FIST, translate);
+  addWeapon(pj, WeaponTypeEnum.KICK, WeaponNameEnum.KICK, translate);
+  addWeapon(pj, WeaponTypeEnum.BRAWL, WeaponNameEnum.BRAWL, translate);
 
   addHumanoidLocs(pj, translate);
-
-  const fist = createWeapon(weaponTypeEnum.FIST, WeaponNameEnum.FIST, translate);
-  const kick = createWeapon(weaponTypeEnum.KICK, WeaponNameEnum.KICK, translate);
-
-  pj.weapons = [];
-  pj.weapons.push(fist);
-  pj.weapons.push(kick);
 
   return pj;
 }
@@ -134,3 +124,19 @@ export const getUniqueID = (name: string) => {
   return name + '_' + new Date().getTime();
 };
 
+export const addWeapon = (
+  pj: Character,
+  type: WeaponType,
+  name: WeaponNameType,
+  translate: TranslateService): void => {
+    const weapon = createWeapon(type, name, translate);
+    pj.weapons.push(weapon);
+    if(!pj.skills.ATTACK.some(s => s.weaponType === weapon.weaponType)) {
+      const types = translate.instant('PJ.WEAPON_TYPES');
+      pj.skills.ATTACK.push(new CombatSkill(types['type'], weapon.attackBS , weapon.weaponType));
+    }
+    if(!pj.skills.DEFENSE.some(s => s.weaponType === weapon.weaponType)) {
+      const types = translate.instant('PJ.WEAPON_TYPES');
+      pj.skills.DEFENSE.push(new CombatSkill(types['type'], weapon.parryBS , weapon.weaponType));
+    }
+  };

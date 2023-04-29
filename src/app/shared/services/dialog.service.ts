@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { EasyDialogComponent } from "../components/easy-dialog/easy-dialog.component";
+import { WeaponDialogComponent } from '../components/weapon-dialog/weapon-dialog.component';
+import { Character } from '../models/character.model';
 
 
 @Injectable({
@@ -27,4 +29,10 @@ export class DialogService {
     //   console.log('The dialog was closed' + result);
     // });
 
+
+  openWeaponDialog(character: Character): void {
+    const dialogRef = this.dialog.open(WeaponDialogComponent, {
+      data: { character }
+    });
+  }
 }

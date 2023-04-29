@@ -11,6 +11,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { EasyDialogComponent } from './components/easy-dialog/easy-dialog.component';
 import { MatInputModule } from '@angular/material/input';
+import { WeaponDialogComponent } from './components/weapon-dialog/weapon-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
 
 
 export const createTranslateLoader = (http: HttpClient) =>
@@ -22,12 +26,13 @@ const matModules = [
   MatMenuModule,
   MatButtonModule,
   MatInputModule,
-
+  MatSelectModule,
 ];
 
 const components = [
   MenubarComponent,
-  EasyDialogComponent
+  EasyDialogComponent,
+  WeaponDialogComponent,
 ];
 
 
@@ -38,6 +43,8 @@ const components = [
   imports: [
     ...matModules,
     BrowserModule,
+    CommonModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({

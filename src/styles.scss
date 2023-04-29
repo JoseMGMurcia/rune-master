@@ -68,10 +68,14 @@ body {
   background-color: colors.$background-light-tertiary-even;
 }
 
+.listLine-card-even {
+  background-color: colors.$card-background-even;
+}
+
 button {
   &.minibutton{
     background-color: colors.$background-tertiary;
-    scale: 0.6
+    scale: 0.6;
   }
 }
 

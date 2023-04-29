@@ -1,9 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NUMBERS } from 'src/app/shared/constants/number.constants';
-import { Character, Location } from 'src/app/shared/models/character.model';
+import { Character, Location, Skill, Weapon } from 'src/app/shared/models/character.model';
+import { DiceRoll } from 'src/app/shared/models/dices.model';
 import { CharactersService } from 'src/app/shared/services/character.service';
-import { getArmorByLocation, getArmorTypeByLocation, getFP, getHp, getHpByLocation, getMP } from 'src/app/shared/utils/character-calculated.-fields.utils';
+import { DialogService } from 'src/app/shared/services/dialog.service';
+import { getMRCC, getManMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
+import { getAgiMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
+import { getArmorByLocation, getArmorTypeByLocation, getCAR, getFP, getHp, getHpByLocation, getMP } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { resetTemporals, setInitialHumanCharacter, setRandomHumanStats } from 'src/app/shared/utils/character-creation.utils';
 
 @Component({
@@ -14,11 +18,16 @@ export class CombatDetailComponent {
   @Input() public character: Character = new Character('');
   @Input() public turn= NUMBERS.N_0;
 
+  @Output() swichCharacter = new EventEmitter<number>();
+
   public swShowLocs = true;
+  public swShowUtils = false;
+  public swCombat = false;
 
   constructor(
     private translate: TranslateService,
     private characterService: CharactersService,
+    private dialogService: DialogService,
   ) { }
 
   public handleHumanice() {
@@ -27,6 +36,38 @@ export class CombatDetailComponent {
 
   public saveCharacter() {
     this.characterService.updateOrAddCharacter(this.character);
+  }
+
+  public getTAttSkill(pj: Character, skillName: string): string {
+    const skill = pj.skills.ATTACK.find(s => s.weaponType === skillName);
+    const value = (skill?.value || NUMBERS.N_0) + getManMod(pj);
+    return value.toString();
+  }
+
+  public getTDefSkill(pj: Character, skillName: string): string {
+    const skill = pj.skills.DEFENSE.find(s => s.weaponType === skillName);
+    const value = (skill?.value || NUMBERS.N_0) + getAgiMod(pj);
+    return value.toString();
+  }
+
+  public getLitsLineClass(index:  number): string {
+    return index % 2 === 0 ? '' : 'listLine-card-even';
+  }
+
+  public getWeaponMR(weapon: Weapon): number {
+    return getMRCC(this.character) +  weapon.reactionMoment;
+  }
+
+  public getWeaoponRollString(weapon: Weapon): string {
+    return DiceRoll.toString(weapon.damage);
+  }
+
+  public swichCharacterIndex(order: number) {
+    this.swichCharacter.emit(order);
+  }
+
+  public addNewWeapon() {
+    this.dialogService.openWeaponDialog(this.character);
   }
 
   public setRandomHumanStats() {
@@ -63,7 +104,7 @@ export class CombatDetailComponent {
   }
 
   public getFP(): number {
-    return getFP(this.character);
+    return getFP(this.character) - getCAR(this.character);
   }
 
   public getMP(): number {
