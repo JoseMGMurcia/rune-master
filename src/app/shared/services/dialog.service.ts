@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { EasyDialogComponent } from "../components/easy-dialog/easy-dialog.component";
 import { WeaponDialogComponent } from '../components/weapon-dialog/weapon-dialog.component';
 import { Character } from '../models/character.model';
+import { ArmorDialogComponent } from '../components/armor-dialog/armor-dialog.component';
 
 
 @Injectable({
@@ -31,7 +32,13 @@ export class DialogService {
 
 
   openWeaponDialog(character: Character): void {
-    const dialogRef = this.dialog.open(WeaponDialogComponent, {
+    this.dialog.open(WeaponDialogComponent, {
+      data: { character }
+    });
+  }
+
+  openArmorDialog(character: Character): void {
+    this.dialog.open(ArmorDialogComponent, {
       data: { character }
     });
   }

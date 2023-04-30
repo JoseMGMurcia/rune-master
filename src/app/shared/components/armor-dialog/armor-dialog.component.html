@@ -1,0 +1,30 @@
+<div class="light-back padding-all">
+  <p class="rQItem title">{{ "ACTIONS.ADD_ARMOR" | translate  }}</p>
+  <form [formGroup]="form" class="rQItem u-flex u-flex-column u-width-100">
+
+    <mat-form-field appearance="fill" class="rQItem u-width-100-padding">
+      <mat-label>{{ "ACTIONS.SELECT_ARMOR_TYPE" | translate }}</mat-label>
+      <mat-select formControlName="type">
+        <mat-option *ngFor="let armor of armorTypes" [value]="armor.name">
+          {{ getArmorName(armor) }} {{ armor.armor }} {{ "PJ.AP" | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="rQItem u-width-100-padding" formGroupName="locs" *ngIf="typeSelected">
+      <p class="rQItem padding-bottom">{{ "ACTIONS.SELECT_LOCATIONS" | translate }}</p>
+      <div *ngFor="let location of data.character.locations; let i = index" [ngClass]="getLitsLineClass(i)">
+        <!-- <mat-checkbox (change)="handleLocationChange($event, location)" [checked]="location.selected">{{ 'PJ.LOCATIONS.' + location.name | translate }}</mat-checkbox>  -->
+
+        <mat-checkbox color="primary" [formControlName]="location.name">{{ location.name }}</mat-checkbox>
+      </div>
+    </div>
+
+  </form>
+
+
+  <div class="rQItem u-flex u-flex-end">
+    <button mat-button color="primary" (click)="handleCancel()"class="rQItem">{{ 'COMMONS.CANCEL' | translate }}</button>
+    <button [disabled]="!form.valid" mat-raised-button color="primary" (click)="handleConfirm()" class="rQItem">{{ 'COMMONS.CONFIRM' | translate }}</button>
+  </div>
+</div>

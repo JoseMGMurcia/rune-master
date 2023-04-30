@@ -3,16 +3,16 @@ import { Character, Location } from "../models/character.model";
 import { DiceRoll } from "../models/dices.model";
 
 export const getHp = (pj: Character): number =>
-  Math.ceil((pj.stats.CON.value + pj.stats.SIZ.value) / NUMBERS.N_2) + pj.bonusHP;
+  Math.ceil((pj.stats.CON.value + pj.stats.CON.tempMod + pj.stats.SIZ.value + pj.stats.SIZ.tempMod) / NUMBERS.N_2) + pj.bonusHP;
 
 export const getFP = (pj: Character): number =>
-  pj.stats.CON.value + pj.stats.STR.value + pj.bonusFP;
+  pj.stats.CON.value + pj.stats.CON.tempMod + pj.stats.STR.value + pj.stats.STR.tempMod + pj.bonusFP;
 
 export const getMP = (pj: Character): number =>
-  pj.stats.POW.value + pj.bonugMP;
+  pj.stats.POW.value + pj.stats.POW.tempMod + pj.bonugMP;
 
 export const getDMGMod = (pj: Character): DiceRoll => {
-  const target = pj.stats.STR.value + pj.stats.SIZ.value;
+  const target = pj.stats.STR.value + pj.stats.STR.tempMod + pj.stats.SIZ.value + pj.stats.SIZ.tempMod;
   if (target < NUMBERS.N_13) {
     return new DiceRoll(- NUMBERS.N_1, NUMBERS.N_4);
   } else if (target < NUMBERS.N_25) {
@@ -45,7 +45,7 @@ export const getCAR = (pj: Character, inCombat = true): number => {
 }
 
 export const getMRDES = (pj: Character): number => {
-  const dex = pj.stats.DEX.value;
+  const dex = pj.stats.DEX.value + pj.stats.DEX.tempMod;
   if (dex < NUMBERS.N_10) {
     return NUMBERS.N_4;
   } else if (dex < NUMBERS.N_16) {
@@ -58,7 +58,7 @@ export const getMRDES = (pj: Character): number => {
 }
 
 export const getMRSIZ = (pj: Character): number => {
-  const siz = pj.stats.SIZ.value;
+  const siz = pj.stats.SIZ.value + pj.stats.SIZ.tempMod;
   if (siz < NUMBERS.N_10) {
     return NUMBERS.N_3;
   } else if (siz < NUMBERS.N_16) {
@@ -95,49 +95,49 @@ const getMod = (primary: number[], secondary: number[], negative: number[]): num
 }
 
 export const getAgiMod = (pj: Character): number => {
-  const primary = [ pj.stats.DEX.value ];
-  const secondary = [ pj.stats.STR.value ];
-  const negative = [ pj.stats.SIZ.value ];
+  const primary = [ pj.stats.DEX.value + pj.stats.DEX.tempMod ];
+  const secondary = [ pj.stats.STR.value + pj.stats.STR.tempMod ];
+  const negative = [ pj.stats.SIZ.value + pj.stats.SIZ.tempMod ];
   return getMod(primary, secondary, negative);
 }
 
 export const getComMod = (pj: Character): number => {
-  const primary = [ pj.stats.INT.value ];
-  const secondary = [ pj.stats.POW.value, pj.stats.CHA.value ];
+  const primary = [ pj.stats.INT.value + pj.stats.INT.tempMod ];
+  const secondary = [ pj.stats.POW.value + pj.stats.POW.tempMod, pj.stats.CHA.value + pj.stats.CHA.tempMod ];
   return getMod(primary, secondary, []);
 }
 
 export const getKnoMod = (pj: Character): number => {
-  const primary = [ pj.stats.INT.value ];
+  const primary = [ pj.stats.INT.value + pj.stats.INT.tempMod ];
   return getMod(primary, [], []);
 }
 
 export const getMagMod = (pj: Character): number => {
-  const primary = [ pj.stats.INT.value, pj.stats.POW.value ];
-  const secondary = [ pj.stats.DEX.value];
+  const primary = [ pj.stats.INT.value + pj.stats.INT.tempMod, pj.stats.POW.value + pj.stats.POW.tempMod ];
+  const secondary = [ pj.stats.DEX.value + pj.stats.DEX.tempMod];
   return getMod(primary, secondary, []);
 }
 
 export const getManMod = (pj: Character): number => {
-  const primary = [ pj.stats.INT.value, pj.stats.DEX.value ];
-  const secondary = [ pj.stats.STR.value];
+  const primary = [ pj.stats.INT.value + pj.stats.INT.tempMod, pj.stats.DEX.value + pj.stats.DEX.tempMod ];
+  const secondary = [ pj.stats.STR.value + pj.stats.STR.tempMod];
   return getMod(primary, secondary, []);
 }
 
 export const getPerMod = (pj: Character): number => {
-  const primary = [pj.stats.INT.value];
-  const secondary = [ pj.stats.POW.value, pj.stats.CON.value ];
+  const primary = [pj.stats.INT.value + pj.stats.INT.tempMod];
+  const secondary = [ pj.stats.POW.value + pj.stats.POW.tempMod, pj.stats.CON.value + pj.stats.CON.tempMod ];
   return getMod(primary, secondary, []);
 }
 
 export const getSteMod = (pj: Character): number => {
-  const primary = [pj.stats.DEX.value];
-  const negative = [ pj.stats.POW.value, pj.stats.SIZ.value ];
+  const primary = [pj.stats.DEX.value + pj.stats.DEX.tempMod];
+  const negative = [ pj.stats.POW.value + pj.stats.POW.tempMod, pj.stats.SIZ.value + pj.stats.SIZ.tempMod ];
   return getMod(primary, [], negative);
 }
 
 export const getFreeINTPoints = (pj: Character): number => {
-  let points = pj.stats.INT.value;
+  let points = pj.stats.INT.value + pj.stats.INT.tempMod;
   pj.spells.SPIRITUAL.forEach((spell) => {
     points -= spell.memorized  ? spell.points : NUMBERS.N_0;
   });

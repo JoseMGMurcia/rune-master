@@ -4,6 +4,7 @@
     "CONFIRM": "Confirmar",
     "CANCEL": "Cancelar",
     "DETAIL": "Detalle",
+    "IN_LOC_SHORT": "en la Loc.",
     "QUANTITY": "Cantidad",
     "QUANTITY_SHORT": "Cant.",
     "RESULT": "Resultado",
@@ -11,7 +12,14 @@
     "TURN": "Turno",
     "TYPE": "Tipo",
     "VALUE": "Valor",
-    "WARNING": "Advertencia"
+    "WARNING": "Advertencia",
+    "SUCCES_LEVEL": {
+      "CRITICAL": "Éxito crítico",
+      "FAILURE": "Fallo",
+      "FUMBLE": "Pifia",
+      "SPECIAL": "Éxito especial",
+      "SUCCESS": "Éxito"
+    }
   },
   "MENU": {
     "HOME": "Inicio",
@@ -21,10 +29,14 @@
   },
   "ACTIONS": {
     "ADD_COMBATANT": "Añadir nuevo luchador",
+    "ADD_ARMOR": "Añadir armadura",
     "ADD_WEAPON": "Añadir arma",
     "CREATE_CHAC": "Crear personaje",
     "DELETE_CONFIRM": "¿Si continuas {{name}} sera borrado permanentemente?",
+    "REMOVE_CONFIRM": "¿Quieres eliminar a {{name}} del combate?",
     "ROLL_DICES": "Tirar dados",
+    "SELECT_ARMOR_TYPE": "Selecciona un tipo de armadura",
+    "SELECT_LOCATIONS": "Selecciona las Localizaciones cubiertas",
     "SELECT_WEAPON_TYPE": "Selecciona un tipo de arma",
     "SAVED_CHARACTERS": "Personajes guardados",
     "UTILS": {
@@ -35,6 +47,8 @@
     }
   },
   "PJ": {
+    "1H": "1M",
+    "2H": "2M",
     "AP": "PA",
     "AGE": "Edad",
     "ARMOR": "Armadura",

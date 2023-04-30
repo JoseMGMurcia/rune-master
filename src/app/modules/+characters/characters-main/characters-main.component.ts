@@ -42,7 +42,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     this.ngUnsubscribe.complete();
   }
 
-  public manageFavourite($event:any, pj: Character) {
+  public manageFavourite($event: Event, pj: Character) {
     this.preventAcordionExpansion($event);
     pj.favorite = !pj.favorite;
     this.characterService.updateOrAddCharacter(pj);
@@ -214,7 +214,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     this.characterService.setCharacters(this.characters);
   }
 
-  handleDelete($event:any, pj: Character): void {
+  handleDelete($event: Event, pj: Character): void {
     this.preventAcordionExpansion($event);
     const text = this.translate.instant('ACTIONS.DELETE_CONFIRM', {name: pj.name});
     this.dialogService.openEasyDialog(text , () => {this.deleteCharacter(pj);});
@@ -230,7 +230,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     this.loadCharacters();
   }
 
-  public preventAcordionExpansion(event: any) {//TODO private
+  public preventAcordionExpansion(event: Event) {//TODO private
     event.stopPropagation();
     event.preventDefault();
   }

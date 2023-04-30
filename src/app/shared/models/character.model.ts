@@ -47,6 +47,14 @@ export class Character {
   public alive = true;
   public favorite = false;
 
+  public specialSuccess = false;
+  public criticalSuccess = false;
+  public swShowLocs = true;
+  public swShowUtils = false;
+  public swCombat = false;
+  public swShowResults = false;
+  public result = '';
+
   constructor(name: string, player = '') {
     this.id = getUniqueID(name);
     this.name = name;
@@ -70,6 +78,7 @@ export class Characteristic {
   public initialValue = NUMBERS.N_0;
   public bonus = NUMBERS.N_0;
   public notInrace = false;
+  public tempMod = NUMBERS.N_0;
 
   constructor(value: number, initialValue = NUMBERS.N_0) {
     this.value = value;
@@ -394,9 +403,19 @@ export type hitpointsRatioType =
   hitpointsRatioEnum.X25 |
   hitpointsRatioEnum.X16;
 
+export enum armorWeightRatioEnum {
+  x1 = 1,
+  x2 = 2,
+}
+
+export type armorWeightRatioType =
+  armorWeightRatioEnum.x1 |
+  armorWeightRatioEnum.x2;
+
 export class Location {
   public name = '';
   public hitpointsRatio: hitpointsRatioType = hitpointsRatioEnum.X33;
+  public armorWeightRario: armorWeightRatioType = armorWeightRatioEnum.x1;
   public armorPoints = NUMBERS.N_0;
   public bonusAP = NUMBERS.N_0;
   public bonusHP = NUMBERS.N_0;

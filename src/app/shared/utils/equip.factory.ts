@@ -176,13 +176,13 @@ export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: 
     }
   } else if (type === WeaponTypeEnum.AXE2H) {
     if (name === WeaponNameEnum.COMBAT_AXE) {
-     return new Weapon(literal, new DiceRoll(1,8,2), DamageTypeEnum.SLASHING, 1,   false, 0, 0 , '', true, 8, 2, false, WeaponTypeEnum.AXE2H, 9, 9);
+     return new Weapon(literal, new DiceRoll(1,8,2), DamageTypeEnum.SLASHING, 1,   false, 0, 0 , '', true, 8, 2, false, WeaponTypeEnum.AXE2H, 9, 9, new DiceRoll(1,8,2), 5, 5);
     } else if (name === WeaponNameEnum.GREAT_AXE) {
-     return new Weapon(literal, new DiceRoll(2,6,2), DamageTypeEnum.SLASHING, 2,   false, 0, 0 , '', true, 10, 1, false, WeaponTypeEnum.AXE2H, 11, 9);
+     return new Weapon(literal, new DiceRoll(2,6,2), DamageTypeEnum.SLASHING, 2,   false, 0, 0 , '', true, 10, 1, false, WeaponTypeEnum.AXE2H, 11, 9, new DiceRoll(2,6,2), 5, 5);
     } else if (name === WeaponNameEnum.HALDBERD) {
-     return new Weapon(literal, new DiceRoll(3,6),   DamageTypeEnum.SLASHING, 3,   false, 0, 0 , '', true, 10, 1, false, WeaponTypeEnum.AXE2H, 13, 9, new DiceRoll(4,6));
+     return new Weapon(literal, new DiceRoll(3,6),   DamageTypeEnum.SLASHING, 3,   false, 0, 0 , '', true, 10, 1, false, WeaponTypeEnum.AXE2H, 13, 9, new DiceRoll(4,6), 5, 5);
     } else if (name === WeaponNameEnum.DANISH_AXE) {
-     return new Weapon(literal, new DiceRoll(3,6),   DamageTypeEnum.SLASHING, 2.5, false, 0, 0 , '', true, 10, 1, false, WeaponTypeEnum.AXE2H, 11, 9);
+     return new Weapon(literal, new DiceRoll(3,6),   DamageTypeEnum.SLASHING, 2.5, false, 0, 0 , '', true, 10, 1, false, WeaponTypeEnum.AXE2H, 11, 9, new DiceRoll(3,6), 5, 5);
     }
   } else if (type === WeaponTypeEnum.DAGGER) {
     if (name === WeaponNameEnum.DAGGER) {

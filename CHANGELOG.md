@@ -28,5 +28,11 @@
 - Roll dices added to combat section
 - New characters creation in combat section.
 - Saved character can be used in commbat section.
-- Combat detail utils
   
+## 0.1.0
+- Combat detail easy management.
+- Combat detail utils.
+- Combat section.
+- Weapon and armor add.
+- Temporal Modificators.
+

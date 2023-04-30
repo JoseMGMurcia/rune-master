@@ -1,14 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NUMBERS } from 'src/app/shared/constants/number.constants';
-import { Character, Location, Skill, Weapon } from 'src/app/shared/models/character.model';
+import { Characteristic } from 'src/app/shared/models/character.model';
+import { Character, Location, Weapon } from 'src/app/shared/models/character.model';
 import { DiceRoll } from 'src/app/shared/models/dices.model';
 import { CharactersService } from 'src/app/shared/services/character.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { getMRCC, getManMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
+import { getDMGMod, getMRCC, getMRDES, getMRSIZ, getManMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getAgiMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getArmorByLocation, getArmorTypeByLocation, getCAR, getFP, getHp, getHpByLocation, getMP } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { resetTemporals, setInitialHumanCharacter, setRandomHumanStats } from 'src/app/shared/utils/character-creation.utils';
+import { getFumbleTarget, getTotal } from 'src/app/shared/utils/dices.utils';
+import { cutDicesRolls } from 'src/app/shared/utils/message.utils';
 
 @Component({
   selector: 'app-combat-detail',
@@ -19,10 +22,7 @@ export class CombatDetailComponent {
   @Input() public turn= NUMBERS.N_0;
 
   @Output() swichCharacter = new EventEmitter<number>();
-
-  public swShowLocs = true;
-  public swShowUtils = false;
-  public swCombat = false;
+  @Output() removeCharacter = new EventEmitter<Character>();
 
   constructor(
     private translate: TranslateService,
@@ -38,20 +38,94 @@ export class CombatDetailComponent {
     this.characterService.updateOrAddCharacter(this.character);
   }
 
-  public getTAttSkill(pj: Character, skillName: string): string {
+  public getTAttSkill(pj: Character, skillName: string): number {
     const skill = pj.skills.ATTACK.find(s => s.weaponType === skillName);
     const value = (skill?.value || NUMBERS.N_0) + getManMod(pj);
-    return value.toString();
+    return value;
   }
 
-  public getTDefSkill(pj: Character, skillName: string): string {
+  public getTDefSkill(pj: Character, skillName: string): number {
     const skill = pj.skills.DEFENSE.find(s => s.weaponType === skillName);
     const value = (skill?.value || NUMBERS.N_0) + getAgiMod(pj);
-    return value.toString();
+    return value;
   }
 
   public getLitsLineClass(index:  number): string {
     return index % 2 === 0 ? '' : 'listLine-card-even';
+  }
+
+  public getNameString(weapon: Weapon): string {
+    return `${weapon.name} ${weapon.twoHanded ? this.translate.instant('PJ.2H') : ''}`
+  }
+
+  public addStatMod(stat: Characteristic, value: number): void {
+    stat.tempMod += value;
+  }
+
+  public rollD100(target: number): void {
+    this.character.swShowResults = true;
+    this.character.specialSuccess = false;
+    this.character.criticalSuccess = false;
+    const successLiterals = this.translate.instant('COMMONS.SUCCES_LEVEL');
+    const  result = new DiceRoll(NUMBERS.N_1, NUMBERS.N_100).roll();
+    if( (result <= Math.ceil(target / NUMBERS.N_20)) || result === NUMBERS.N_1) {
+      this.character.criticalSuccess = true;
+      this.character.result = `${result} ${successLiterals.CRITICAL}`;
+    } else if ( result <= Math.ceil(target / NUMBERS.N_5)) {
+      this.character.specialSuccess = true;
+      this.character.result = `${result} ${successLiterals.SPECIAL}`;
+    } else if ( (result <= target && result <= NUMBERS.N_95) || (result < NUMBERS.N_6)) {
+      this.character.result = `${result} ${successLiterals.SUCCESS}`;
+    } else if ( result > target && result < getFumbleTarget(target)) {
+      this.character.result = `${result} ${successLiterals.FAILURE}`;
+    } else {
+      this.character.result = `${result} ${successLiterals.FUMBLE}`;
+    }
+  }
+
+  public quitCharacter() {
+    this.dialogService.openEasyDialog(
+      this.translate.instant('ACTIONS.REMOVE_CONFIRM', { name: this.character.name }),
+      () => {
+        this.swichCharacterIndex(- NUMBERS.N_1)
+        this.removeCharacter.emit(this.character);
+      }
+    )
+  }
+
+  public rollDamage(weapon: Weapon ): void {
+    const rollString = this.character.specialSuccess ? DiceRoll.toString(weapon.specialDamage) : DiceRoll.toString(weapon.damage);
+
+    let  weaponRolls = cutDicesRolls(rollString);
+
+    //If critical, maximum damage.
+    weaponRolls = this.character.criticalSuccess ? [`${weapon.specialDamage.dice*weapon.specialDamage.sides + weapon.specialDamage.modifier}`] : weaponRolls;
+
+    const dmgModString = DiceRoll.toString(getDMGMod(this.character));
+    const result = getTotal([...weaponRolls, dmgModString]);
+
+    const locNumber = Math.floor(Math.random() * NUMBERS.N_20) + NUMBERS.N_1;
+    this.character.result = `${result} ${this.translate.instant('COMMONS.IN_LOC_SHORT')} ${locNumber}`;
+    this.character.swShowResults = true;
+  }
+
+  public clearResult() {
+    this.character.swShowResults = false;
+    this.character.result = '';
+    this.character.criticalSuccess = false;
+    this.character.specialSuccess = false;
+  }
+
+  public getDMGMod(pj: Character): string {
+    return DiceRoll.toString(getDMGMod(pj));
+  }
+
+  public getMRDESC(pj: Character): number {
+    return getMRDES(pj);
+  }
+
+  public getMRSIZ(pj: Character): number {
+    return getMRSIZ(pj);
   }
 
   public getWeaponMR(weapon: Weapon): number {
@@ -68,6 +142,10 @@ export class CombatDetailComponent {
 
   public addNewWeapon() {
     this.dialogService.openWeaponDialog(this.character);
+  }
+
+  public addNewArmor() {
+    this.dialogService.openArmorDialog(this.character);
   }
 
   public setRandomHumanStats() {
@@ -104,7 +182,7 @@ export class CombatDetailComponent {
   }
 
   public getFP(): number {
-    return getFP(this.character) - getCAR(this.character);
+    return Math.floor(getFP(this.character) - getCAR(this.character));
   }
 
   public getMP(): number {

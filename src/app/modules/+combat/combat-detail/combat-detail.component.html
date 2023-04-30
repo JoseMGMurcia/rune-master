@@ -1,184 +1,281 @@
 <div class="u-width-100" *ngIf="character.name">
   <div class="u-width-100 u-flex u-flex-space-between">
     <button mat-icon-button class="rQItem u-width-20" (click)="swichCharacterIndex(-1)">
-      <mat-icon>arrow_back_ios</mat-icon>
+      <mat-icon class="cardIconButton">arrow_back_ios</mat-icon>
     </button>
-    <mat-label class="rQItem title u-text-center u-flex u-flex-center">{{ character.name }}</mat-label>
+    <p class="rQItem title u-text-center u-flex u-flex-center">{{ character.name }}</p>
     <div class="u-flex">
       <button mat-icon-button class="rQItem u-width-20" (click)="saveCharacter()">
-        <mat-icon>save</mat-icon>
+        <mat-icon class="cardIconButton">save</mat-icon>
+      </button>
+      <button mat-icon-button class="rQItem u-width-20" (click)="quitCharacter()">
+        <mat-icon class="cardIconButton">clear</mat-icon>
       </button>
       <button mat-icon-button class="rQItem u-width-20" (click)="swichCharacterIndex(1)">
-        <mat-icon>arrow_forward_ios</mat-icon>
+        <mat-icon class="cardIconButton">arrow_forward_ios</mat-icon>
       </button>
     </div>
   </div>
-  <div class="u-width-100 rQItem u-flex">
-    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.STR" | translate  }}</b></p>
-    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.CON" | translate  }}</b></p>
-    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.DEX" | translate  }}</b></p>
-    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.INT" | translate  }}</b></p>
-    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.SIZ" | translate  }}</b></p>
-    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.POW" | translate  }}</b></p>
-    <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.CHA" | translate  }}</b></p>
-  </div>
-  <div class="u-width-100 rQItem u-flex">
-    <p class="u-width-14 u-text-center">{{ character.stats.STR.value }}</p>
-    <p class="u-width-14 u-text-center">{{ character.stats.CON.value }}</p>
-    <p class="u-width-14 u-text-center">{{ character.stats.DEX.value }}</p>
-    <p class="u-width-14 u-text-center">{{ character.stats.INT.value }}</p>
-    <p class="u-width-14 u-text-center">{{ character.stats.SIZ.value }}</p>
-    <p class="u-width-14 u-text-center">{{ character.stats.POW.value }}</p>
-    <p class="u-width-14 u-text-center">{{ character.stats.CHA.value }}</p>
-  </div>
   <div class="u-width-100 u-flex">
-    <div class="border-all u-width-85-padding">
-        <div class="u-width- rQItem u-flex">
-          <p class="u-width-33 u-text-center"><b>{{ "PJ.HP" | translate  }}</b></p>
-          <p class="u-width-33 u-text-center"><b>{{ "PJ.FP" | translate  }}</b></p>
-          <p class="u-width-33 u-text-center"><b>{{ "PJ.MP" | translate  }}</b></p>
-        </div>
-        <div class="u-width-100 rQItem u-flex">
-          <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
-            <button mat-mini-fab class="minibutton" (click)="addHpMod(-1)">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <p class="u-text-center">{{ getHp() + this.character.tempHPMod }}/{{ getHp() }}</p>
-            <button mat-mini-fab class="minibutton" (click)="addHpMod(1)">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-          <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
-            <button mat-mini-fab class="minibutton" (click)="addFpMod(-1)">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <p class="u-text-center">{{ getFP() + this.character.tempFPMod - this.turn }}/{{ getFP() }}</p>
-            <button mat-mini-fab class="minibutton" (click)="addFpMod(1)">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-          <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
-            <button mat-mini-fab class="minibutton" (click)="addMpMod(-1)">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <p class="u-text-center">{{ getMP()  + this.character.tempMPMod }}/{{ getMP() }}</p>
-            <button mat-mini-fab class="minibutton" (click)="addMpMod(1)">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-        </div>
-    </div>
-    <div class="rQItem u-width-15 u-flex u-flex-column border-all" (click)="resetCharacterTemps()">
-      <div class="u-width-100 u-flex u-flex-space-center">
-        <button mat-icon-button >
-          <mat-icon>health_and_safety</mat-icon>
-        </button>
+    <div class="u-width-60 u-flex u-flex-column">
+      <div class="u-width-100 rQItem u-flex">
+        <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.STR" | translate  }}</b></p>
+        <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.CON" | translate  }}</b></p>
+        <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.DEX" | translate  }}</b></p>
+        <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.INT" | translate  }}</b></p>
+        <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.SIZ" | translate  }}</b></p>
+        <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.POW" | translate  }}</b></p>
+        <p class="u-width-14 u-text-center"><b>{{ "PJ.CATACTERISTICS_TYPES.CHA" | translate  }}</b></p>
       </div>
-      <div class="u-width-100 u-flex u-flex-space-center">
-        <p>{{ "ACTIONS.UTILS.RESEL_ALL" | translate }}</p>
-      </div>
-    </div>
-  </div>
-  <div class=" u-width-100-padding u-flex u-flex-column border-all">
-    <div class="u-flex listItem padding-all" (click)="swShowLocs = !swShowLocs">
-      <div class="u-width-100 u-flex" *ngIf="swShowLocs">
-        <p class="u-width-25 u-flex u-flex-space-center"><b>{{ "PJ.LOC" | translate }}</b></p>
-        <p class="u-width-20 u-flex u-flex-space-center"><b>{{ "PJ.HP" | translate }}</b></p>
-        <p class="u-width-40 u-flex u-flex-space-center"><b>{{ "PJ.ARMOR" | translate }}</b></p>
-        <p class="u-width-15 u-flex u-flex-space-center"><b>{{ "PJ.AP" | translate }}</b></p>
-      </div>
-      <div class="u-width-100 u-flex" *ngIf="!swShowLocs">
-        <p class="u-width-100 u-flex u-flex-space-center"><b>{{ "PJ.LOCS" | translate }}</b></p>
-      </div>
-    </div>
-    <div *ngIf="swShowLocs">
-      <div class="u-width-100 u-flex padding-left padding-right" *ngFor="let loc of character.locations">
-        <div class="u-width-30 u-flex u-flex-center"><p class="margin-none">{{ loc.name }}</p></div>
-        <div class="u-width-20">
-          <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
-            <button mat-mini-fab class="minibutton" (click)="addLocHpMod(-1, loc)">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <p class="u-text-center margin-none">{{ getHpByLocation(character, loc)  + loc.bonusHP }}/{{ getHpByLocation(character, loc) }}</p>
-            <button mat-mini-fab class="minibutton" (click)="addLocHpMod(1, loc)">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-        </div>
-        <div class="u-width-35 u-flex u-flex-center">
-          <p class="margin-none" [matTooltip]="getArmorTypeByLocation(character, loc)">{{ getArmorTypeByLocation(character, loc) }}</p>
-        </div>
-        <div class="u-width-15 u-flex u-flex-center">
-          <p class="margin-none">{{ getArmorByLocation(character, loc) }}</p>
-        </div>
-      </div>
-      <div class=" u-width-100-padding u-flex border-all">
-        <p class="u-width-50 u-flex u-flex-center u-flex-space-center"><b>{{ "PJ.ARMOR_BONUS" | translate }}:</b> </p>
-        <div class="u-width-50 u-flex u-flex-center u-flex-space-center">
-          <button mat-mini-fab class="minibutton" (click)="addApMod(-1)">
+      <div class="u-width-100 rQItem u-flex">
+        <div class="u-width-14 u-flex u-flex-center u-flex-space-center">
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.STR, -1)">
             <mat-icon>remove</mat-icon>
           </button>
-          <p class="u-text-center">{{ character.tempAPMod }}</p>
-          <button mat-mini-fab class="minibutton" (click)="addApMod(1)">
+          <p class="u-text-center">{{ character.stats.STR.value + character.stats.STR.tempMod  }}</p>
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.STR, 1)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="u-width-14 u-flex u-flex-center u-flex-space-center">
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.CON, -1)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <p class="u-text-center">{{ character.stats.CON.value + character.stats.CON.tempMod  }}</p>
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.CON, 1)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="u-width-14 u-flex u-flex-center u-flex-space-center">
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.DEX, -1)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <p class="u-text-center">{{ character.stats.DEX.value + character.stats.DEX.tempMod  }}</p>
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.DEX, 1)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="u-width-14 u-flex u-flex-center u-flex-space-center">
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.INT, -1)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <p class="u-text-center">{{ character.stats.INT.value + character.stats.INT.tempMod  }}</p>
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.INT, 1)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="u-width-14 u-flex u-flex-center u-flex-space-center">
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.SIZ, -1)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <p class="u-text-center">{{ character.stats.SIZ.value + character.stats.SIZ.tempMod  }}</p>
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.SIZ, 1)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="u-width-14 u-flex u-flex-center u-flex-space-center">
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.POW, -1)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <p class="u-text-center">{{ character.stats.POW.value + character.stats.POW.tempMod  }}</p>
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.POW, 1)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="u-width-14 u-flex u-flex-center u-flex-space-center">
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.CHA, -1)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <p class="u-text-center">{{ character.stats.CHA.value + character.stats.CHA.tempMod  }}</p>
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.CHA, 1)">
             <mat-icon>add</mat-icon>
           </button>
         </div>
       </div>
+      <div class="u-width-100 u-flex">
+        <div class="border-all u-width-85-padding">
+            <div class="u-width- rQItem u-flex">
+              <p class="u-width-33 u-text-center"><b>{{ "PJ.HP" | translate  }}</b></p>
+              <p class="u-width-33 u-text-center"><b>{{ "PJ.FP" | translate  }}</b></p>
+              <p class="u-width-33 u-text-center"><b>{{ "PJ.MP" | translate  }}</b></p>
+            </div>
+            <div class="u-width-100 rQItem u-flex">
+              <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addHpMod(-1)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <p class="u-text-center">{{ getHp() + this.character.tempHPMod }}/{{ getHp() }}</p>
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addHpMod(1)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addFpMod(-1)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <p class="u-text-center">{{ getFP() + this.character.tempFPMod - this.turn }}/{{ getFP() }}</p>
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addFpMod(1)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addMpMod(-1)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <p class="u-text-center">{{ getMP()  + this.character.tempMPMod }}/{{ getMP() }}</p>
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addMpMod(1)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+        </div>
+        <div class="rQItem u-width-15 u-flex u-flex-column border-all" (click)="resetCharacterTemps()">
+          <div class="u-width-100 u-flex u-flex-space-center">
+            <button mat-icon-button >
+              <mat-icon>health_and_safety</mat-icon>
+            </button>
+          </div>
+          <div class="u-width-100 u-flex u-flex-space-center">
+            <p>{{ "ACTIONS.UTILS.RESEL_ALL" | translate }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="u-width-100 rQItem u-flex">
+        <p class="u-width-10"></p>
+        <p class="rQItem u-width-33 margin-left"><b>{{ "PJ.DAMAGE_MOD" | translate }}:</b> {{ getDMGMod(character) }}</p>
+        <p><b>{{ "PJ.MRCC" | translate  }}:</b> {{ getMRDESC(character)+getMRSIZ(character) }} = {{ "PJ.MRDEX" | translate  }}: {{ getMRDESC(character) }} + {{ "PJ.MRSIZ" | translate  }}: {{ getMRSIZ(character) }}</p>
+      </div>
+    </div>
+    <div class="u-width-40 u-flex u-flex-column">
+      <div class=" u-width-100-padding u-flex u-flex-column border-all">
+        <div class="u-flex listItem padding-all" (click)="character.swShowLocs = !character.swShowLocs">
+          <div class="u-width-100 u-flex" *ngIf="character.swShowLocs">
+            <p class="u-width-25 u-flex u-flex-space-center"><b>{{ "PJ.LOC" | translate }}</b></p>
+            <p class="u-width-20 u-flex u-flex-space-center"><b>{{ "PJ.HP" | translate }}</b></p>
+            <p class="u-width-40 u-flex u-flex-space-center"><b>{{ "PJ.ARMOR" | translate }}</b></p>
+            <p class="u-width-15 u-flex u-flex-space-center"><b>{{ "PJ.AP" | translate }}</b></p>
+          </div>
+          <div class="u-width-100 u-flex" *ngIf="!character.swShowLocs">
+            <p class="u-width-100 u-flex u-flex-space-center"><b>{{ "PJ.LOCS" | translate }}</b></p>
+          </div>
+        </div>
+        <div *ngIf="character.swShowLocs">
+          <div class="u-width-100-padding-sides u-flex" *ngFor="let loc of character.locations; let i = index" [ngClass]="getLitsLineClass(i)">
+            <div class="u-width-30 u-flex u-flex-center"><p class="margin-none">{{ loc.name }}</p></div>
+            <div class="u-width-20">
+              <div class="u-width-33 u-flex u-flex-center u-flex-space-center">
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addLocHpMod(-1, loc)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <p class="u-text-center margin-none">{{ getHpByLocation(character, loc)  + loc.bonusHP }}/{{ getHpByLocation(character, loc) }}</p>
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addLocHpMod(1, loc)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="u-width-35 u-flex u-flex-center">
+              <p class="margin-none" [matTooltip]="getArmorTypeByLocation(character, loc)">{{ getArmorTypeByLocation(character, loc) }}</p>
+            </div>
+            <div class="u-width-5 u-flex u-flex-center">
+              <p class="margin-none">{{ getArmorByLocation(character, loc) }}</p>
+            </div>
+          </div>
+          <div class=" u-width-100-padding u-flex border-all rQItem">
+            <p class="u-width-50 u-flex u-flex-center u-flex-space-center"><b>{{ "PJ.ARMOR_BONUS" | translate }}:</b> </p>
+            <div class="u-width-50 u-flex u-flex-center u-flex-space-center">
+              <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addApMod(-1)">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <p class="u-text-center">{{ character.tempAPMod }}</p>
+              <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addApMod(1)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-
-  <div class=" u-width-100-padding u-flex u-flex-column border-all">
-    <div class="u-flex listItem padding-all" (click)="swCombat = !swCombat">
+  <div class="u-width-100-padding u-flex u-flex-column border-all">
+    <div class="u-flex listItem padding-all" (click)="character.swCombat = !character.swCombat">
         <p class="u-width-100 u-flex u-flex-space-center"><b>{{ "PJ.COMBAT" | translate }}</b></p>
     </div>
-    <div class="u-flex u-width-100-padding u-flex-column margin-top" *ngIf="swCombat">
+
+    <div class=" u-width-100-padding u-flex border-all " *ngIf="character.swShowResults && character.swCombat">
+      <p class="u-width-30 u-flex u-flex-center u-flex-space-center rQItem"><b>{{ "COMMONS.RESULT" | translate }}:</b> </p>
+      <p class="u-width-60 u-flex u-flex-center u-flex-space-center rQItem">{{ character.result }}</p>
+      <button mat-icon-button class="rQItem u-width-10" (click)="clearResult()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+
+    <div class="u-flex u-width-100-padding u-flex-column margin-top" *ngIf="character.swCombat">
       <div class="u-flex u-width-100">
-        <p class="u-width-23"><b>{{ "PJ.WEAPON" | translate }}</b></p>
-        <p class="u-width-8"><b>{{ "PJ.ATTACK_SHORT" | translate }}</b></p>
-        <p class="u-width-8"><b>{{ "PJ.PARRY_SHORT" | translate }}</b></p>
-        <p class="u-width-8"><b>{{ "PJ.AP" | translate }}</b></p>
-        <p class="u-width-8"><b>{{ "PJ.MR" | translate }}</b></p>
-        <p class="u-width-15"><b>{{ "PJ.DAMAGE" | translate }}</b></p>
-        <p class="u-width-15"><b>{{ "PJ.RANGE" | translate }}</b></p>
-        <p class="u-width-15"><b>{{ "PJ.FIRE_RATE_SHORT" | translate }}</b></p>
+        <p class="u-width-25"><b>{{ "PJ.WEAPON" | translate }}</b></p>
+        <p class="u-width-8 u-text-center"><b>{{ "PJ.ATTACK_SHORT" | translate }}</b></p>
+        <p class="u-width-8 u-text-center"><b>{{ "PJ.PARRY_SHORT" | translate }}</b></p>
+        <p class="u-width-8 u-text-center"><b>{{ "PJ.AP" | translate }}</b></p>
+        <p class="u-width-8 u-text-center"><b>{{ "PJ.MR" | translate }}</b></p>
+        <p class="u-width-15 u-text-center"><b>{{ "PJ.DAMAGE" | translate }}</b></p>
+        <p class="u-width-15 u-text-center"><b>{{ "PJ.RANGE" | translate }}</b></p>
+        <p class="u-width-15 u-text-center"><b>{{ "PJ.FIRE_RATE_SHORT" | translate }}</b></p>
       </div>
       <div class="u-flex"
         *ngFor="let weapon of character.weapons; let i = index"
         [ngClass]="getLitsLineClass(i)">
-          <p class="u-width-23">{{ weapon.name }}</p>
-          <p class="u-width-8">{{ getTAttSkill(character, weapon.weaponType) }}</p>
-          <p class="u-width-8">{{ getTDefSkill(character, weapon.weaponType) }}</p>
-          <p class="u-width-8">{{ weapon.armorPoints }}</p>
-          <p class="u-width-8">{{ getWeaponMR(weapon) }}</p>
-          <p class="u-width-15">{{ getWeaoponRollString(weapon) }}</p>
-          <p class="u-width-15">{{ weapon.range }} / {{weapon.maxRange }}</p>
-          <p class="u-width-15">{{ weapon.fireRate }}</p>
+          <div class="u-width-25 u-flex u-flex-center"><p>{{getNameString(weapon) }}</p></div>
+          <div class="u-width-8 u-flex u-flex-center u-flex-space-center">
+            <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollD100(getTAttSkill(character, weapon.weaponType))">
+              {{ getTAttSkill(character, weapon.weaponType) }}
+            </button>
+          </div>
+          <div class="u-width-8 u-flex u-flex-center u-flex-space-center">
+            <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollD100(getTDefSkill(character, weapon.weaponType))">
+              {{ getTDefSkill(character, weapon.weaponType) }}
+            </button>
+          </div>
+          <div class="u-width-8 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.armorPoints }}</p></div>
+          <div class="u-width-8 u-flex u-flex-center u-flex-space-center"><p>{{ getWeaponMR(weapon) }}</p></div>
+          <div class="u-width-15 u-flex u-flex-center u-flex-space-center">
+            <button class="card-button wide u-flex u-flex-space-center u-flex-center" (click)="rollDamage(weapon)">
+              {{ getWeaoponRollString(weapon) }}
+            </button>
+          </div>
+          <div class="u-width-15 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.range }} / {{weapon.maxRange }}</p></div>
+          <div class="u-width-15 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.fireRate }}</p></div>
       </div>
     </div>
   </div>
 
-
-
   <div class=" u-width-100-padding u-flex u-flex-column border-all">
-    <div class="u-flex listItem padding-all" (click)="swShowUtils = !swShowUtils">
+    <div class="u-flex listItem padding-all" (click)="character.swShowUtils = !character.swShowUtils">
         <p class="u-width-100 u-flex u-flex-space-center"><b>{{ "ACTIONS.UTILS.UTILS" | translate }}</b></p>
     </div>
-    <div class="u-flex" *ngIf="swShowUtils" >
-      <div class="u-width-33 rQItem">
-        <button mat-raised-button (click)="handleHumanice()" class="u-width-100">
-          <mat-icon>manage_accounts</mat-icon>{{ "ACTIONS.UTILS.HUMANICE" | translate  }}
-        </button>
+    <div class="u-flex u-flex-column" *ngIf="character.swShowUtils" >
+      <div class="u-flex u-width-100">
+        <div class="u-width-33 rQItem">
+          <button mat-raised-button (click)="handleHumanice()" class="u-width-100">
+            <mat-icon>manage_accounts</mat-icon>{{ "ACTIONS.UTILS.HUMANICE" | translate  }}
+          </button>
+        </div>
+        <div class="u-width-33 rQItem">
+          <button mat-raised-button (click)="setRandomHumanStats()" class="u-width-100">
+            <mat-icon>cached</mat-icon>{{ "ACTIONS.UTILS.RND_HUMAN_STATS" | translate  }}
+          </button>
+        </div>
+        <div class="u-width-33 rQItem">
+          <button mat-raised-button (click)="addNewWeapon()" class="u-width-100">
+            <mat-icon>add_moderator</mat-icon>{{ "ACTIONS.ADD_WEAPON" | translate  }}
+          </button>
+        </div>
       </div>
-      <div class="u-width-33 rQItem">
-        <button mat-raised-button (click)="setRandomHumanStats()" class="u-width-100">
-          <mat-icon>cached</mat-icon>{{ "ACTIONS.UTILS.RND_HUMAN_STATS" | translate  }}
-        </button>
-      </div>
-      <div class="u-width-33 rQItem">
-        <button mat-raised-button (click)="addNewWeapon()" class="u-width-100">
-          <mat-icon>add_moderator</mat-icon>{{ "ACTIONS.ADD_WEAPON" | translate  }}
-        </button>
+      <div class="u-flex u-width-100">
+        <div class="u-width-33 rQItem">
+          <button mat-raised-button (click)="addNewArmor()" class="u-width-100">
+            <mat-icon>add_moderator</mat-icon>{{ "ACTIONS.ADD_ARMOR" | translate  }}
+          </button>
+        </div>
       </div>
     </div>
   </div>

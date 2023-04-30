@@ -34,6 +34,7 @@ export const manageRolls = (rollsText: string): number => {
     return getTotal(rolls);
 };
 
-
-
-
+export const getFumbleTarget = (target: number): number => {
+  const fumbleTarget = NUMBERS.N_100 - (NUMBERS.N_3 - Math.floor((target - NUMBERS.N_11)/NUMBERS.N_20));
+  return fumbleTarget > NUMBERS.N_100 ? NUMBERS.N_100 : fumbleTarget;
+};

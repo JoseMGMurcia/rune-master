@@ -60,6 +60,10 @@ export class CombatMainComponent implements OnInit, OnDestroy {
     this.character = character;
   }
 
+  public removeCharacter(character: Character) {
+    this.characters.splice(this.characters.findIndex((pj) => pj.id === character.id), NUMBERS.N_1);
+  }
+
   public addSavedCharacter() {
     const savedId = this.dicesForm.controls['savedPJ'].value;
     const pJ = this.savedCharacters.find((pj) => pj.id === savedId);

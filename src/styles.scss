@@ -5,7 +5,7 @@
 
 @include mat.core();
 
-html,
+html,s
 body {
   height: 100%;
 }
@@ -54,10 +54,14 @@ body {
   color: colors.$card-color;
 }
 
+.cardIconButton {
+  color: colors.$card-icon-button;
+}
+
 .listItem {
   background-color: colors.$background-sec;
+  border-radius: 8px;
   color: colors.$white-50;
-  border-radius: 8px
 }
 
 .listLine-odd {
@@ -73,9 +77,27 @@ body {
 }
 
 button {
-  &.minibutton{
+  &.card-button {
     background-color: colors.$background-tertiary;
-    scale: 0.6;
+    border: 0;
+    border-radius: 50px;
+    box-shadow: 1px 4px 4px 1px rgba(0, 0, 0, 0.2);
+    height: 1.75em;
+    margin: 0.25em 0.15em;
+    width: 1.75em;
+
+    &.wide {
+      width: 3.25em;
+    }
+
+    &-mini {
+      scale: 0.7;
+    }
+  }
+
+  &.card-button:hover {
+    background-color: colors.$background-tertiary-hover;
+    box-shadow: 1px 8px 8px 1px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -118,7 +140,7 @@ button {
   }
 
   .mat-expansion-panel-body {
-    background-color:  colors.$background-light-tertiary
+    background-color: colors.$background-light-tertiary;
   }
 }
 
@@ -127,3 +149,16 @@ button {
     margin: 0;
   }
 }
+
+.mat-mdc-checkbox {
+  .mdc-form-field {
+    label {
+      color: colors.$tema-contrast-dark;
+    }
+
+    div {
+      border-color: colors.$tema-contrast-dark !important;
+    }
+  }
+}
+

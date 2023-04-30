@@ -1,6 +1,6 @@
 import { rollRegex } from "../constants/regex.constants";
 
-export const cutDicesRolls = (text: string) => {
+export const cutDicesRolls = (text: string): string[] => {
   text = text.replace("-", "+-");
   const rolls = text.split("+");
     rolls.forEach((roll, index) => {

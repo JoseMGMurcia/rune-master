@@ -15,6 +15,8 @@ import { WeaponDialogComponent } from './components/weapon-dialog/weapon-dialog.
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { ArmorDialogComponent } from './components/armor-dialog/armor-dialog.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 export const createTranslateLoader = (http: HttpClient) =>
@@ -27,12 +29,14 @@ const matModules = [
   MatButtonModule,
   MatInputModule,
   MatSelectModule,
+  MatCheckboxModule,
 ];
 
 const components = [
   MenubarComponent,
   EasyDialogComponent,
   WeaponDialogComponent,
+  ArmorDialogComponent,
 ];
 
 

@@ -1,8 +1,9 @@
 import { TranslateService } from "@ngx-translate/core";
-import { Character, CombatSkill, Location, Skill, hitpointsRatioEnum, WeaponTypeEnum, Weapon, WeaponType } from "../models/character.model";
+import { Character, CombatSkill, Location, Skill, hitpointsRatioEnum, WeaponTypeEnum, WeaponType, Armor, armorWeightRatioEnum } from "../models/character.model";
 import { NUMBERS } from "../constants/number.constants";
 import { WeaponNameEnum, WeaponNameType, createWeapon } from "./equip.factory";
 import { getTotal } from "./dices.utils";
+import { ArmorType } from "../constants/equip/armor.const";
 
 export const resetTemporals = (pj: Character): void => {
   pj.tempHPMod = NUMBERS.N_0;
@@ -14,7 +15,15 @@ export const resetTemporals = (pj: Character): void => {
     loc.bonusAP = NUMBERS.N_0;
     return loc;
   });
+  pj.stats.STR.tempMod = NUMBERS.N_0;
+  pj.stats.DEX.tempMod = NUMBERS.N_0;
+  pj.stats.CON.tempMod = NUMBERS.N_0;
+  pj.stats.INT.tempMod = NUMBERS.N_0;
+  pj.stats.SIZ.tempMod = NUMBERS.N_0;
+  pj.stats.POW.tempMod = NUMBERS.N_0;
+  pj.stats.CHA.tempMod = NUMBERS.N_0;
 }
+
 export const setRandomHumanStats = (pj: Character): void => {
   pj.stats.STR.value = getTotal(['3d6']);
   pj.stats.DEX.value = getTotal(['3d6']);
@@ -111,10 +120,16 @@ export const setInitialHumanCharacter = (pj: Character, translate: TranslateServ
 const addHumanoidLocs = (pj: Character, translate: TranslateService) => {
   const locations =  translate.instant('PJ.LOCATION');
   pj.locations = [];
-  pj.locations.push(new Location(locations.RIGHT_LEG, hitpointsRatioEnum.X33));
-  pj.locations.push(new Location(locations.LEFT_LEG, hitpointsRatioEnum.X33));
+  const rightLeg = new Location(locations.RIGHT_LEG, hitpointsRatioEnum.X33);
+  rightLeg.armorWeightRario = armorWeightRatioEnum.x2;
+  pj.locations.push(rightLeg);
+  const leftLeg = new Location(locations.LEFT_LEG, hitpointsRatioEnum.X33);
+  leftLeg.armorWeightRario = armorWeightRatioEnum.x2;
+  pj.locations.push(leftLeg);
   pj.locations.push(new Location(locations.ABDOMEN, hitpointsRatioEnum.X33));
-  pj.locations.push(new Location(locations.CHEST, hitpointsRatioEnum.X40));
+  const chest = new Location(locations.CHEST, hitpointsRatioEnum.X40);
+  chest.armorWeightRario = armorWeightRatioEnum.x2;
+  pj.locations.push(chest);
   pj.locations.push(new Location(locations.RIGHT_ARM, hitpointsRatioEnum.X25));
   pj.locations.push(new Location(locations.LEFT_ARM, hitpointsRatioEnum.X25));
   pj.locations.push(new Location(locations.HEAD, hitpointsRatioEnum.X33));
@@ -124,19 +139,37 @@ export const getUniqueID = (name: string) => {
   return name + '_' + new Date().getTime();
 };
 
-export const addWeapon = (
-  pj: Character,
-  type: WeaponType,
-  name: WeaponNameType,
-  translate: TranslateService): void => {
-    const weapon = createWeapon(type, name, translate);
+export const addWeapon = ( pj: Character, type: WeaponType, name: WeaponNameType, translate: TranslateService): void => {
+  const weapon = createWeapon(type, name, translate);
+  weapon.inCombat = true;
+  if(!pj.weapons.some(w => w.name === weapon.name && w.weaponType === weapon.weaponType)){
     pj.weapons.push(weapon);
-    if(!pj.skills.ATTACK.some(s => s.weaponType === weapon.weaponType)) {
-      const types = translate.instant('PJ.WEAPON_TYPES');
-      pj.skills.ATTACK.push(new CombatSkill(types['type'], weapon.attackBS , weapon.weaponType));
+  }
+  if(!pj.skills.ATTACK.some(s => s.weaponType === weapon.weaponType)) {
+    const types = translate.instant('PJ.WEAPON_TYPES');
+    pj.skills.ATTACK.push(new CombatSkill(types['type'], weapon.attackBS , weapon.weaponType));
+  }
+  if(!pj.skills.DEFENSE.some(s => s.weaponType === weapon.weaponType)) {
+    const types = translate.instant('PJ.WEAPON_TYPES');
+    pj.skills.DEFENSE.push(new CombatSkill(types['type'], weapon.parryBS , weapon.weaponType));
+  }
+};
+
+export const addArmor = ( pj: Character, type: ArmorType, locations: string[], translate: TranslateService): void => {
+  const armorName = translate.instant('PJ.ARMOR_TYPES.' + type.name);
+  const armor = new Armor(armorName, type.armor, locations);
+
+  const sizeTypeIndex = Math.floor((pj.stats.SIZ.value - NUMBERS.N_5) / NUMBERS.N_5);
+  console.log('sizeTypeIndex', sizeTypeIndex);
+  let weight = NUMBERS.N_0;
+  const basicWeight = type.weights[sizeTypeIndex] / NUMBERS.N_10;
+  locations.forEach(locName => {
+    const loc = pj.locations.find(loc => loc.name === locName);
+    if(loc){
+      weight += loc.armorWeightRario*basicWeight;
     }
-    if(!pj.skills.DEFENSE.some(s => s.weaponType === weapon.weaponType)) {
-      const types = translate.instant('PJ.WEAPON_TYPES');
-      pj.skills.DEFENSE.push(new CombatSkill(types['type'], weapon.parryBS , weapon.weaponType));
-    }
-  };
+  });
+  armor.weight = weight;
+  armor.inCombat = true;
+  pj.armor.push(armor);
+};

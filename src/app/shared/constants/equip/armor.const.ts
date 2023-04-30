@@ -1,4 +1,3 @@
-import { Armor } from "../../models/character.model";
 
 export class ArmorType {
   name = '';
@@ -65,7 +64,7 @@ export const ARMOR_TYPES: ArmorType[] = [
   },
   {
     name: 'SCALE_MAIL',
-    armor: 7,
+    armor: 6,
     weights: [16,20,24,28],
     values: [1920,2400,2880,3360]
   },

@@ -1,29 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ARMOR_TYPES, ArmorType } from 'src/app/shared/constants/equip/armor.const';
-import { DatabaseService } from 'src/app/shared/services/db.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  public armors: ArmorType[] = [];
-  public swShow = false;
+  public armors: ArmorType[] = ARMOR_TYPES;
   constructor(
     private translate: TranslateService,
-    private db: DatabaseService
     ) { }
 
-  ngOnInit(): void {
-   this.fetch();
-  }
-
-  private fetch(): void {
-    this.armors = ARMOR_TYPES;
-    this.swShow = true;
-  }
 
   getArmorName(armor: ArmorType): string {
     return this.translate.instant(`PJ.ARMOR_TYPES.${armor.name}`);

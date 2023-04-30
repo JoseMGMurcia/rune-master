@@ -1,5 +1,5 @@
 <div class="u-width-100 u-flex u-height-100 body">
-  <div class="u-width-75 u-height-min">
+  <div class="u-width-50 u-height-min">
     <form [formGroup]="dicesForm" class="u-width-100 u-flex u-border-bottom">
       <div class="u-width-15 rQItem">
           <mat-form-field class="rQItem u-width-100" >
@@ -58,11 +58,12 @@
         {{ character.name }}
     </div>
   </div>
-  <div class="u-width-25 u-height-100-padding card">
+  <div class="u-width-50 u-height-100-padding card">
     <app-combat-detail
       [character]="character"
       [turn]="turn"
-      (swichCharacter)="swichCharacterIndex($event)">
+      (swichCharacter)="swichCharacterIndex($event)"
+      (removeCharacter)="removeCharacter($event)">
     </app-combat-detail>
   </div>
 </div>

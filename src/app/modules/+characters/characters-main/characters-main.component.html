@@ -10,21 +10,21 @@
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="padding-right">{{ pj.name }} </span>
-        <mat-label class="rQItem"> {{ pj.profesion }} {{ pj.race }} {{ "PJ.CULTURE_TYPES." + pj.culture | translate  }} {{ pj.age }} {{ "PJ.YEARS_SHORT" | translate  }}</mat-label>
+        <p class="rQItem"> {{ pj.profesion }} {{ pj.race }} {{ "PJ.CULTURE_TYPES." + pj.culture | translate  }} {{ pj.age }} {{ "PJ.YEARS_SHORT" | translate  }}</p>
 
       </mat-panel-title>
       <mat-panel-description>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.STR" | translate  }} {{ pj.stats.STR.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.DEX" | translate  }} {{ pj.stats.DEX.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CON" | translate  }} {{ pj.stats.CON.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.INT" | translate  }} {{ pj.stats.INT.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.SIZ" | translate  }} {{ pj.stats.SIZ.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.POW" | translate  }} {{ pj.stats.POW.value }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CHA" | translate  }} {{ pj.stats.CHA.value }}</mat-label>
-        <mat-label class="rQItem padding-left">{{ "PJ.HP" | translate  }} {{ getHP(pj) }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.MP" | translate  }} {{ getMP(pj) }}</mat-label>
-        <mat-label class="rQItem">{{ "PJ.FP" | translate  }} {{ getFP(pj) }}</mat-label>
-        <mat-label class="rQItem">{{ getCultText(pj) }}</mat-label>
+        <p class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.STR" | translate  }} {{ pj.stats.STR.value }}</p>
+        <p class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.DEX" | translate  }} {{ pj.stats.DEX.value }}</p>
+        <p class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CON" | translate  }} {{ pj.stats.CON.value }}</p>
+        <p class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.INT" | translate  }} {{ pj.stats.INT.value }}</p>
+        <p class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.SIZ" | translate  }} {{ pj.stats.SIZ.value }}</p>
+        <p class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.POW" | translate  }} {{ pj.stats.POW.value }}</p>
+        <p class="rQItem">{{ "PJ.CATACTERISTICS_TYPES.CHA" | translate  }} {{ pj.stats.CHA.value }}</p>
+        <p class="rQItem padding-left">{{ "PJ.HP" | translate  }} {{ getHP(pj) }}</p>
+        <p class="rQItem">{{ "PJ.MP" | translate  }} {{ getMP(pj) }}</p>
+        <p class="rQItem">{{ "PJ.FP" | translate  }} {{ getFP(pj) }}</p>
+        <p class="rQItem">{{ getCultText(pj) }}</p>
       </mat-panel-description>
       <span>
         <button mat-icon-button (click)="manageFavourite($event, pj)"> <mat-icon>{{ pj.favorite ? 'star' : 'star_border' }}</mat-icon></button>
@@ -40,7 +40,7 @@
 
     <!-- <mat-form-field>
 
-      <mat-label>Name</mat-label>
+      <p>Name</p>
       <input matInput type="text"  [value]="pj.name">
     </mat-form-field> -->
     <div class="rQItem"><p class="rQItem title">{{ "PJ.SKILLS" | translate  }}</p></div>
@@ -49,10 +49,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.SKILL_TYPE.AGILITY" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">{{ getAgilityMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">{{ getAgilityMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.AGILITY; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
+            <p class="rQItem" *ngFor="let skill of pj.skills.AGILITY; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</p>
           </div>
         </mat-expansion-panel>
       </div>
@@ -61,10 +61,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.SKILL_TYPE.COMUNICATION" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">{{ getComunicationMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">{{ getComunicationMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.COMUNICATION; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
+            <p class="rQItem" *ngFor="let skill of pj.skills.COMUNICATION; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</p>
           </div>
           </mat-expansion-panel>
       </div>
@@ -73,10 +73,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.SKILL_TYPE.MANIPULATION" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">{{ getManipulationMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">{{ getManipulationMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.MANIPULATION; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
+            <p class="rQItem" *ngFor="let skill of pj.skills.MANIPULATION; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</p>
           </div>
           </mat-expansion-panel>
       </div>
@@ -85,10 +85,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.SKILL_TYPE.KNOWLEDGE" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">{{ getKnowledgeMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">{{ getKnowledgeMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.KNOWLEDGE; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
+            <p class="rQItem" *ngFor="let skill of pj.skills.KNOWLEDGE; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</p>
           </div>
           </mat-expansion-panel>
       </div>
@@ -97,10 +97,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.SKILL_TYPE.STEALTH" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">{{ getStealthMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">{{ getStealthMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.STEALTH; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
+            <p class="rQItem" *ngFor="let skill of pj.skills.STEALTH; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</p>
           </div>
           </mat-expansion-panel>
       </div>
@@ -109,10 +109,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.SKILL_TYPE.AWARENESS" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">{{ getPerceptionMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">{{ getPerceptionMod(pj) }}</p>
           </mat-expansion-panel-header>
             <div class="u-flex u-flex-column">
-              <mat-label class="rQItem" *ngFor="let skill of pj.skills.AWARENESS; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
+              <p class="rQItem" *ngFor="let skill of pj.skills.AWARENESS; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</p>
             </div>
         </mat-expansion-panel>
       </div>
@@ -123,7 +123,7 @@
             <mat-panel-title>{{ "PJ.SKILL_TYPE.OTHER" | translate  }}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.OTHER; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
+            <p class="rQItem" *ngFor="let skill of pj.skills.OTHER; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</p>
           </div>
           </mat-expansion-panel>
       </div>
@@ -142,10 +142,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.MAGICAL_SKILLS" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">{{ getMagicalMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">{{ getMagicalMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let skill of pj.skills.MAGICAL; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</mat-label>
+            <p class="rQItem" *ngFor="let skill of pj.skills.MAGICAL; let i = index" [ngClass]="getLitsLineClass(i)">{{ skill.name }} {{ skill.value }}</p>
           </div>
         </mat-expansion-panel>
       </div>
@@ -154,10 +154,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.SPELL_TYPE.SPIRITUAL" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">{{ pj.stats.POW.value*5 }} + {{ getMagicalMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">{{ pj.stats.POW.value*5 }} + {{ getMagicalMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.SPIRITUAL; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}-{{ spell.points }}</mat-label>
+            <p class="rQItem" *ngFor="let spell of pj.spells.SPIRITUAL; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}-{{ spell.points }}</p>
           </div>
         </mat-expansion-panel>
       </div>
@@ -166,10 +166,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.SPELL_TYPE.DIVINE" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">100 + {{ getMagicalMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">100 + {{ getMagicalMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.DIVINE; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}({{ spell.points }})x{{ spell.divineStack }}</mat-label>
+            <p class="rQItem" *ngFor="let spell of pj.spells.DIVINE; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}({{ spell.points }})x{{ spell.divineStack }}</p>
           </div>
         </mat-expansion-panel>
       </div>
@@ -178,10 +178,10 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ "PJ.SPELL_TYPE.SORCERY" | translate  }}</mat-panel-title>
-            <mat-label class="rQItem padding-right">{{ getMagicalMod(pj) }}</mat-label>
+            <p class="rQItem padding-right">{{ getMagicalMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.SORCERY; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}({{ getSpellStatus(spell) }}): {{ spell.sorcerySkillValue }} </mat-label>
+            <p class="rQItem" *ngFor="let spell of pj.spells.SORCERY; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}({{ getSpellStatus(spell) }}): {{ spell.sorcerySkillValue }} </p>
           </div>
         </mat-expansion-panel>
       </div>
@@ -192,7 +192,7 @@
             <mat-panel-title>{{ "PJ.SPELL_TYPE.DRAGON" | translate  }}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.DRAGON; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</mat-label>
+            <p class="rQItem" *ngFor="let spell of pj.spells.DRAGON; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</p>
           </div>
         </mat-expansion-panel>
       </div>
@@ -203,7 +203,7 @@
             <mat-panel-title>{{ "PJ.SPELL_TYPE.KI" | translate  }}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.KI; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</mat-label>
+            <p class="rQItem" *ngFor="let spell of pj.spells.KI; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</p>
           </div>
         </mat-expansion-panel>
       </div>
@@ -214,7 +214,7 @@
             <mat-panel-title>{{ "PJ.SPELL_TYPE.OTHER" | translate  }}</mat-panel-title>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column">
-            <mat-label class="rQItem" *ngFor="let spell of pj.spells.OTHER; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</mat-label>
+            <p class="rQItem" *ngFor="let spell of pj.spells.OTHER; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</p>
           </div>
         </mat-expansion-panel>
       </div>
@@ -262,8 +262,8 @@
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header class="u-flex">
             <mat-panel-title>{{ "PJ.WEAPONS" | translate  }}</mat-panel-title>
-              <mat-label class="u-width-33 u-text-center">{{ "PJ.ATTACK_MOD" | translate }}: {{ getManipulationMod(pj) }}</mat-label>
-              <mat-label class="u-width-33 u-text-center">{{ "PJ.PARRY_MOD" | translate }}: {{ getAgilityMod(pj) }}</mat-label>
+              <p class="u-width-33 u-text-center">{{ "PJ.ATTACK_MOD" | translate }}: {{ getManipulationMod(pj) }}</p>
+              <p class="u-width-33 u-text-center">{{ "PJ.PARRY_MOD" | translate }}: {{ getAgilityMod(pj) }}</p>
           </mat-expansion-panel-header>
           <div class="u-flex u-flex-column margin-top">
             <div class="u-flex">

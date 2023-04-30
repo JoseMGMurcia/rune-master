@@ -10,7 +10,6 @@ import { NUMBERS } from '../../constants/number.constants';
 @Component({
   selector: 'app-weapon-dialog',
   templateUrl: './weapon-dialog.component.html',
-  styleUrls: ['./weapon-dialog.component.scss']
 })
 export class WeaponDialogComponent implements OnInit{
 
