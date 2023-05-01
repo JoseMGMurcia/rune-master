@@ -113,7 +113,7 @@
                 <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addFpMod(-1)">
                   <mat-icon>remove</mat-icon>
                 </button>
-                <p class="u-text-center">{{ getFP() + this.character.tempFPMod - this.turn }}/{{ getFP() }}</p>
+                <p class="u-text-center">{{ getFP() }}/{{ getInitialFP() }}</p>
                 <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addFpMod(1)">
                   <mat-icon>add</mat-icon>
                 </button>
@@ -211,7 +211,18 @@
     </div>
 
     <div class="u-flex u-width-100-padding u-flex-column margin-top" *ngIf="character.swCombat">
+      <div class="u-width-100 rQItem u-flex u-flex-center">
+        <p><b>{{ "PJ.SKILL_NAME.AGILITY.DODGE" | translate }}:</b></p>
+        <p class="padding-left-mini">{{ getDodgeLine(character) }}</p>
+        <div class="u-width-5 u-flex padding-left-mini">
+          <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollD100(getDodge(character))">
+            {{ getDodge(character) }}
+          </button>
+        </div>
+      </div>
+
       <div class="u-flex u-width-100">
+        <p class="u-width-5 u-text-center"><b></b></p>
         <p class="u-width-25"><b>{{ "PJ.WEAPON" | translate }}</b></p>
         <p class="u-width-8 u-text-center"><b>{{ "PJ.ATTACK_SHORT" | translate }}</b></p>
         <p class="u-width-8 u-text-center"><b>{{ "PJ.PARRY_SHORT" | translate }}</b></p>
@@ -221,18 +232,22 @@
         <p class="u-width-15 u-text-center"><b>{{ "PJ.RANGE" | translate }}</b></p>
         <p class="u-width-15 u-text-center"><b>{{ "PJ.FIRE_RATE_SHORT" | translate }}</b></p>
       </div>
-      <div class="u-flex"
+      <div class="u-flex u-flex-column"
         *ngFor="let weapon of character.weapons; let i = index"
         [ngClass]="getLitsLineClass(i)">
+        <div class="u-width-100 u-flex">
+          <div class="u-width-5 u-text-center">
+            <mat-icon class="cardIconButton cardIconButton-mini" (click)="weapon.showDetail = !weapon.showDetail">remove_red_eye</mat-icon>
+          </div>
           <div class="u-width-25 u-flex u-flex-center"><p>{{getNameString(weapon) }}</p></div>
           <div class="u-width-8 u-flex u-flex-center u-flex-space-center">
             <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollD100(getTAttSkill(character, weapon.weaponType))">
-              {{ getTAttSkill(character, weapon.weaponType) }}
+              {{ getTAttSkill(character, weapon.weaponType) + getFPAllMod() }}
             </button>
           </div>
           <div class="u-width-8 u-flex u-flex-center u-flex-space-center">
             <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollD100(getTDefSkill(character, weapon.weaponType))">
-              {{ getTDefSkill(character, weapon.weaponType) }}
+              {{ getTDefSkill(character, weapon.weaponType) + getFPAllMod() }}
             </button>
           </div>
           <div class="u-width-8 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.armorPoints }}</p></div>
@@ -244,6 +259,8 @@
           </div>
           <div class="u-width-15 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.range }} / {{weapon.maxRange }}</p></div>
           <div class="u-width-15 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.fireRate }}</p></div>
+        </div>
+        <div class="u-width-5 u-text-center" *ngIf="weapon.showDetail">DETAIl</div>
       </div>
     </div>
   </div>

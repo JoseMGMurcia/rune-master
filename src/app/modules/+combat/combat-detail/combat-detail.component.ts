@@ -19,7 +19,7 @@ import { cutDicesRolls } from 'src/app/shared/utils/message.utils';
 })
 export class CombatDetailComponent {
   @Input() public character: Character = new Character('');
-  @Input() public turn= NUMBERS.N_0;
+  @Input() public turn= NUMBERS.N_1;
 
   @Output() swichCharacter = new EventEmitter<number>();
   @Output() removeCharacter = new EventEmitter<Character>();
@@ -182,7 +182,16 @@ export class CombatDetailComponent {
   }
 
   public getFP(): number {
+    return Math.floor(getFP(this.character) - getCAR(this.character) + this.character.tempFPMod - this.turn + NUMBERS.N_1);
+  }
+
+  public getInitialFP(): number {
     return Math.floor(getFP(this.character) - getCAR(this.character));
+  }
+
+  public getFPAllMod(): number {
+    // const fp = this.getFP();
+    return this.getFP() < NUMBERS.N_0 ? this.getFP() : NUMBERS.N_0;
   }
 
   public getMP(): number {
@@ -199,5 +208,20 @@ export class CombatDetailComponent {
 
   public getArmorTypeByLocation(pj: Character, loc: Location ): string {
     return getArmorTypeByLocation(pj, loc);
+  }
+
+  public getDodgeLine(pj: Character): string {
+    const dodge = this.translate.instant('PJ.SKILL_NAME.AGILITY.DODGE');
+    const dodgeSkill = pj.skills.AGILITY.find(s => s.name === dodge);
+    const value = dodgeSkill?.value ? dodgeSkill.value : NUMBERS.N_0;
+
+    return ` ${value}% + ${getAgiMod(pj)}%(mod) - ${getCAR(pj)}%(CAR) = `;
+  }
+
+  public getDodge(pj: Character): number {
+    const dodge = this.translate.instant('PJ.SKILL_NAME.AGILITY.DODGE');
+    const dodgeSkill = pj.skills.AGILITY.find(s => s.name === dodge);
+    const value = dodgeSkill?.value ? dodgeSkill.value : NUMBERS.N_0;
+    return Math.floor(value + getAgiMod(pj) - getCAR(pj) + this.getFPAllMod());
   }
 }

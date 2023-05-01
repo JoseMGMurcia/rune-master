@@ -225,6 +225,7 @@ export class Spell {
     public minimumDEX = NUMBERS.N_0;
     public attackBS = NUMBERS.N_5;
     public parryBS = NUMBERS.N_5;
+    public showDetail = false;
 
     constructor(
       name: string,

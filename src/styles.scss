@@ -56,6 +56,10 @@ body {
 
 .cardIconButton {
   color: colors.$card-icon-button;
+
+  &-mini {
+    scale: 0.75;
+  }
 }
 
 .listItem {

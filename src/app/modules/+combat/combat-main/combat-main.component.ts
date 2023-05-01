@@ -14,7 +14,7 @@ import { isRollMsg } from 'src/app/shared/utils/message.utils';
 export class CombatMainComponent implements OnInit, OnDestroy {
 
   public dicesResult = '';
-  public turn = NUMBERS.N_0;
+  public turn = NUMBERS.N_1;
   public swShowResult = false;
   public characters: Character[] = [];
   public savedCharacters: Character[] = [];
@@ -77,7 +77,7 @@ export class CombatMainComponent implements OnInit, OnDestroy {
   }
 
   public substractTurn() {
-    if (this.turn > 0) {
+    if (this.turn > 1) {
       this.turn--;
     }
   }
