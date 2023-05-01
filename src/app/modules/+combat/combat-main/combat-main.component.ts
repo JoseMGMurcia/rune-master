@@ -109,6 +109,6 @@ export class CombatMainComponent implements OnInit, OnDestroy {
         this.savedCharacters = characters;
         // TODO end loading
       });
-    }
+  }
 
 }

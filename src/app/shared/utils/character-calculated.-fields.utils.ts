@@ -1,6 +1,6 @@
-import { NUMBERS } from "../constants/number.constants";
-import { Character, Location } from "../models/character.model";
-import { DiceRoll } from "../models/dices.model";
+import { NUMBERS } from '../constants/number.constants';
+import { Character, Location } from '../models/character.model';
+import { DiceRoll } from '../models/dices.model';
 
 export const getHp = (pj: Character): number =>
   Math.ceil((pj.stats.CON.value + pj.stats.CON.tempMod + pj.stats.SIZ.value + pj.stats.SIZ.tempMod) / NUMBERS.N_2) + pj.bonusHP;
@@ -27,7 +27,7 @@ export const getDMGMod = (pj: Character): DiceRoll => {
     const times = Math.ceil((target - NUMBERS.N_56) / NUMBERS.N_16);
     return new DiceRoll(times + NUMBERS.N_2, NUMBERS.N_6);
   }
-}
+};
 
 export const getCAR = (pj: Character, inCombat = true): number => {
   let CAR = NUMBERS.N_0;
@@ -37,12 +37,12 @@ export const getCAR = (pj: Character, inCombat = true): number => {
     ...pj.armor
   ];
   allEquip.forEach((item) => {
-     CAR+= !inCombat ? item.weight : item.inCombat ? item.weight : NUMBERS.N_0;
+    CAR+= !inCombat ? item.weight : item.inCombat ? item.weight : NUMBERS.N_0;
   });
   //TODO Armor CAR penalty when double hard armor in same location
 
   return CAR;
-}
+};
 
 export const getMRDES = (pj: Character): number => {
   const dex = pj.stats.DEX.value + pj.stats.DEX.tempMod;
@@ -55,7 +55,7 @@ export const getMRDES = (pj: Character): number => {
   } else {
     return NUMBERS.N_1;
   }
-}
+};
 
 export const getMRSIZ = (pj: Character): number => {
   const siz = pj.stats.SIZ.value + pj.stats.SIZ.tempMod;
@@ -68,12 +68,11 @@ export const getMRSIZ = (pj: Character): number => {
   } else {
     return NUMBERS.N_0;
   }
-}
+};
 
 export const getMRCC = (pj: Character): number => {
   return getMRSIZ(pj) + getMRDES(pj);
-}
-
+};
 
 const getMod = (primary: number[], secondary: number[], negative: number[]): number => {
   let value = NUMBERS.N_0;
@@ -92,49 +91,49 @@ const getMod = (primary: number[], secondary: number[], negative: number[]): num
     value -= i - NUMBERS.N_10;
   }
   return value;
-}
+};
 
 export const getAgiMod = (pj: Character): number => {
   const primary = [ pj.stats.DEX.value + pj.stats.DEX.tempMod ];
   const secondary = [ pj.stats.STR.value + pj.stats.STR.tempMod ];
   const negative = [ pj.stats.SIZ.value + pj.stats.SIZ.tempMod ];
   return getMod(primary, secondary, negative);
-}
+};
 
 export const getComMod = (pj: Character): number => {
   const primary = [ pj.stats.INT.value + pj.stats.INT.tempMod ];
   const secondary = [ pj.stats.POW.value + pj.stats.POW.tempMod, pj.stats.CHA.value + pj.stats.CHA.tempMod ];
   return getMod(primary, secondary, []);
-}
+};
 
 export const getKnoMod = (pj: Character): number => {
   const primary = [ pj.stats.INT.value + pj.stats.INT.tempMod ];
   return getMod(primary, [], []);
-}
+};
 
 export const getMagMod = (pj: Character): number => {
   const primary = [ pj.stats.INT.value + pj.stats.INT.tempMod, pj.stats.POW.value + pj.stats.POW.tempMod ];
   const secondary = [ pj.stats.DEX.value + pj.stats.DEX.tempMod];
   return getMod(primary, secondary, []);
-}
+};
 
 export const getManMod = (pj: Character): number => {
   const primary = [ pj.stats.INT.value + pj.stats.INT.tempMod, pj.stats.DEX.value + pj.stats.DEX.tempMod ];
   const secondary = [ pj.stats.STR.value + pj.stats.STR.tempMod];
   return getMod(primary, secondary, []);
-}
+};
 
 export const getPerMod = (pj: Character): number => {
   const primary = [pj.stats.INT.value + pj.stats.INT.tempMod];
   const secondary = [ pj.stats.POW.value + pj.stats.POW.tempMod, pj.stats.CON.value + pj.stats.CON.tempMod ];
   return getMod(primary, secondary, []);
-}
+};
 
 export const getSteMod = (pj: Character): number => {
   const primary = [pj.stats.DEX.value + pj.stats.DEX.tempMod];
   const negative = [ pj.stats.POW.value + pj.stats.POW.tempMod, pj.stats.SIZ.value + pj.stats.SIZ.tempMod ];
   return getMod(primary, [], negative);
-}
+};
 
 export const getFreeINTPoints = (pj: Character): number => {
   let points = pj.stats.INT.value + pj.stats.INT.tempMod;
@@ -145,7 +144,7 @@ export const getFreeINTPoints = (pj: Character): number => {
     points -= spell.memorized  ? NUMBERS.N_1 : NUMBERS.N_0;
   });
   return points;
-}
+};
 
 export const getHpByLocation = (pj: Character, loc: Location): number => {
   let hp = getHp(pj) + pj.bonusHP;
@@ -154,7 +153,7 @@ export const getHpByLocation = (pj: Character, loc: Location): number => {
   const hpRatio = loc.hitpointsRatio;
   const locHP  =  Math.ceil((hp*hpRatio));
   return  locHP;
-}
+};
 
 export const getArmorByLocation = (pj: Character, loc: Location): number => {
   let armor = NUMBERS.N_0;
@@ -164,7 +163,7 @@ export const getArmorByLocation = (pj: Character, loc: Location): number => {
     }
   });
   return armor + (loc.bonusAP ? loc.bonusAP : NUMBERS.N_0);
-}
+};
 
 export const getArmorTypeByLocation = (pj: Character, loc: Location): string => {
   const armorsInLoc: string[] = [];
@@ -174,7 +173,7 @@ export const getArmorTypeByLocation = (pj: Character, loc: Location): string => 
     }
   });
   return  armorsInLoc.toString();
-}
+};
 
 export const getWeaponList = (pj: Character): string[] => {
   const weapons: string[] = [];
@@ -186,5 +185,4 @@ export const getWeaponList = (pj: Character): string[] => {
   });
 
   return Array.from(new Set(weapons));
-}
-
+};

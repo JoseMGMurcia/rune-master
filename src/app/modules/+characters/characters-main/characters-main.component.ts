@@ -251,5 +251,5 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
         this.filteredCharacters = characters;
         // TODO end loading
       });
-    }
+  }
 }

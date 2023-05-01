@@ -10,7 +10,7 @@ describe('MenubarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ MenubarComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MenubarComponent);
     component = fixture.componentInstance;

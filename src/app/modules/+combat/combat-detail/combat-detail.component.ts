@@ -55,7 +55,7 @@ export class CombatDetailComponent {
   }
 
   public getNameString(weapon: Weapon): string {
-    return `${weapon.name} ${weapon.twoHanded ? this.translate.instant('PJ.2H') : ''}`
+    return `${weapon.name} ${weapon.twoHanded ? this.translate.instant('PJ.2H') : ''}`;
   }
 
   public addStatMod(stat: Characteristic, value: number): void {
@@ -87,10 +87,9 @@ export class CombatDetailComponent {
     this.dialogService.openEasyDialog(
       this.translate.instant('ACTIONS.REMOVE_CONFIRM', { name: this.character.name }),
       () => {
-        this.swichCharacterIndex(- NUMBERS.N_1)
+        this.swichCharacterIndex(- NUMBERS.N_1);
         this.removeCharacter.emit(this.character);
-      }
-    )
+      });
   }
 
   public rollDamage(weapon: Weapon ): void {

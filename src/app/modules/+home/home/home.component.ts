@@ -11,8 +11,7 @@ export class HomeComponent {
   public armors: ArmorType[] = ARMOR_TYPES;
   constructor(
     private translate: TranslateService,
-    ) { }
-
+  ) { }
 
   getArmorName(armor: ArmorType): string {
     return this.translate.instant(`PJ.ARMOR_TYPES.${armor.name}`);

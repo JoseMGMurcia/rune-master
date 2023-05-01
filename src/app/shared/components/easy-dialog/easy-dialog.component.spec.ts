@@ -10,7 +10,7 @@ describe('MenubarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ EasyDialogComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EasyDialogComponent);
     component = fixture.componentInstance;

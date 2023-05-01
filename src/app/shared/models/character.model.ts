@@ -1,6 +1,6 @@
-import { NUMBERS } from "../constants/number.constants";
-import { getUniqueID } from "../utils/character-creation.utils";
-import { DiceRoll } from "./dices.model";
+import { NUMBERS } from '../constants/number.constants';
+import { getUniqueID } from '../utils/character-creation.utils';
+import { DiceRoll } from './dices.model';
 
 export class Character {
   public id = '';
@@ -180,216 +180,216 @@ export class Spell {
   }
 }
 
-  export class Equipment {
-    public name = '';
-    public description = '';
-    public weight = NUMBERS.N_0;
-    public combatWeight = NUMBERS.N_0;
-    public price = NUMBERS.N_0;
-    public quantity = NUMBERS.N_1;
-    public inCombat = false;
-    public visible = true;
+export class Equipment {
+  public name = '';
+  public description = '';
+  public weight = NUMBERS.N_0;
+  public combatWeight = NUMBERS.N_0;
+  public price = NUMBERS.N_0;
+  public quantity = NUMBERS.N_1;
+  public inCombat = false;
+  public visible = true;
 
-    constructor(name: string) {
-      this.name = name;
-    }
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+export enum DamageTypeEnum {
+  SLASHING = 'SLASHING',
+  PIERCING = 'PIERCING',
+  BLUNT = 'BLUNT'
+}
+
+export type DamageType =
+  DamageTypeEnum.SLASHING |
+  DamageTypeEnum.PIERCING |
+  DamageTypeEnum.BLUNT;
+
+export class Weapon extends Equipment {
+  public damage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
+  public specialDamage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
+  public damageType: DamageType = DamageTypeEnum.BLUNT;
+  public ranged = false;
+  public range = NUMBERS.N_0;
+  public maxRange = NUMBERS.N_0;
+  public fireRate = '';
+  public twoHanded = false;
+  public armorPoints = NUMBERS.N_0;
+  public reactionMoment = NUMBERS.N_0;
+  public shield = false;
+  public weaponType: WeaponType = WeaponTypeEnum.AXE1H;
+  public bonusAttack = NUMBERS.N_0;
+  public bonusParry = NUMBERS.N_0;
+  public minimumSTR = NUMBERS.N_0;
+  public minimumDEX = NUMBERS.N_0;
+  public attackBS = NUMBERS.N_5;
+  public parryBS = NUMBERS.N_5;
+  public showDetail = false;
+
+  constructor(
+    name: string,
+    damage: DiceRoll,
+    damageType: DamageType,
+    weight: number,
+    ranged = false,
+    range = NUMBERS.N_0,
+    maxRange = NUMBERS.N_0,
+    fireRate = '',
+    twoHanded = false,
+    armorPoints = NUMBERS.N_0,
+    reactionMoment = NUMBERS.N_0,
+    shield = false,
+    weaponType: WeaponType = WeaponTypeEnum.AXE1H,
+    minimumSTR = NUMBERS.N_0,
+    minimumDEX = NUMBERS.N_0,
+    specialDMG = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0),
+    attackBS = NUMBERS.N_5,
+    parryBS = NUMBERS.N_5
+  ) {
+    super(name);
+    this.damage = damage;
+    this.damageType = damageType;
+    this.weight = weight;
+    this.ranged = ranged;
+    this.range = range;
+    this.maxRange = maxRange;
+    this.fireRate = fireRate;
+    this.twoHanded = twoHanded;
+    this.armorPoints = armorPoints;
+    this.reactionMoment = reactionMoment;
+    this.shield = shield;
+    this.weaponType = weaponType;
+    this.minimumSTR = minimumSTR;
+    this.minimumDEX = minimumDEX;
+    this.specialDamage = specialDMG;
+    this.attackBS = attackBS;
+    this.parryBS = parryBS;
   }
 
-  export enum DamageTypeEnum {
-    SLASHING = 'SLASHING',
-    PIERCING = 'PIERCING',
-    BLUNT = 'BLUNT'
+}
+
+export class Armor extends Equipment {
+  public armorPoints = NUMBERS.N_0;
+  public locations: string[] = [];
+  public soft = false;
+  public natural = false;
+  public equipped = false;
+
+  constructor(name: string , armorPoints = NUMBERS.N_0, locations: string[] = [], soft = false) {
+    super(name);
+    this.armorPoints = armorPoints;
+    this.locations = locations;
+    this.soft = soft;
   }
+}
 
-  export type DamageType =
-    DamageTypeEnum.SLASHING |
-    DamageTypeEnum.PIERCING |
-    DamageTypeEnum.BLUNT;
+export enum WeaponTypeEnum {
+  AXE1H = 'AXE1H',
+  AXE2H = 'AXE2H',
+  DAGGER = 'DAGGER',
+  PEASANT_MACE1M = 'PEASANT_MACE1M',
+  PEASANT_MACE2M = 'PEASANT_MACE2M',
+  HAMMER1H = 'HAMMER1H',
+  HAMMER2H = 'HAMMER2H',
+  RAPIER = 'RAPIER',
+  SHORT_SWORD = 'SHORT_SWORD',
+  SHIELD = 'SHIELD',
+  SPEAR1H = 'SPEAR1H',
+  SPEAR2H = 'SPEAR2H',
+  SWORD1H = 'SWORD1H',
+  SWORD2H = 'SWORD2H',
+  SHORT_BOW = 'SHORT_BOW',
+  LONGBOW = 'LONGBOW',
+  COMPOSITE_BOW = 'COMPOSITE_BOW',
+  LIGHT_CROSSBOW = 'LIGHT_CROSSBOW',
+  MEDIUM_CROSSBOW = 'MEDIUM_CROSSBOW',
+  HEAVY_CROSSBOW = 'HEAVY_CROSSBOW',
+  REPEATING_CROSSBOW = 'REPEATING_CROSSBOW',
+  CROOK_SLING = 'CROOK_SLING',
+  SLING = 'SLING',
+  THROWING_AXE = 'THROWING_AXE',
+  THROWING_KNIFE = 'THROWING_KNIFE',
+  THROWING_ROCK = 'THROWING_ROCK',
+  FIST = 'FIST',
+  KICK = 'KICK',
+  CLAW = 'CLAW',
+  BRAWL = 'BRAWL',
+  HORN = 'HORN',
+  MACE1H = 'MACE1H',
+  MACE2H = 'MACE2H',
+  TOOL_HOE = 'TOOL_HOE',
+  TOOL_SCYTHE = 'TOOL_SCYTHE',
+  TOOL_SICKLE = 'TOOL_SICKLE',
+  TOOL_SHOVEL = 'TOOL_SHOVEL',
+  ATLATL = 'ATLATL',
+  ROCK_LAUNCHER = 'ROCK_LAUNCHER',
+  BLOWGUN = 'BLOWGUN',
+  BOLAS = 'BOLAS',
+  WAR_BOOMERANG = 'WAR_BOOMERANG',
+  HUNTING_BOOMERANG = 'HUNTING_BOOMERANG',
+  JABELIN = 'JABELIN',
+  DART = 'DART',
+  SHURIKEN = 'SHURIKEN',
+  ROPE_LACE = 'ROPE_LACE',
+  POLE_LACE = 'POLE_LACE',
+  NET = 'NET',
+  WHIP = 'FLAIL',
+  OTHER = 'OTHER'
+}
 
-  export class Weapon extends Equipment {
-    public damage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
-    public specialDamage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
-    public damageType: DamageType = DamageTypeEnum.BLUNT;
-    public ranged = false;
-    public range = NUMBERS.N_0;
-    public maxRange = NUMBERS.N_0;
-    public fireRate = '';
-    public twoHanded = false;
-    public armorPoints = NUMBERS.N_0;
-    public reactionMoment = NUMBERS.N_0;
-    public shield = false;
-    public weaponType: WeaponType = WeaponTypeEnum.AXE1H;
-    public bonusAttack = NUMBERS.N_0;
-    public bonusParry = NUMBERS.N_0;
-    public minimumSTR = NUMBERS.N_0;
-    public minimumDEX = NUMBERS.N_0;
-    public attackBS = NUMBERS.N_5;
-    public parryBS = NUMBERS.N_5;
-    public showDetail = false;
-
-    constructor(
-      name: string,
-      damage: DiceRoll,
-      damageType: DamageType,
-      weight: number,
-      ranged = false,
-      range = NUMBERS.N_0,
-      maxRange = NUMBERS.N_0,
-      fireRate = '',
-      twoHanded = false,
-      armorPoints = NUMBERS.N_0,
-      reactionMoment = NUMBERS.N_0,
-      shield = false,
-      weaponType: WeaponType = WeaponTypeEnum.AXE1H,
-      minimumSTR = NUMBERS.N_0,
-      minimumDEX = NUMBERS.N_0,
-      specialDMG = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0),
-      attackBS = NUMBERS.N_5,
-      parryBS = NUMBERS.N_5
-      ) {
-        super(name);
-        this.damage = damage;
-        this.damageType = damageType;
-        this.weight = weight;
-        this.ranged = ranged;
-        this.range = range;
-        this.maxRange = maxRange;
-        this.fireRate = fireRate;
-        this.twoHanded = twoHanded;
-        this.armorPoints = armorPoints;
-        this.reactionMoment = reactionMoment;
-        this.shield = shield;
-        this.weaponType = weaponType;
-        this.minimumSTR = minimumSTR;
-        this.minimumDEX = minimumDEX;
-        this.specialDamage = specialDMG;
-        this.attackBS = attackBS;
-        this.parryBS = parryBS;
-    }
-
-  }
-
-  export class Armor extends Equipment {
-    public armorPoints = NUMBERS.N_0;
-    public locations: string[] = [];
-    public soft = false;
-    public natural = false;
-    public equipped = false;
-
-    constructor(name: string , armorPoints = NUMBERS.N_0, locations: string[] = [], soft = false) {
-      super(name);
-      this.armorPoints = armorPoints;
-      this.locations = locations;
-      this.soft = soft;
-    }
-  }
-
-  export enum WeaponTypeEnum {
-    AXE1H = 'AXE1H',
-    AXE2H = 'AXE2H',
-    DAGGER = 'DAGGER',
-    PEASANT_MACE1M = 'PEASANT_MACE1M',
-    PEASANT_MACE2M = 'PEASANT_MACE2M',
-    HAMMER1H = 'HAMMER1H',
-    HAMMER2H = 'HAMMER2H',
-    RAPIER = 'RAPIER',
-    SHORT_SWORD = 'SHORT_SWORD',
-    SHIELD = 'SHIELD',
-    SPEAR1H = 'SPEAR1H',
-    SPEAR2H = 'SPEAR2H',
-    SWORD1H = 'SWORD1H',
-    SWORD2H = 'SWORD2H',
-    SHORT_BOW = 'SHORT_BOW',
-    LONGBOW = 'LONGBOW',
-    COMPOSITE_BOW = 'COMPOSITE_BOW',
-    LIGHT_CROSSBOW = 'LIGHT_CROSSBOW',
-    MEDIUM_CROSSBOW = 'MEDIUM_CROSSBOW',
-    HEAVY_CROSSBOW = 'HEAVY_CROSSBOW',
-    REPEATING_CROSSBOW = 'REPEATING_CROSSBOW',
-    CROOK_SLING = 'CROOK_SLING',
-    SLING = 'SLING',
-    THROWING_AXE = 'THROWING_AXE',
-    THROWING_KNIFE = 'THROWING_KNIFE',
-    THROWING_ROCK = 'THROWING_ROCK',
-    FIST = 'FIST',
-    KICK = 'KICK',
-    CLAW = 'CLAW',
-    BRAWL = 'BRAWL',
-    HORN = 'HORN',
-    MACE1H = 'MACE1H',
-    MACE2H = 'MACE2H',
-    TOOL_HOE = 'TOOL_HOE',
-    TOOL_SCYTHE = 'TOOL_SCYTHE',
-    TOOL_SICKLE = 'TOOL_SICKLE',
-    TOOL_SHOVEL = 'TOOL_SHOVEL',
-    ATLATL = 'ATLATL',
-    ROCK_LAUNCHER = 'ROCK_LAUNCHER',
-    BLOWGUN = 'BLOWGUN',
-    BOLAS = 'BOLAS',
-    WAR_BOOMERANG = 'WAR_BOOMERANG',
-    HUNTING_BOOMERANG = 'HUNTING_BOOMERANG',
-    JABELIN = 'JABELIN',
-    DART = 'DART',
-    SHURIKEN = 'SHURIKEN',
-    ROPE_LACE = 'ROPE_LACE',
-    POLE_LACE = 'POLE_LACE',
-    NET = 'NET',
-    WHIP = 'FLAIL',
-    OTHER = 'OTHER'
-  }
-
-  export type WeaponType =
-    WeaponTypeEnum.AXE1H |
-    WeaponTypeEnum.AXE2H |
-    WeaponTypeEnum.DAGGER |
-    WeaponTypeEnum.PEASANT_MACE1M |
-    WeaponTypeEnum.PEASANT_MACE2M |
-    WeaponTypeEnum.HAMMER1H |
-    WeaponTypeEnum.HAMMER2H |
-    WeaponTypeEnum.RAPIER |
-    WeaponTypeEnum.SHORT_SWORD |
-    WeaponTypeEnum.SHIELD |
-    WeaponTypeEnum.SPEAR1H |
-    WeaponTypeEnum.SPEAR2H |
-    WeaponTypeEnum.SWORD1H |
-    WeaponTypeEnum.SWORD2H |
-    WeaponTypeEnum.SHORT_BOW |
-    WeaponTypeEnum.LONGBOW |
-    WeaponTypeEnum.COMPOSITE_BOW |
-    WeaponTypeEnum.LIGHT_CROSSBOW |
-    WeaponTypeEnum.MEDIUM_CROSSBOW |
-    WeaponTypeEnum.HEAVY_CROSSBOW |
-    WeaponTypeEnum.REPEATING_CROSSBOW |
-    WeaponTypeEnum.CROOK_SLING |
-    WeaponTypeEnum.SLING |
-    WeaponTypeEnum.THROWING_AXE |
-    WeaponTypeEnum.THROWING_KNIFE |
-    WeaponTypeEnum.THROWING_ROCK |
-    WeaponTypeEnum.FIST |
-    WeaponTypeEnum.MACE1H |
-    WeaponTypeEnum.MACE2H |
-    WeaponTypeEnum.ATLATL |
-    WeaponTypeEnum.ROCK_LAUNCHER |
-    WeaponTypeEnum.BLOWGUN |
-    WeaponTypeEnum.BOLAS |
-    WeaponTypeEnum.WAR_BOOMERANG |
-    WeaponTypeEnum.HUNTING_BOOMERANG |
-    WeaponTypeEnum.JABELIN |
-    WeaponTypeEnum.DART |
-    WeaponTypeEnum.SHURIKEN |
-    WeaponTypeEnum.ROPE_LACE |
-    WeaponTypeEnum.POLE_LACE |
-    WeaponTypeEnum.NET |
-    WeaponTypeEnum.WHIP |
-    WeaponTypeEnum.OTHER |
-    WeaponTypeEnum.KICK |
-    WeaponTypeEnum.CLAW |
-    WeaponTypeEnum.BRAWL |
-    WeaponTypeEnum.HORN |
-    WeaponTypeEnum.TOOL_HOE |
-    WeaponTypeEnum.TOOL_SCYTHE |
-    WeaponTypeEnum.TOOL_SICKLE |
-    WeaponTypeEnum.TOOL_SHOVEL;
+export type WeaponType =
+  WeaponTypeEnum.AXE1H |
+  WeaponTypeEnum.AXE2H |
+  WeaponTypeEnum.DAGGER |
+  WeaponTypeEnum.PEASANT_MACE1M |
+  WeaponTypeEnum.PEASANT_MACE2M |
+  WeaponTypeEnum.HAMMER1H |
+  WeaponTypeEnum.HAMMER2H |
+  WeaponTypeEnum.RAPIER |
+  WeaponTypeEnum.SHORT_SWORD |
+  WeaponTypeEnum.SHIELD |
+  WeaponTypeEnum.SPEAR1H |
+  WeaponTypeEnum.SPEAR2H |
+  WeaponTypeEnum.SWORD1H |
+  WeaponTypeEnum.SWORD2H |
+  WeaponTypeEnum.SHORT_BOW |
+  WeaponTypeEnum.LONGBOW |
+  WeaponTypeEnum.COMPOSITE_BOW |
+  WeaponTypeEnum.LIGHT_CROSSBOW |
+  WeaponTypeEnum.MEDIUM_CROSSBOW |
+  WeaponTypeEnum.HEAVY_CROSSBOW |
+  WeaponTypeEnum.REPEATING_CROSSBOW |
+  WeaponTypeEnum.CROOK_SLING |
+  WeaponTypeEnum.SLING |
+  WeaponTypeEnum.THROWING_AXE |
+  WeaponTypeEnum.THROWING_KNIFE |
+  WeaponTypeEnum.THROWING_ROCK |
+  WeaponTypeEnum.FIST |
+  WeaponTypeEnum.MACE1H |
+  WeaponTypeEnum.MACE2H |
+  WeaponTypeEnum.ATLATL |
+  WeaponTypeEnum.ROCK_LAUNCHER |
+  WeaponTypeEnum.BLOWGUN |
+  WeaponTypeEnum.BOLAS |
+  WeaponTypeEnum.WAR_BOOMERANG |
+  WeaponTypeEnum.HUNTING_BOOMERANG |
+  WeaponTypeEnum.JABELIN |
+  WeaponTypeEnum.DART |
+  WeaponTypeEnum.SHURIKEN |
+  WeaponTypeEnum.ROPE_LACE |
+  WeaponTypeEnum.POLE_LACE |
+  WeaponTypeEnum.NET |
+  WeaponTypeEnum.WHIP |
+  WeaponTypeEnum.OTHER |
+  WeaponTypeEnum.KICK |
+  WeaponTypeEnum.CLAW |
+  WeaponTypeEnum.BRAWL |
+  WeaponTypeEnum.HORN |
+  WeaponTypeEnum.TOOL_HOE |
+  WeaponTypeEnum.TOOL_SCYTHE |
+  WeaponTypeEnum.TOOL_SICKLE |
+  WeaponTypeEnum.TOOL_SHOVEL;
 
 export enum hitpointsRatioEnum {
   X16 = 0.16,

@@ -26,11 +26,11 @@ export const createTranslateLoader = (http: HttpClient) =>
     SharedModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
       }
-  })
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

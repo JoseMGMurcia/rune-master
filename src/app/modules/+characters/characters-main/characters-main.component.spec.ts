@@ -10,7 +10,7 @@ describe('CharactersMainComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CharactersMainComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CharactersMainComponent);
     component = fixture.componentInstance;

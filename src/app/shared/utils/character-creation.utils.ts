@@ -1,9 +1,9 @@
-import { TranslateService } from "@ngx-translate/core";
-import { Character, CombatSkill, Location, Skill, hitpointsRatioEnum, WeaponTypeEnum, WeaponType, Armor, armorWeightRatioEnum } from "../models/character.model";
-import { NUMBERS } from "../constants/number.constants";
-import { WeaponNameEnum, WeaponNameType, createWeapon } from "./equip.factory";
-import { getTotal } from "./dices.utils";
-import { ArmorType } from "../constants/equip/armor.const";
+import { TranslateService } from '@ngx-translate/core';
+import { Character, CombatSkill, Location, Skill, hitpointsRatioEnum, WeaponTypeEnum, WeaponType, Armor, armorWeightRatioEnum } from '../models/character.model';
+import { NUMBERS } from '../constants/number.constants';
+import { WeaponNameEnum, WeaponNameType, createWeapon } from './equip.factory';
+import { getTotal } from './dices.utils';
+import { ArmorType } from '../constants/equip/armor.const';
 
 export const resetTemporals = (pj: Character): void => {
   pj.tempHPMod = NUMBERS.N_0;
@@ -22,7 +22,7 @@ export const resetTemporals = (pj: Character): void => {
   pj.stats.SIZ.tempMod = NUMBERS.N_0;
   pj.stats.POW.tempMod = NUMBERS.N_0;
   pj.stats.CHA.tempMod = NUMBERS.N_0;
-}
+};
 
 export const setRandomHumanStats = (pj: Character): void => {
   pj.stats.STR.value = getTotal(['3d6']);
@@ -115,7 +115,7 @@ export const setInitialHumanCharacter = (pj: Character, translate: TranslateServ
   addHumanoidLocs(pj, translate);
 
   return pj;
-}
+};
 
 const addHumanoidLocs = (pj: Character, translate: TranslateService) => {
   const locations =  translate.instant('PJ.LOCATION');

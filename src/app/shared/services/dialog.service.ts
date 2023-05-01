@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { EasyDialogComponent } from "../components/easy-dialog/easy-dialog.component";
+import { EasyDialogComponent } from '../components/easy-dialog/easy-dialog.component';
 import { WeaponDialogComponent } from '../components/weapon-dialog/weapon-dialog.component';
 import { Character } from '../models/character.model';
 import { ArmorDialogComponent } from '../components/armor-dialog/armor-dialog.component';
@@ -26,9 +26,9 @@ export class DialogService {
       }
     });
   }
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed' + result);
-    // });
+  // dialogRef.afterClosed().subscribe(result => {
+  //   console.log('The dialog was closed' + result);
+  // });
 
 
   openWeaponDialog(character: Character): void {

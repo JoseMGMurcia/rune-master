@@ -10,7 +10,7 @@ describe('ArmorDialogComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ArmorDialogComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ArmorDialogComponent);
     component = fixture.componentInstance;
