@@ -18,6 +18,8 @@ export class WeaponDialogComponent implements OnInit{
   public form : FormGroup = new FormGroup({
     type: new FormControl({value: '', disabled: false}),
     name: new FormControl({value: '', disabled: false}),
+    atack: new FormControl({value: 5, disabled: false}),
+    defence: new FormControl({value: 5, disabled: false}),
   });
 
   public weapontypes = WeaponTypeEnum;
@@ -49,10 +51,11 @@ export class WeaponDialogComponent implements OnInit{
   handleConfirm() {
     const type: WeaponType = this.form.controls['type'].value;
     const name: WeaponNameType = this.form.controls['name'].value;
-    addWeapon(this.data.character, type, name, this.translate);
+    const attack: number = this.form.controls['atack'].value;
+    const defence: number = this.form.controls['defence'].value;
+    addWeapon(this.data.character, type, name, this.translate, attack, defence);
     this.dialogRef.close();
   }
-
 
   handleCancel() {
     this.dialogRef.close();

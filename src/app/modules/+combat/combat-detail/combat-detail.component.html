@@ -271,24 +271,30 @@
     </div>
     <div class="u-flex u-flex-column" *ngIf="character.swShowUtils" >
       <div class="u-flex u-width-100">
-        <div class="u-width-33 rQItem">
+        <div class="u-width-25 rQItem">
           <button mat-raised-button (click)="handleHumanice()" class="u-width-100">
             <mat-icon>manage_accounts</mat-icon>{{ "ACTIONS.UTILS.HUMANICE" | translate  }}
           </button>
         </div>
-        <div class="u-width-33 rQItem">
+        <div class="u-width-25 rQItem">
           <button mat-raised-button (click)="setRandomHumanStats()" class="u-width-100">
             <mat-icon>cached</mat-icon>{{ "ACTIONS.UTILS.RND_HUMAN_STATS" | translate  }}
           </button>
         </div>
-        <div class="u-width-33 rQItem">
+        <div class="u-width-25 rQItem">
+          <button mat-raised-button (click)="setRandomMorocathStats()" class="u-width-100">
+            <mat-icon>cached</mat-icon>{{ "ACTIONS.UTILS.RND_MOROCANTH_STATS" | translate  }}
+          </button>
+        </div>
+        
+      </div>
+      <div class="u-flex u-width-100">
+        <div class="u-width-25 rQItem">
           <button mat-raised-button (click)="addNewWeapon()" class="u-width-100">
             <mat-icon>add_moderator</mat-icon>{{ "ACTIONS.ADD_WEAPON" | translate  }}
           </button>
         </div>
-      </div>
-      <div class="u-flex u-width-100">
-        <div class="u-width-33 rQItem">
+        <div class="u-width-25 rQItem">
           <button mat-raised-button (click)="addNewArmor()" class="u-width-100">
             <mat-icon>add_moderator</mat-icon>{{ "ACTIONS.ADD_ARMOR" | translate  }}
           </button>

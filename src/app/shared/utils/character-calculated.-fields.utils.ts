@@ -162,7 +162,7 @@ export const getArmorByLocation = (pj: Character, loc: Location): number => {
       armor += item.armorPoints;
     }
   });
-  return armor + (loc.bonusAP ? loc.bonusAP : NUMBERS.N_0);
+  return armor + (loc.bonusAP ? loc.bonusAP : NUMBERS.N_0) + loc.armorPoints;
 };
 
 export const getArmorTypeByLocation = (pj: Character, loc: Location): string => {

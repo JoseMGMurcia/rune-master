@@ -1,8 +1,8 @@
 <div class="light-back padding-all">
   <p class="rQItem title">{{ "ACTIONS.ADD_WEAPON" | translate  }}</p>
-  <form [formGroup]="form" class="rQItem u-flex column u-width-100 ">
+  <form [formGroup]="form" class="rQItem u-flex u-flex-column u-width-100 ">
 
-    <mat-form-field appearance="fill" class="rQItem u-width-100">
+    <mat-form-field appearance="fill" class="rQItem u-width-95 ">
       <mat-label>{{ "ACTIONS.SELECT_WEAPON_TYPE" | translate }}</mat-label>
       <mat-select formControlName="type">
         <mat-option *ngFor="let name of weapontypes | keyvalue" [value]="name.value">
@@ -11,7 +11,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="rQItem u-width-100" *ngIf="typeSelected">
+    <mat-form-field appearance="fill" class="rQItem u-width-95" *ngIf="typeSelected">
       <mat-label>{{ "ACTIONS.SELECT_WEAPON_TYPE" | translate }}</mat-label>
       <mat-select formControlName="name">
         <mat-option *ngFor="let name of weaponNames" [value]="name">
@@ -20,10 +20,24 @@
       </mat-select>
     </mat-form-field>
 
+    <div class="rQItem u-width-95 u-flex">
+      <mat-form-field appearance="fill" class="rQItem u-width-50 margin-right" >
+        <mat-label>{{ "PJ.ATTACK_SKILL" | translate }}</mat-label>
+        <input matInput type="number" min="0" max="2000"  [value]="" formControlName="atack">
+        <mat-hint>{{ "HINTS.SELEC_SKILL_VALUE" | translate }}</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="rQItem u-width-50 margin-right" >
+        <mat-label>{{ "PJ.DEFENCE_SKILL" | translate }}</mat-label>
+        <input matInput type="number" min="0" max="2000"  [value]="" formControlName="defence">
+        <mat-hint>{{ "HINTS.SELEC_SKILL_VALUE" | translate }}</mat-hint>
+      </mat-form-field>
+    </div>
+    
+
   </form>
 
 
-  <div class="rQItem u-flex u-flex-end">
+  <div class="rQItem u-flex u-flex-end  u-width-100">
     <button mat-button color="primary" (click)="handleCancel()"class="rQItem">{{ 'COMMONS.CANCEL' | translate }}</button>
     <button [disabled]="!typeSelected || !nameSelected" mat-raised-button color="primary" (click)="handleConfirm()" class="rQItem">{{ 'COMMONS.CONFIRM' | translate }}</button>
   </div>

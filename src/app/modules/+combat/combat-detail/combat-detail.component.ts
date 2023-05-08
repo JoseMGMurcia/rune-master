@@ -9,7 +9,7 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
 import { getDMGMod, getMRCC, getMRDES, getMRSIZ, getManMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getAgiMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getArmorByLocation, getArmorTypeByLocation, getCAR, getFP, getHp, getHpByLocation, getMP } from 'src/app/shared/utils/character-calculated.-fields.utils';
-import { resetTemporals, setInitialHumanCharacter, setRandomHumanStats } from 'src/app/shared/utils/character-creation.utils';
+import { resetTemporals, setInitialHumanCharacter, setRandomHumanStats, setRandomMorocathStats } from 'src/app/shared/utils/character-creation.utils';
 import { getFumbleTarget, getTotal } from 'src/app/shared/utils/dices.utils';
 import { cutDicesRolls } from 'src/app/shared/utils/message.utils';
 
@@ -149,6 +149,10 @@ export class CombatDetailComponent {
 
   public setRandomHumanStats() {
     setRandomHumanStats(this.character);
+  }
+
+  public setRandomMorocathStats() {
+    setRandomMorocathStats(this.character);
   }
 
   public resetCharacterTemps() {

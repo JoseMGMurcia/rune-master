@@ -43,6 +43,7 @@
       "UTILS": "Utilidades",
       "HUMANICE": "Humano Inic.",
       "RND_HUMAN_STATS": "RND Human Chars",
+      "RND_MOROCANTH_STATS": "RND Morocath Chars",
       "RESEL_ALL": "Reset"
     }
   },
@@ -58,12 +59,14 @@
     "ATTACK": "Ataque",
     "ATTACK_MOD": "Modif. Ataque",
     "ATTACK_SHORT": "A%",
+    "ATTACK_SKILL": "Habilidad de Ataque",
     "BORN_IN": "Nacido en:",
     "COMBAT": "Combate",
     "CULTURE": "Cultura",
     "CATACTERISTICS": "Características",
     "DAMAGE": "Daño",
     "DAMAGE_MOD": "Mod. daño",
+    "DEFENCE_SKILL": "Habilidad de parada",
     "DESCRIPTION": "Descripción",
     "EQUIPMENT": "Equipo",
     "FIRE_RATE": "Tasa Fuego",
@@ -87,6 +90,7 @@
     "PLAYER": "Jugador",
     "RANGE": "Alcance",
     "SELF_LANGUAJE": "Idioma nativo",
+    "SKILL": "Habilidad",
     "SKILLS": "Habilidades",
     "YEARS": "años",
     "YEARS_SHORT": "a.",
@@ -393,6 +397,7 @@
   "HINTS":{
     "DICES_STRING": "Nº dados D tipo Dado + mod",
     "ADD_COMBATANT": "Añadir nuevo luchador sin estadísticas",
-    "ADD_SAVED_COMBATANT": "Añadir Personaje pregenerado"
+    "ADD_SAVED_COMBATANT": "Añadir Personaje pregenerado",
+    "SELEC_SKILL_VALUE": "El valor de la habilidad"
   }
 }

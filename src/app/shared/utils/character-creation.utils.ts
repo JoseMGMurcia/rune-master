@@ -34,6 +34,23 @@ export const setRandomHumanStats = (pj: Character): void => {
   pj.stats.CHA.value = getTotal(['3d6']);
 };
 
+export const setRandomMorocathStats = (pj: Character): void => {
+  pj.stats.STR.value = getTotal(['3d6', '+6']);
+  pj.stats.DEX.value = getTotal(['2d4', '+3']);
+  pj.stats.CON.value = getTotal(['3d6', '+6']);
+  pj.stats.INT.value = getTotal(['2d6','+6']);
+  pj.stats.SIZ.value = getTotal(['2d6','+6']);
+  pj.stats.POW.value = getTotal(['3d6']);
+  pj.stats.CHA.value = getTotal(['3d6']);
+
+  pj.locations = pj.locations.map((loc: Location) => {
+    const location = new Location(loc.name, loc.hitpointsRatio, NUMBERS.N_4);
+    location.armorWeightRario = loc.armorWeightRario;
+    
+    return location;
+  });
+};
+
 
 export const setInitialHumanCharacter = (pj: Character, translate: TranslateService): Character => {
   const agiSkills =  translate.instant('PJ.SKILL_NAME.AGILITY');
@@ -139,7 +156,7 @@ export const getUniqueID = (name: string) => {
   return name + '_' + new Date().getTime();
 };
 
-export const addWeapon = ( pj: Character, type: WeaponType, name: WeaponNameType, translate: TranslateService): void => {
+export const addWeapon = ( pj: Character, type: WeaponType, name: WeaponNameType, translate: TranslateService, attack = NUMBERS.N_5, defence = NUMBERS.N_5): void => {
   const weapon = createWeapon(type, name, translate);
   weapon.inCombat = true;
   if(!pj.weapons.some(w => w.name === weapon.name && w.weaponType === weapon.weaponType)){
@@ -147,11 +164,11 @@ export const addWeapon = ( pj: Character, type: WeaponType, name: WeaponNameType
   }
   if(!pj.skills.ATTACK.some(s => s.weaponType === weapon.weaponType)) {
     const types = translate.instant('PJ.WEAPON_TYPES');
-    pj.skills.ATTACK.push(new CombatSkill(types['type'], weapon.attackBS , weapon.weaponType));
+    pj.skills.ATTACK.push(new CombatSkill(types['type'], weapon.attackBS > attack ? weapon.attackBS : attack, weapon.weaponType));
   }
   if(!pj.skills.DEFENSE.some(s => s.weaponType === weapon.weaponType)) {
     const types = translate.instant('PJ.WEAPON_TYPES');
-    pj.skills.DEFENSE.push(new CombatSkill(types['type'], weapon.parryBS , weapon.weaponType));
+    pj.skills.DEFENSE.push(new CombatSkill(types['type'], weapon.parryBS > defence ? weapon.parryBS : defence, weapon.weaponType));
   }
 };
 

@@ -268,6 +268,8 @@ export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: 
       return new Weapon(literal, new DiceRoll(1,6),  DamageTypeEnum.BLUNT, 7, false, 0, 0 , '', false, 18, 3, true, WeaponTypeEnum.SHIELD, 12, 0, new DiceRoll(1,6), 5, 15);
     } else if (name === WeaponNameEnum.COMMET) {
       return new Weapon(literal, new DiceRoll(1,6),  DamageTypeEnum.BLUNT, 5, false, 0, 0 , '', false, 16, 3, true, WeaponTypeEnum.SHIELD, 11, 0, new DiceRoll(1,6), 5, 15);
+    }else if (name === WeaponNameEnum.ROUND_SHIELD) {
+      return new Weapon(literal, new DiceRoll(1,6),  DamageTypeEnum.BLUNT, 4, false, 0, 0 , '', false, 10, 3, true, WeaponTypeEnum.SHIELD, 9, 7, new DiceRoll(1,6), 5, 15);
     }
   } else if (type === WeaponTypeEnum.SPEAR1H) {
     if (name === WeaponNameEnum.PILUM) {
@@ -456,7 +458,7 @@ export const getWweaponNameListByType = (type: WeaponTypeEnum): WeaponNameEnum[]
   } else if (type === WeaponTypeEnum.SHORT_SWORD) {
     return[WeaponNameEnum.GLADIUS, WeaponNameEnum.KUKRI];
   } else if (type === WeaponTypeEnum.SHIELD) {
-    return[WeaponNameEnum.BUCKER, WeaponNameEnum.ROUND_SHIELD, WeaponNameEnum.HERALD, WeaponNameEnum.COMMET, WeaponNameEnum.LARGE_RECTANGULAR];
+    return[WeaponNameEnum.BUCKER, WeaponNameEnum.ROUND_SHIELD, WeaponNameEnum.HERALD, WeaponNameEnum.COMMET, WeaponNameEnum.LARGE_RECTANGULAR, WeaponNameEnum.DIANE];
   } else if (type === WeaponTypeEnum.SPEAR1H) {
     return[WeaponNameEnum.JABELIN, WeaponNameEnum.CABALRY_SPEAR, WeaponNameEnum.SHORT_SPEAR];
   } else if (type === WeaponTypeEnum.SPEAR2H) {
