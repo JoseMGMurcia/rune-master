@@ -175,6 +175,10 @@ export class CombatDetailComponent {
     this.character.tempAPMod += mod;
   }
 
+  public addWeaponAP(weapon: Weapon, mod: number) {
+    weapon.tempAP += mod;
+  }
+
   public addLocHpMod(mod: number, loc: Location) {
     loc.bonusHP += mod;
     this.character.tempHPMod += mod;

@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { Character, CombatSkill, Location, Skill, hitpointsRatioEnum, WeaponTypeEnum, WeaponType, Armor, armorWeightRatioEnum } from '../models/character.model';
+import { Character, CombatSkill, Location, Skill, hitpointsRatioEnum, WeaponTypeEnum, WeaponType, Armor, armorWeightRatioEnum, Weapon } from '../models/character.model';
 import { NUMBERS } from '../constants/number.constants';
 import { WeaponNameEnum, WeaponNameType, createWeapon } from './equip.factory';
 import { getTotal } from './dices.utils';
@@ -22,6 +22,11 @@ export const resetTemporals = (pj: Character): void => {
   pj.stats.SIZ.tempMod = NUMBERS.N_0;
   pj.stats.POW.tempMod = NUMBERS.N_0;
   pj.stats.CHA.tempMod = NUMBERS.N_0;
+
+  pj.weapons = pj.weapons.map((weapon: Weapon) => {
+    weapon.tempAP = NUMBERS.N_0;
+    return weapon;
+  });
 };
 
 export const setRandomHumanStats = (pj: Character): void => {

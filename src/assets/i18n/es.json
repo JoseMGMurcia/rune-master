@@ -91,10 +91,12 @@
     "RANGE": "Alcance",
     "SELF_LANGUAJE": "Idioma nativo",
     "SKILL": "Habilidad",
+    "SPELLS": "Hechizos",
     "SKILLS": "Habilidades",
     "YEARS": "años",
     "YEARS_SHORT": "a.",
     "WEAPON": "Arma",
+    "WEAPON_UTILS": "Utilidades del arma",
     "WEAPON_TYPE": "Tipo de arma",
     "WEAPONS": "Armas",
     "WEIGHT": "Peso",
@@ -258,6 +260,10 @@
     "SPELL_STATUS": {
       "LEARNED": "Memo.",
       "FORGOTTEN": "No memo."
+    },
+    "SPELL_ACTION_TYPE": {
+      "ACTIVE": "Activo",
+      "PASSIVE": "Pasivo"
     },
     "WEAPON_TYPES": {
       "AXE1H": "Hacha 1 mano",

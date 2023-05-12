@@ -1,0 +1,578 @@
+[
+    {
+        "id": 1,
+        "name": "Confusión",
+        "description": "El conjuro confunde a la victima que sucumbe a el, no altera sus creencias ni percepciones pero las enturbia. Durante la declaración de intenciones, la victima debe indicar que su aventurero intentará sacudirse de la Confusión. Eso es todo lo que el aventurero puede hacer ese asalto. Debe sacar INTx5 con un exito el conjuro queda anulado y la victima puede actuar normalmente en el siguiete asalto. Si falla permanece confuso y no puede hacer nada, ni parar ni esquivar, si pifia confundirá a amigos con enemigos y actuará atacando al bando contrario. Los exitos criticos de un personaje confuso se consideran pifias.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 2,
+        "name": "Contramagia",
+        "description": "Este conjuro protege al objetivo de los conjuros y hechizos que le sean lanzados activamente, no de onjetos magicos ni habilidades pasivas. Si el conjuro atacante es dos o mas puntos menor que el de contramagia anulará el conjuro atacante. Si el conjuro es entre un punto menor y un punto mayor, anulará el hechozo atacante y también contramagia. Si es mayor se anulará la contramagia y el hechizo atacante prevalecerá.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 3,
+        "name": "Control (Especie- normalmente espíritus)",
+        "description": "Pg 109 RQ Básico.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 4,
+        "name": "Cuchilla Afilada",
+        "description": "Cada punto de este conjuro mejora las posibilidades de ataque de un arma punzante o de filo en 5% y suma 1 punto de daño, que se considerará daño mágico (no se dobla al empalar).",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 5,
+        "name": "Cuchilla ignea",
+        "description": "El arma afilada o punzante blanco de este conjuro cambiará su daño por 3D6 de fuego no empalante. El arma no será dañada por este fuego. Incompatible con cuchilla afilada.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 6,
+        "name": "Curación",
+        "description": "Cura 1 PG por cada punto de conjuro en una localización, la cual es necesario tocar. Efecto inmediato. En especies distintas son necesarios 2 puntos por cada punto curado.",
+        "range": "Toque",
+        "duration": "Instantaneo",
+        "points": 1,
+        "stackable": true
+    },
+    {
+        "id": 7,
+        "name": "Dardo Veloz",
+        "description": "Añade +15% a atacar a un arma arrojadiza. Se debe lanzar el mismo asalto que se dispara el proyectil, y se mantiene hasta el final de este.",
+        "range": "Toque",
+        "duration": "1 asalto de combate",
+        "points": 1,
+        "stackable": false
+    },
+    {
+        "id": 8,
+        "name": "Desmoralización",
+        "description": "La victima pierde la confianza, solo puede lanzar magia defensiva y de curación, si entra en ese estado antes de que empiece el combate no atacará. Puede intentar darse cuenta sacando INTx1n (Solamente una vez) , y entonces podrá lanzar magia para eliminar dicho conjuro.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 2,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 9,
+        "name": "Detectar (Sustancia)",
+        "description": "El foco guia al lanzador hasta la fuente más cercana de la sustancia indicada. Este conjuro puede atravesar hasta 1m de piedra, metal, suciedad, etc...",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 10,
+        "name": "Disipar Magia",
+        "description": "Este conjuro elimina la magia, 1 punto elimina 1 punto de magia espiritual o 1 punto de intensidad de un conjuro de hechicería. Eliminar magia divina cuesta dos puntos por punto. Eliminará siempre en primer lugar la magia defensiva, comenzando por el más potente. Se puede lanzar sobre un conjuro concreto si el lanzador es capaz de distinguirlo.",
+        "range": "A distancia",
+        "duration": "Instantaneo",
+        "points": 1,
+        "stackable": true
+    },
+    {
+        "id": 11,
+        "name": "Disrupción",
+        "description": "Hace daño de 1D3 puntos en una localización a distancia al azar de los cuales la armadura no protege. Se han de superar los PM del objetivo.",
+        "range": "A distancia",
+        "duration": "Instantaneo",
+        "points": 1,
+        "stackable": false
+    },
+    {
+        "id": 12,
+        "name": "Encantamiento de Armadura",
+        "description": "",
+        "range": "",
+        "duration": "",
+        "points": 0,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 13,
+        "name": "Encantamiento de Fortalecimiento",
+        "description": "",
+        "range": "",
+        "duration": "",
+        "points": 0,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 14,
+        "name": "Encantamiento de Ligadura",
+        "description": "",
+        "range": "",
+        "duration": "",
+        "points": 0,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 15,
+        "name": "Encantamiento de Matriz de PM",
+        "description": "",
+        "range": "",
+        "duration": "",
+        "points": 0,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 16,
+        "name": "Encantamiento de Matriz de Conjuros",
+        "description": "",
+        "range": "",
+        "duration": "",
+        "points": 0,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 17,
+        "name": "Fanatismo",
+        "description": "En un ser con INT normal aumenta las posibilidades de golpear en un 50% del valor actual y no puede detener ni lanzar conjuros que no sean de ataque. Las posibilidades de esquivar se reducen a la mitad. Este conjuro contraresta Desmoralización.Si no es un blanco voluntario se han de superar los PM.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 18,
+        "name": "Fuerza",
+        "description": "Cada punto aumenta en 3 la fuerza del blanco hasta un maximo del doble del valor inicial. Aumenta modificadores y PF.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 19,
+        "name": "Garrotazo",
+        "description": "Cada punto de este conjuro mejora las posibilidades de ataque de un arma contundente en 5% y suma 1 punto de daño, que se considerará daño mágico (no se dobla al empalar).",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 20,
+        "name": "Invocar(especie)",
+        "description": "Pg 11 RQ básico.",
+        "range": "",
+        "duration": "",
+        "points": 0,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 21,
+        "name": "Luz",
+        "description": "Se lanza sobre un ente físico que (vara, punta de dedo, muro... ) y emite luz  de 10m de radio con claridad  suficiente para poder leer.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 22,
+        "name": "Mano de Hierro",
+        "description": "Cada punto de este conjuro mejora las posibilidades de ataque de un arma natural en 5% y suma 1 punto de daño, que se considerará daño mágico (no se dobla al empalar).",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 23,
+        "name": "Protección",
+        "description": "Cada punto mejora los PA de la totalidad del cuerpo o de un objeto en 1, incompatible con contramagia.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 24,
+        "name": "Reparación",
+        "description": "Repara un objeto del que deben de estar todas sus partes presentes, recupera 1D10 puntos de daño y quedará una marca permanente, perdiendo un PA para siempre.",
+        "range": "Toque",
+        "duration": "Instantaneo",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 25,
+        "name": "Cola",
+        "description": "Cada punto equivale a un cuadrado de 10cm de lado de cola con FUE igual a la intensidad del conjuro x 10  que no funciona en tejidos vivos y que desaparece si se despega venciendo su FUE en una tirada enfrentada.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 26,
+        "name": "Comunicación Mental",
+        "description": "Este conjuro permita la comunicación mental entre dos o varias personas, en una suerte de telepatía. Cada punto de conjuro permite que una persona más entre en contacto con el mago, pero no entre ellos. Solo se transmiten pensamientos voluntariamente y no se pueden compartir PM o conocimientos mágicos.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 27,
+        "name": "Coordinación",
+        "description": "Aumenta la DES del blanco en 1 por cada punto de conjuro. El valor máximo de la nueva DES es el doble de la inicial.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 28,
+        "name": "Detectar Enemigos",
+        "description": "Funciiona sobre un pequeño amuleto, varita o cuerda que pueda guiarle hasta los posibles enemigos. Guiará primero hasta la persona más cercana en un radio de 100m que pretenda hacerle daño intencionadamente. No necesita vencer los PM del blanco, una vez alcanzado este blanco el amuleto guiará hasta el siguiente y así sucesivamente. Atraviesa como máximo 1m de sustancia sólida.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 29,
+        "name": "Detectar Magia",
+        "description": "Funciiona sobre un pequeño amuleto, varita o cuerda que pueda guiarle hasta el objeto encantado(Incluidos muertos vivientes) o que tiene algún hechizo más proximo. Guiará primero hasta el objeto más cercana en un radio de 100m, una vez alcanzado este blanco el amuleto guiará hasta el siguiente y así sucesivamente. Atraviesa como máximo 1m de sustancia sólida.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 30,
+        "name": "Enentecer",
+        "description": "Cada punto enlentece a su blanco una tasa de 1m/MR. Si su movimiento llega a 0 aún podrá correr, pero con suficientes puntos de conjuro dejará también de correr.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 31,
+        "name": "Extinguir",
+        "description": "Apaga fuegos y llamas y enfria materiales calientes hasta la temperatura ambiente. Un punto apaga una vela o una antorcha, 2 un pequeño fuego de campamente, 3 una hogera etc...",
+        "range": "A distancia",
+        "duration": "Instantaneo",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 32,
+        "name": "Flecha ignea",
+        "description": "Prende un proyectil que pasa a hacer 3D6 de daño no empalante. La armadura protege de este daño. prenden materiales inflamables sin necesidad de vencer al blanco del proyectil en una tirada enfrentada de PM. Incompatible con Dardo Veloz y Proyectil Múltiple.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 2,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 33,
+        "name": "Glamour",
+        "description": "Cada punto aumenta el ASP del blanco en 2 puntos. El blanco no será reconocible si su ASP aumenta a más del 50% inicial.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 34,
+        "name": "Inflamar",
+        "description": "Prende cualquier objeto normalmente inflamable.La piel humana no lo hará, el pelo si, si es un blanco vivo se han de superar sus PM.",
+        "range": "A distancia",
+        "duration": "Instantaneo",
+        "points": 1,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 35,
+        "name": "Mellar Armas",
+        "description": "Hace que cualquier arma no natural reduzca su daño en 1 por punto de conjuro.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 36,
+        "name": "Movilidad",
+        "description": "Aumenta el movimiento dle blanco en 1m/MR por punto de conjuro. Se pierde un punto de fatiga adicional por asalto por cada 3 puntos de este conjuro o fracción.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 37,
+        "name": "Pantalla Espiritual",
+        "description": "Actua como una armadura mágica que protege al blanco conrta ataques de espiritus. Cada punto añade dos puntos de defensa al blanco en todos los combates espirituales.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 38,
+        "name": "Pared de Luz",
+        "description": "Crea una pared de luz de 10m cuadrados y 10cm de espesor que brilla fuertemente por un lado, solo se puede atravesar visualmente desde el lado que no brilla, Ilumina 10m en todas dorecciones. Se puede mover a voluntad del lanzador a 1m/MR y se le puede dar la forma que se quiera mientras sea una sola pieza.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 4,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 39,
+        "name": "Pared Oscura",
+        "description": "Crea una pared de oscuridad de 10m cuadrados y 10cm de espesor que no puede ser atravesada visualmente desde ningún lado. Se puede mover a voluntad del lanzador a 1m/MR y se le puede dar la forma que se quiera mientras sea una sola pieza.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 2,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 40,
+        "name": "Proyectil Multiple",
+        "description": "Crea un proyectil adicinal al blanco del mismo tipo por cada punto de conjuro, no empalan y cada aataque se determina por separado. Incompatible con Dardo Veloz. Las amrmas muy grandes necesitan de más puntos por proyectil cada punto copia máximo 2D6. Solo tiene efecto al lanzar el proyectil blanco del conjuro.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 41,
+        "name": "Resistencia",
+        "description": "Suma al blanco 5 PF hasta su máximo original.",
+        "range": "Toque",
+        "duration": "Instantaneo",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 42,
+        "name": "Rielar",
+        "description": "Cada punto resta 5% de las posibilidades de atacarle al blanco.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 43,
+        "name": "Silencio",
+        "description": "Cada punto suma 15& a la habilidad deslizarse en silencio del blanco.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": true
+    },
+    {
+        "id": 44,
+        "name": "Vigor",
+        "description": "Cada punto aumenta la CON del blanco en 2 puntos hasta el máximo del doble original.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 45,
+        "name": "Visibilidad",
+        "description": "Este conjuro transporta a una criatura incorporea desde el plano espiritual al plan mundano, dandole una forma traslúcida, y podra interactual con el. Para ser expulsado con disipar, neutralizar o disolver será necesaria una intensidad o número de PM igual a los PM del la criatura.",
+        "range": "Sobre uno mismo",
+        "duration": "Temporal",
+        "points": 2,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 46,
+        "name": "Vista Lejana",
+        "description": "Cada Punto de este conjuro hace que el receptor perciva la distancia que le separa del resto del universo a la mitad. El efecto incluye la ampliación del campo de visión como si se estuviera usando un teleobjetivo. Si se especifica un blanco en concreto, entonces el conjuro amplia solamente dicho blanco, y la capacidad de 'Buscar' del observador aumenta en 5 percentiles por cada PM usado para impulsar el conjuro.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 47,
+        "name": "Vista mágica",
+        "description": "Este conjuro permite al blanco distinguir el aura de PER de los seres vivos y calibrar su potencia aproximada, aunque no e permite acceder al plano espiritual. El aura de todas las criaturas dentro del radio de alcance brillará de modo evidente a ojos del usuario. Si hay muchas criaturas será dificil distinguir a cada una. Los no muertos no brillan de esta manera. el Master indicará si la per es menor en 5 puntos o más que la suya, mayor en 5 puntos o mas o  semejante, entre ambos tramos. Es posible utilizar este conjuro para ver y golpear enemigos que ses oculten en la oscuridad. Cualquier superficie opaca bloqueará esta tipo de visión.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 3,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 48,
+        "name": "Calentar Metales (Lodril)",
+        "description": "Un punto de CAR de un metal cualquiera se calienta hasta hacerse maleable. Se necesita un minuto para alcanzar dicho estado, cada punto provoca una intensidad de calor de 1D6 puntos(Cada metal necesita una intensidad) para malearse o fundirse.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 49,
+        "name": "Comprensión (Pamalt)",
+        "description": "Incrementa todas las habilidades de conocimiento del blanco en 5% por cada punto de conjuro.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 50,
+        "name": "Corte pacífico (Dioses cazadores, Waha) Ritual Ceremonia",
+        "description": "Se debe llevar a cabo una sola torada junto fabricación carnicero. Hace que el alma del animal sacrificado como alimento volverá al seno de la madre tierra y será reciclada de modo conveniente. Incluye oración corta y una acción de agradecimiento.",
+        "range": "",
+        "duration": "",
+        "points": 1,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 51,
+        "name": "Estornudos (Malia)",
+        "description": "Se han de superar los PM del blanco. si tiene exito el blanco comenzará a estornudar al MR siguieente y lo hará durante 10MR más. Durante ese tiempo estará practicamente incapacitado y solamente podrá detener y esquivar a mitad de posibilidades. Para lanzar un conjuro necesita una tirada de concentración de INTx3 cada MR que dure el lanzamiento.",
+        "range": "A distancia",
+        "duration": "Instantaneo",
+        "points": 2,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 52,
+        "name": "Gran Red (Krarsht)",
+        "description": "Cada punto mejora las posibilidades de golpear con una red en 5% y su FUE en 1. Es incompatible con otros conjuros de mejora de armas.",
+        "range": "A",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 53,
+        "name": "Linterna (Yelmalio)",
+        "description": "El onjetivo debe ser una superficie plana, como un techo, un escudo etc.... Ilumina un semicirculo de 180 grados a 10m de distancia con la intensidad de una antorcha.",
+        "range": "A distancia",
+        "duration": "5 minutos por punto de conjuro",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    },
+    {
+        "id": 54,
+        "name": "Ojos del Rio (Dioses de los ríos)",
+        "description": "El blanco puede ver a traves del agua o del aire(si el usuario es un ser acuatico) eliminando todas las reflexiones y refracciones, si el agua estuviese sucia o hubiese niebla este conjuro no los eliminiría.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 55,
+        "name": "Pies Calientes (Eurmal el Embaucador)",
+        "description": "Si se vencen los PM del blanco el blanco siente una horrible sensación de quemaón en un pie, a elección del lanzador, el cual no podrá apoyarse en el suelo el resto del asalto. Si consigue una torada de DESx5 podrá mantenerse erguido a la pata coja, si no caer´pa al suelo.",
+        "range": "A distancia",
+        "duration": "Instantaneo",
+        "points": 1,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 56,
+        "name": "Recolección (Aldria)",
+        "description": "Recolecta las plantas que se necesiten para servir de alimento o para proporcionar cobijo o servir de herramienta o arma. La planta usada no será ofendida y en caso de morir regresará al seno de Aldría.",
+        "range": "Toque",
+        "duration": "Instantaneo",
+        "points": 1,
+        "pasive": false,
+        "stackable": false
+    },
+    {
+        "id": 57,
+        "name": "Sueño (Chalana Arroy)",
+        "description": "Si se vencen las PM del blanco en una tirada. Durante la duración del conjuro el blanco cae profundamente dormido y solo se despierta si es herido o es el blanco de un conjuro hostil.",
+        "range": "A distancia",
+        "duration": "Temporal",
+        "points": 3,
+        "pasive": true,
+        "stackable": false
+    },
+    {
+        "id": 58,
+        "name": "Toque de Pamalt (Pamalt)",
+        "description": "Aumenta la posibilidad de lanzar conjuros espirituales en 5% por cada punto de conjuro.",
+        "range": "Toque",
+        "duration": "Temporal",
+        "points": 1,
+        "pasive": true,
+        "stackable": true
+    }
+]

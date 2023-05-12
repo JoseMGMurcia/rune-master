@@ -155,11 +155,13 @@ export class Spells {
 }
 
 export class Spell {
+  public id = 0;
   public name = '';
   public description = '';
   public range = '';
   public duration = '';
   public points = NUMBERS.N_1;
+  public spiritualPoints = NUMBERS.N_0;
   public divineStack = NUMBERS.N_1;
   public sorcerySkillValue = NUMBERS.N_0;
   public pasive = false;
@@ -215,7 +217,8 @@ export class Weapon extends Equipment {
   public maxRange = NUMBERS.N_0;
   public fireRate = '';
   public twoHanded = false;
-  public armorPoints = NUMBERS.N_0;
+  public aP = NUMBERS.N_0;
+  public tempAP = NUMBERS.N_0;
   public reactionMoment = NUMBERS.N_0;
   public shield = false;
   public weaponType: WeaponType = WeaponTypeEnum.AXE1H;
@@ -224,7 +227,9 @@ export class Weapon extends Equipment {
   public minimumSTR = NUMBERS.N_0;
   public minimumDEX = NUMBERS.N_0;
   public attackBS = NUMBERS.N_5;
+  public attackTempBS = NUMBERS.N_0;
   public parryBS = NUMBERS.N_5;
+  public parryTempBS = NUMBERS.N_0;
   public showDetail = false;
 
   constructor(
@@ -256,7 +261,7 @@ export class Weapon extends Equipment {
     this.maxRange = maxRange;
     this.fireRate = fireRate;
     this.twoHanded = twoHanded;
-    this.armorPoints = armorPoints;
+    this.aP = armorPoints;
     this.reactionMoment = reactionMoment;
     this.shield = shield;
     this.weaponType = weaponType;

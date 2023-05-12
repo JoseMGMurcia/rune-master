@@ -132,7 +132,7 @@
         <div class="rQItem u-width-15 u-flex u-flex-column border-all" (click)="resetCharacterTemps()">
           <div class="u-width-100 u-flex u-flex-space-center">
             <button mat-icon-button >
-              <mat-icon>health_and_safety</mat-icon>
+              <mat-icon class="cardIconButton">health_and_safety</mat-icon>
             </button>
           </div>
           <div class="u-width-100 u-flex u-flex-space-center">
@@ -226,9 +226,9 @@
         <p class="u-width-25"><b>{{ "PJ.WEAPON" | translate }}</b></p>
         <p class="u-width-8 u-text-center"><b>{{ "PJ.ATTACK_SHORT" | translate }}</b></p>
         <p class="u-width-8 u-text-center"><b>{{ "PJ.PARRY_SHORT" | translate }}</b></p>
-        <p class="u-width-8 u-text-center"><b>{{ "PJ.AP" | translate }}</b></p>
+        <p class="u-width-12 u-text-center"><b>{{ "PJ.AP" | translate }}</b></p>
         <p class="u-width-8 u-text-center"><b>{{ "PJ.MR" | translate }}</b></p>
-        <p class="u-width-15 u-text-center"><b>{{ "PJ.DAMAGE" | translate }}</b></p>
+        <p class="u-width-11 u-text-center"><b>{{ "PJ.DAMAGE" | translate }}</b></p>
         <p class="u-width-15 u-text-center"><b>{{ "PJ.RANGE" | translate }}</b></p>
         <p class="u-width-15 u-text-center"><b>{{ "PJ.FIRE_RATE_SHORT" | translate }}</b></p>
       </div>
@@ -250,9 +250,17 @@
               {{ getTDefSkill(character, weapon.weaponType) + getFPAllMod() }}
             </button>
           </div>
-          <div class="u-width-8 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.armorPoints }}</p></div>
+          <div class="u-width-12 u-flex u-flex-center u-flex-space-center">
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addWeaponAP(weapon, -1)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <div class="u-text-center"><p>{{ weapon.aP + weapon.tempAP }}</p></div>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addWeaponAP(weapon, 1)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>   
           <div class="u-width-8 u-flex u-flex-center u-flex-space-center"><p>{{ getWeaponMR(weapon) }}</p></div>
-          <div class="u-width-15 u-flex u-flex-center u-flex-space-center">
+          <div class="u-width-11 u-flex u-flex-center u-flex-space-center">
             <button class="card-button wide u-flex u-flex-space-center u-flex-center" (click)="rollDamage(weapon)">
               {{ getWeaoponRollString(weapon) }}
             </button>
@@ -260,7 +268,9 @@
           <div class="u-width-15 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.range }} / {{weapon.maxRange }}</p></div>
           <div class="u-width-15 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.fireRate }}</p></div>
         </div>
-        <div class="u-width-5 u-text-center" *ngIf="weapon.showDetail">DETAIl</div>
+        <div class="u-width-100 u-text-center" *ngIf="weapon.showDetail">
+          <p class="u-width-100 u-flex border-all padding-top padding-bottom"><b>{{ "PJ.WEAPON_UTILS" | translate }}</b></p>
+        </div>
       </div>
     </div>
   </div>

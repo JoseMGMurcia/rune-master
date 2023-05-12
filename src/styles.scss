@@ -166,3 +166,10 @@ button {
   }
 }
 
+body {
+  background-color: colors.$background;
+}
+
+.medium-viewport {
+  height: 325px;
+}
