@@ -36,3 +36,9 @@
 - Weapon and armor add.
 - Temporal Modificators.
 
+## 0.2.0
+- Json service added.
+- Spells servicce added.
+- Spirit spell Json added.
+- Spirit spells preview in home page added.
+
