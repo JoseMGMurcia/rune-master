@@ -47,6 +47,7 @@
  - Train Costs.
  - Race selector modal.
  - Stats editor modal.
+ - Race Type Ids added.
 
 ## Futute WalkThrough 
 - Add Broo Horn
