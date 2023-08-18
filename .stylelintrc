@@ -14,7 +14,8 @@
         "indentation": [2, {"except": "value"}],
         "max-empty-lines": 2,
         "order/properties-alphabetical-order": true,
-        "selector-pseudo-element-no-unknown": [true, {"ignorePseudoElements": "ng-deep"}]
+        "selector-pseudo-element-no-unknown": [true, {"ignorePseudoElements": "ng-deep"}],
+        "no-invalid-position-at-import-rule": null
     }
 
 }

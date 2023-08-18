@@ -5,7 +5,8 @@ import { EasyDialogComponent } from '../components/easy-dialog/easy-dialog.compo
 import { WeaponDialogComponent } from '../components/weapon-dialog/weapon-dialog.component';
 import { Character } from '../models/character.model';
 import { ArmorDialogComponent } from '../components/armor-dialog/armor-dialog.component';
-
+import { RaceDialogComponent } from '../components/race-dialog/race-dialog.component';
+import { StatsDialogComponent } from '../components/stats-dialog/stats-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,18 @@ export class DialogService {
 
   openArmorDialog(character: Character): void {
     this.dialog.open(ArmorDialogComponent, {
+      data: { character }
+    });
+  }
+
+  openRaceDialog(character: Character): void {
+    this.dialog.open(RaceDialogComponent, {
+      data: { character }
+    });
+  }
+
+  openStatsDialog(character: Character): void {
+    this.dialog.open(StatsDialogComponent, {
       data: { character }
     });
   }

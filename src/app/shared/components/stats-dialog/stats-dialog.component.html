@@ -1,0 +1,118 @@
+<div class="light-back padding-all">
+  <p class="rQItem title">{{ "PJ.CATACTERISTICS" | translate  }} ( {{ data.character.name }} )</p>
+  <form [formGroup]="form" class="rQItem u-flex u-flex-column u-width-100">
+
+    <div class="u-flex u-flex-align-center margin-all-mini">
+      <p class="rQItem u-width-25 u-text-center">{{ "PJ.CATACTERISTICS_TYPES.STR" | translate  }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('str', -1)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <p class="rQItem u-width-25 u-text-center">{{ form.controls['str'].value }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('str', 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="u-flex u-flex-align-center margin-all-mini">
+      <p class="rQItem u-width-25 u-text-center">{{ "PJ.CATACTERISTICS_TYPES.CON" | translate  }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('con', -1)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <p class="rQItem u-width-25 u-text-center">{{ form.controls['con'].value }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('con', 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="u-flex u-flex-align-center margin-all-mini">
+      <p class="rQItem u-width-25 u-text-center">{{ "PJ.CATACTERISTICS_TYPES.SIZ" | translate  }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('siz', -1)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <p class="rQItem u-width-25 u-text-center">{{ form.controls['siz'].value }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('siz', 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="u-flex u-flex-align-center margin-all-mini">
+      <p class="rQItem u-width-25 u-text-center">{{ "PJ.CATACTERISTICS_TYPES.INT" | translate  }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('int', -1)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <p class="rQItem u-width-25 u-text-center">{{ form.controls['int'].value }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('int', 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="u-flex u-flex-align-center margin-all-mini">
+      <p class="rQItem u-width-25 u-text-center">{{ "PJ.CATACTERISTICS_TYPES.POW" | translate  }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('pow', -1)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <p class="rQItem u-width-25 u-text-center">{{ form.controls['pow'].value }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('pow', 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="u-flex u-flex-align-center margin-all-mini">
+      <p class="rQItem u-width-25 u-text-center">{{ "PJ.CATACTERISTICS_TYPES.DEX" | translate  }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('dex', -1)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <p class="rQItem u-width-25 u-text-center">{{ form.controls['dex'].value }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('dex', 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="u-flex u-flex-align-center margin-all-mini">
+      <p class="rQItem u-width-25 u-text-center">{{ "PJ.CATACTERISTICS_TYPES.CHA" | translate  }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('cha', -1)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <p class="rQItem u-width-25 u-text-center">{{ form.controls['cha'].value }}</p>
+      <div class="u-width-25 u-flex u-flex-space-center">
+        <button mat-mini-fab class="u-flex u-flex-space-center u-flex-center" (click)="addStat('cha', 1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+
+  <div class="rQItem u-flex u-flex-end">
+    <button mat-button color="primary" (click)="handleCancel()"class="rQItem">{{ 'COMMONS.CANCEL' | translate }}</button>
+    <button mat-raised-button color="primary" (click)="handleConfirm()" class="rQItem">{{ 'COMMONS.CONFIRM' | translate }}</button>
+  </div>
+</div>

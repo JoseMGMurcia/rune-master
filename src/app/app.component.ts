@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DB_TABLES } from './shared/constants/db.constants';
-import { Character, Spell } from './shared/models/character.model';
+import { Character } from './shared/models/character.model';
 import { CharactersService } from './shared/services/character.service';
 import { DatabaseService } from './shared/services/db.service';
 import { JsonService } from './shared/services/json.service';

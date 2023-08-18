@@ -17,7 +17,8 @@ import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { ArmorDialogComponent } from './components/armor-dialog/armor-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { RaceDialogComponent } from './components/race-dialog/race-dialog.component';
+import { StatsDialogComponent } from './components/stats-dialog/stats-dialog.component';
 
 export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,12 +38,14 @@ const components = [
   EasyDialogComponent,
   WeaponDialogComponent,
   ArmorDialogComponent,
+  StatsDialogComponent,
 ];
 
 
 @NgModule({
   declarations: [
     ...components,
+    RaceDialogComponent,
   ],
   imports: [
     ...matModules,

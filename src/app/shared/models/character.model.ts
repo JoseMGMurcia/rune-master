@@ -1,6 +1,7 @@
 import { NUMBERS } from '../constants/number.constants';
 import { getUniqueID } from '../utils/character-creation.utils';
 import { DiceRoll } from './dices.model';
+import { RaceTypeEnum } from './races.model';
 
 export class Character {
   public id = '';
@@ -8,6 +9,7 @@ export class Character {
   public player = '';
   public pnj = true;
   public race = 'Humano';
+  public raceID = RaceTypeEnum.HUMAN;
   public sex: SexType = SexTypeEnum.U;
   public age = NUMBERS.N_15;
   public height = NUMBERS.N_0;

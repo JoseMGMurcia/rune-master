@@ -10,10 +10,10 @@ import { getSteMod } from 'src/app/shared/utils/character-calculated.-fields.uti
 import { getKnoMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getPerMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getMagMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
-import { setInitialHumanCharacter } from 'src/app/shared/utils/character-creation.utils';
 import { NUMBERS } from 'src/app/shared/constants/number.constants';
 import { DiceRoll } from 'src/app/shared/models/dices.model';
 import { WeaponNameEnum, createWeapon } from 'src/app/shared/utils/equip.factory';
+import { setInitialHumanCharacter } from 'src/app/shared/utils/races.utils';
 
 @Component({
   selector: 'app-characters-main',

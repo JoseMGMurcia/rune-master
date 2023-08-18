@@ -42,3 +42,12 @@
 - Spirit spell Json added.
 - Spirit spells preview in home page added.
 
+## 0.3.0
+ - Spiritual spells small text fixes.
+ - Train Costs.
+ - Race selector modal.
+ - Stats editor modal.
+
+## Futute WalkThrough 
+- Add Broo Horn
+- Add Tritonid Trident

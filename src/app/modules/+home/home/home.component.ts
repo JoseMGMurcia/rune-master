@@ -4,6 +4,7 @@ import { ARMOR_TYPES, ArmorType } from 'src/app/shared/constants/equip/armor.con
 import { SpellsService } from 'src/app/shared/services/spells.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Spell, Spells } from 'src/app/shared/models/character.model';
+import { TRAINER_WEELKY_COST, TRAIN_COSTS } from 'src/app/shared/models/train-models';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { Spell, Spells } from 'src/app/shared/models/character.model';
 })
 export class HomeComponent implements OnInit, OnDestroy{
   public armors: ArmorType[] = ARMOR_TYPES;
-
+  public TRAINING_COSTS = TRAIN_COSTS;
+  public TRAINER_WEELKY_COST = TRAINER_WEELKY_COST
   public spells: Spells = new Spells();
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
@@ -21,7 +23,6 @@ export class HomeComponent implements OnInit, OnDestroy{
     private translate: TranslateService,
     private spellService: SpellsService,
   ) { }
-
   
   ngOnInit(): void {
     this.fetch();
@@ -51,9 +52,9 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   private fetch() {
     this.spellService.spiritualSpells$
-    .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe((spells) => {
-      this.spells.SPIRITUAL = spells;
-    });
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((spells) => {
+        this.spells.SPIRITUAL = spells;
+      });
   }
 }

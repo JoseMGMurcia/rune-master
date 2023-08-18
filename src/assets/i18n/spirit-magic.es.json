@@ -35,7 +35,7 @@
         "description": "Cada punto de este conjuro mejora las posibilidades de ataque de un arma punzante o de filo en 5% y suma 1 punto de daño, que se considerará daño mágico (no se dobla al empalar).",
         "range": "Toque",
         "duration": "Temporal",
-        "points": 1,
+        "points": 4,
         "pasive": false,
         "stackable": true
     },
@@ -45,9 +45,9 @@
         "description": "El arma afilada o punzante blanco de este conjuro cambiará su daño por 3D6 de fuego no empalante. El arma no será dañada por este fuego. Incompatible con cuchilla afilada.",
         "range": "Toque",
         "duration": "Temporal",
-        "points": 1,
+        "points": 4,
         "pasive": false,
-        "stackable": true
+        "stackable": false
     },
     {
         "id": 6,
@@ -111,7 +111,7 @@
         "description": "",
         "range": "",
         "duration": "",
-        "points": 0,
+        "points": 1,
         "pasive": false,
         "stackable": false
     },
@@ -121,7 +121,7 @@
         "description": "",
         "range": "",
         "duration": "",
-        "points": 0,
+        "points": 1,
         "pasive": false,
         "stackable": false
     },
@@ -131,7 +131,7 @@
         "description": "",
         "range": "",
         "duration": "",
-        "points": 0,
+        "points": 1,
         "pasive": false,
         "stackable": false
     },
@@ -141,7 +141,7 @@
         "description": "",
         "range": "",
         "duration": "",
-        "points": 0,
+        "points": 1,
         "pasive": false,
         "stackable": false
     },
@@ -151,7 +151,7 @@
         "description": "",
         "range": "",
         "duration": "",
-        "points": 0,
+        "points": 1,
         "pasive": false,
         "stackable": false
     },
@@ -191,7 +191,7 @@
         "description": "Pg 11 RQ básico.",
         "range": "",
         "duration": "",
-        "points": 0,
+        "points": 1,
         "pasive": false,
         "stackable": false
     },

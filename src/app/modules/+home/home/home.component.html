@@ -55,14 +55,40 @@
 
         <div class="u-width-50 u-height-min card margin-all-mini" *ngIf="spell.name">
           <p class="padding-all u-width-100"><b>{{ spell.name }}</b></p>
-          <p class="padding-all u-width-100">{{ spell.range }}, {{ spell.duration }}, {{ getActiveText(spell) }}</p>
+          <p class="u-width-100-padding-sides" *ngIf="spell.stackable">{{ "COMMONS.VARIABLE" | translate }}</p>
+          <p class="u-width-100-padding-sides" *ngIf="!spell.stackable"> {{ spell.points }} {{ "COMMONS.POINTS" | translate }}</p>
+          <p class="u-width-100-padding-sides padding-bottom-mini">{{ spell.range }}, {{ spell.duration }}, {{ getActiveText(spell) }}</p>
           <p class="u-width-100-padding-sides padding-bottom justyfy">{{ spell.description }}</p>
-        </div>
-  
-  
+        </div> 
   
       </div>
     </mat-expansion-panel>
   </div>
 </div>
+<div class="u-flex">
+  <div class="u-width-25 rQItem">
+    <mat-expansion-panel class="rQItem tertiary-expansion">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ "PJ.TRAIN_COST" | translate  }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="u-flex u-flex-column margin-top">
+        <div class="u-flex">
+          <div class="u-width-2"></div>
+          <p class="u-width-40 u-flex u-flex-space-center"><b>{{ "PJ.SKILL_MAX_VALUE" | translate }}</b></p>
+          <p class="u-width-30 u-flex u-flex-space-center"><b>{{ "PJ.MAX_STUDENTS" | translate }}</b></p>
+          <p class="u-width-30 u-flex u-flex-space-center"><b>{{ "PJ.MIN_COST" | translate }}</b></p>
+   
+        </div>
+        <div class="u-flex" *ngFor="let trainingCost of TRAINING_COSTS; let i = index" [ngClass]="getLitsLineClass(i)">
+          <div class="u-width-2"></div>
+          <p class="u-width-40 u-flex u-flex-space-center">{{ trainingCost.maxSkill }}</p>
+          <p class="u-width-30 u-flex u-flex-space-center">{{ trainingCost.maxStudents }}</p>
+          <p class="u-width-30 u-flex u-flex-space-center">{{ TRAINER_WEELKY_COST / trainingCost.maxStudents }}</p>
+
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>
+
 

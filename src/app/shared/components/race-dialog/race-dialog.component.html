@@ -1,0 +1,23 @@
+<div class="light-back padding-all">
+    <p class="rQItem title">{{ "PJ.RACES" | translate  }}</p>
+    <form [formGroup]="form" class="rQItem u-flex u-flex-column u-width-100">
+  
+      <mat-form-field appearance="fill" class="rQItem u-width-100-padding">
+        <mat-label>{{ "ACTIONS.SELECT_RACE" | translate }}</mat-label>
+        <mat-select formControlName="race">
+          <mat-option *ngFor="let race of races" [value]="race.id">
+            {{ "PJ.RACES_TYPE." + race.name | translate  }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      
+  
+    </form>
+  
+  
+    <div class="rQItem u-flex u-flex-end">
+      <button mat-button color="primary" (click)="handleCancel()"class="rQItem">{{ 'COMMONS.CANCEL' | translate }}</button>
+      <button [disabled]="!form.valid" mat-raised-button color="primary" (click)="handleConfirm()" class="rQItem">{{ 'COMMONS.CONFIRM' | translate }}</button>
+    </div>
+  </div>

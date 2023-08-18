@@ -4,14 +4,16 @@ import { NUMBERS } from 'src/app/shared/constants/number.constants';
 import { Characteristic } from 'src/app/shared/models/character.model';
 import { Character, Location, Weapon } from 'src/app/shared/models/character.model';
 import { DiceRoll } from 'src/app/shared/models/dices.model';
+import { RaceTypeEnum } from 'src/app/shared/models/races.model';
 import { CharactersService } from 'src/app/shared/services/character.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { getDMGMod, getMRCC, getMRDES, getMRSIZ, getManMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getAgiMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getArmorByLocation, getArmorTypeByLocation, getCAR, getFP, getHp, getHpByLocation, getMP } from 'src/app/shared/utils/character-calculated.-fields.utils';
-import { resetTemporals, setInitialHumanCharacter, setRandomHumanStats, setRandomMorocathStats } from 'src/app/shared/utils/character-creation.utils';
+import { resetTemporals } from 'src/app/shared/utils/character-creation.utils';
 import { getFumbleTarget, getTotal } from 'src/app/shared/utils/dices.utils';
 import { cutDicesRolls } from 'src/app/shared/utils/message.utils';
+import { setRandomAgimoriStats, setRandomBrooStats, setRandomDuckStats, setRandomHumanStats, setRandomMorocathStats, setRandomNewLingStats, setRandomTuskRiderStats } from 'src/app/shared/utils/races.utils';
 
 @Component({
   selector: 'app-combat-detail',
@@ -30,8 +32,8 @@ export class CombatDetailComponent {
     private dialogService: DialogService,
   ) { }
 
-  public handleHumanice() {
-    setInitialHumanCharacter(this.character, this.translate);
+  public handleRace() {
+    this.dialogService.openRaceDialog(this.character);
   }
 
   public saveCharacter() {
@@ -147,12 +149,26 @@ export class CombatDetailComponent {
     this.dialogService.openArmorDialog(this.character);
   }
 
-  public setRandomHumanStats() {
-    setRandomHumanStats(this.character);
+  public editStats() {
+    this.dialogService.openStatsDialog(this.character);
   }
 
-  public setRandomMorocathStats() {
-    setRandomMorocathStats(this.character);
+  public setRandomStats() {
+    if(this.character.raceID === RaceTypeEnum.HUMAN ){
+      setRandomHumanStats(this.character);
+    } else if(this.character.raceID === RaceTypeEnum.MOROCATH ){
+      setRandomMorocathStats(this.character);
+    } else if(this.character.raceID === RaceTypeEnum.DUCK) {
+      setRandomDuckStats(this.character);
+    } else if(this.character.raceID === RaceTypeEnum.NEWLING) {
+      setRandomNewLingStats(this.character);
+    } else if(this.character.raceID === RaceTypeEnum.AGIMORI) {
+      setRandomAgimoriStats(this.character);
+    } else if(this.character.raceID === RaceTypeEnum.TUSK_RIDER) {
+      setRandomTuskRiderStats(this.character);
+    } else if(this.character.raceID === RaceTypeEnum.BROO) {
+      setRandomBrooStats(this.character);
+    }
   }
 
   public resetCharacterTemps() {

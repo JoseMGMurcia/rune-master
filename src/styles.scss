@@ -5,8 +5,9 @@
 
 @include mat.core();
 
-html,s
+html,
 body {
+  background-color: colors.$background;
   height: 100%;
 }
 
@@ -103,6 +104,8 @@ button {
     background-color: colors.$background-tertiary-hover;
     box-shadow: 1px 8px 8px 1px rgba(0, 0, 0, 0.2);
   }
+
+  
 }
 
 // ANGULAR MATERIAL REDESING STYLES
@@ -164,10 +167,6 @@ button {
       border-color: colors.$tema-contrast-dark !important;
     }
   }
-}
-
-body {
-  background-color: colors.$background;
 }
 
 .medium-viewport {

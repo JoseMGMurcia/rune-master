@@ -2,9 +2,12 @@
   "RUNEQUEST_MASTER": "RuneQuest Master",
   "COMMONS":{
     "CONFIRM": "Confirmar",
+    "COST": "Coste",
     "CANCEL": "Cancelar",
     "DETAIL": "Detalle",
     "IN_LOC_SHORT": "en la Loc.",
+    "POINT": "Punto",
+    "POINTS": "Puntos",
     "QUANTITY": "Cantidad",
     "QUANTITY_SHORT": "Cant.",
     "RESULT": "Resultado",
@@ -12,6 +15,7 @@
     "TURN": "Turno",
     "TYPE": "Tipo",
     "VALUE": "Valor",
+    "VARIABLE": "Variable",
     "WARNING": "Advertencia",
     "SUCCES_LEVEL": {
       "CRITICAL": "Éxito crítico",
@@ -37,6 +41,7 @@
     "ROLL_DICES": "Tirar dados",
     "SELECT_ARMOR_TYPE": "Selecciona un tipo de armadura",
     "SELECT_LOCATIONS": "Selecciona las Localizaciones cubiertas",
+    "SELECT_RACE": "Selecciona una raza",
     "SELECT_WEAPON_TYPE": "Selecciona un tipo de arma",
     "SAVED_CHARACTERS": "Personajes guardados",
     "UTILS": {
@@ -44,6 +49,7 @@
       "HUMANICE": "Humano Inic.",
       "RND_HUMAN_STATS": "RND Human Chars",
       "RND_MOROCANTH_STATS": "RND Morocath Chars",
+      "RND_STATS": "Caracts. aleatorias",
       "RESEL_ALL": "Reset"
     }
   },
@@ -80,6 +86,8 @@
     "NAME": "Nombre",
     "MAGIC": "Magia",
     "MAGICAL_SKILLS": "Habilidades mágicas",
+    "MAX_STUDENTS": "Máx. estudiantes",
+    "MIN_COST": "Coste mínimo",
     "MR": "MR",
     "MRCC": "MMR-CC",
     "MRDEX": "MMR-DES",
@@ -88,11 +96,14 @@
     "PARRY_MOD": "Modif. Detención",
     "PARRY_SHORT": "D%",
     "PLAYER": "Jugador",
+    "RACES": "Razas",
     "RANGE": "Alcance",
     "SELF_LANGUAJE": "Idioma nativo",
     "SKILL": "Habilidad",
+    "SKILL_MAX_VALUE": "Valor máximo de la habilidad",
     "SPELLS": "Hechizos",
     "SKILLS": "Habilidades",
+    "TRAIN_COST": "Coste de entrenamiento, por 50h de entrenamiento (120 l.)",
     "YEARS": "años",
     "YEARS_SHORT": "a.",
     "WEAPON": "Arma",
@@ -156,6 +167,15 @@
       "CHEST": "Pecho",
       "ABDOMEN": "Abdomen"
     },
+    "RACES_TYPE":{
+      "HUMAN": "Humano",
+      "MOROCATH": "Morocante",
+      "DUCK": "Pato",
+      "NEWLING": "Tritónido",
+      "AGIMORI": "Agimori",
+      "TUSK_RIDER": "Jinete de los colmillos",
+      "BROO": "Broo"
+    },
     "SKILL_NAME":{
       "AGILITY": {
         "THROW": "Arrojar",
@@ -184,6 +204,7 @@
       },
       "COMUNICATION": {
         "SPEAK_LANGUAGE": "Hablar idioma",
+        "SPEAK_LOCAL_HUMAN": "Hablar idioma local humano",
         "ACT": "Actuar",
         "SING": "Cantar",
         "FLUID_SPEAK": "Habla fluida",
