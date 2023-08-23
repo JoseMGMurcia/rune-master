@@ -186,28 +186,6 @@
         </mat-expansion-panel>
       </div>
 
-      <div class="u-width-16 rQItem" *ngIf="pj.spells.DRAGON.length > 0">
-        <mat-expansion-panel class="rQItem tertiary-expansion">
-          <mat-expansion-panel-header>
-            <mat-panel-title>{{ "PJ.SPELL_TYPE.DRAGON" | translate  }}</mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="u-flex u-flex-column">
-            <p class="rQItem" *ngFor="let spell of pj.spells.DRAGON; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</p>
-          </div>
-        </mat-expansion-panel>
-      </div>
-
-      <div class="u-width-16 rQItem" *ngIf="pj.spells.KI.length > 0">
-        <mat-expansion-panel class="rQItem tertiary-expansion">
-          <mat-expansion-panel-header>
-            <mat-panel-title>{{ "PJ.SPELL_TYPE.KI" | translate  }}</mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="u-flex u-flex-column">
-            <p class="rQItem" *ngFor="let spell of pj.spells.KI; let i = index" [ngClass]="getLitsLineClass(i)">{{ spell.name }}</p>
-          </div>
-        </mat-expansion-panel>
-      </div>
-
       <div class="u-width-16 rQItem" *ngIf="pj.spells.OTHER.length > 0">
         <mat-expansion-panel class="rQItem tertiary-expansion">
           <mat-expansion-panel-header>

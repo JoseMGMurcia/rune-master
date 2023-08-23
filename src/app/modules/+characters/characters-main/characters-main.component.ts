@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil} from 'rxjs';
-import { Character, Characteristic, CultMember, SexTypeEnum, Skill, cultMemberTypeEnum, cultureTypeEnum, Spell, Location, Armor, Weapon, WeaponTypeEnum, CombatSkill } from 'src/app/shared/models/character.model';
+import { Character, Characteristic, CultMember, SexTypeEnum, Skill, cultMemberTypeEnum, cultureTypeEnum, Spell, Location, Armor, Weapon, WeaponTypeEnum, CombatSkill, Spells } from 'src/app/shared/models/character.model';
 import { CharactersService } from 'src/app/shared/services/character.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { getAgiMod, getArmorByLocation, getArmorTypeByLocation, getCAR, getComMod, getDMGMod, getFP, getFreeINTPoints, getHp, getHpByLocation, getMP, getMRDES, getMRSIZ, getManMod, getWeaponList } from 'src/app/shared/utils/character-calculated.-fields.utils';
@@ -14,6 +14,8 @@ import { NUMBERS } from 'src/app/shared/constants/number.constants';
 import { DiceRoll } from 'src/app/shared/models/dices.model';
 import { WeaponNameEnum, createWeapon } from 'src/app/shared/utils/equip.factory';
 import { setInitialHumanCharacter } from 'src/app/shared/utils/races.utils';
+import { SpellsService } from 'src/app/shared/services/spells.service';
+import { getSpiritualSpell } from 'src/app/shared/utils/spell.utils';
 
 @Component({
   selector: 'app-characters-main',
@@ -23,7 +25,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
 
   public characters: Character[] = [];
   public filteredCharacters: Character[] = [];
-
+  public spells: Spells = new Spells();
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
@@ -31,6 +33,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
     public translate: TranslateService,
     private characterService: CharactersService,
     private dialogService: DialogService,
+    private spellService: SpellsService,
   ) { }
 
   ngOnInit(): void {
@@ -164,8 +167,8 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
   handleCreate() {
     const pj = setInitialHumanCharacter( new Character('Pijus magníficus'), this.translate);
     pj.race = 'Humano';
-    pj.spells.SPIRITUAL.push(new Spell('Curación', 4, true));
-    pj.spells.SPIRITUAL.push(new Spell('Cuchilla Afilada', 3, true));
+    pj.spells.SPIRITUAL.push(getSpiritualSpell(this.spells, 'Curación', NUMBERS.N_4));
+    pj.spells.SPIRITUAL.push(getSpiritualSpell(this.spells, 'Cuchilla Afilada', NUMBERS.N_3));
     pj.spells.DIVINE.push(new Spell('Separación del Alma', 3, false, true));
     pj.spells.SORCERY.push(new Spell('Succionar PER', 1, true, true, 35));
 
@@ -228,6 +231,7 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
 
   private fetch() {
     this.loadCharacters();
+    this.loadSpells();
   }
 
   public preventAcordionExpansion(event: Event) {//TODO private
@@ -250,6 +254,14 @@ export class CharactersMainComponent implements OnInit, OnDestroy{
         this.characters = characters;
         this.filteredCharacters = characters;
         // TODO end loading
+      });
+  }
+
+  private loadSpells(): void {
+    this.spellService.spiritualSpells$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((spells) => {
+        this.spells.SPIRITUAL = spells;
       });
   }
 }

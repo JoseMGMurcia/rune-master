@@ -10,7 +10,7 @@ export class SpellsService {
   public spiritualSpells: BehaviorSubject<any> = new BehaviorSubject(null);
   public spiritualSpells$ =this.spiritualSpells.asObservable();
 
-  public setGiftData(data: Spell[]): void {
+  public setSpitirualSpellsData(data: Spell[]): void {
     this.spiritualSpells.next(data);
   }
 }

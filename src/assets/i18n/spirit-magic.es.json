@@ -5,7 +5,7 @@
         "description": "El conjuro confunde a la victima que sucumbe a el, no altera sus creencias ni percepciones pero las enturbia. Durante la declaración de intenciones, la victima debe indicar que su aventurero intentará sacudirse de la Confusión. Eso es todo lo que el aventurero puede hacer ese asalto. Debe sacar INTx5 con un exito el conjuro queda anulado y la victima puede actuar normalmente en el siguiete asalto. Si falla permanece confuso y no puede hacer nada, ni parar ni esquivar, si pifia confundirá a amigos con enemigos y actuará atacando al bando contrario. Los exitos criticos de un personaje confuso se consideran pifias.",
         "range": "A distancia",
         "duration": "Temporal",
-        "points": 1,
+        "points": 2,
         "pasive": true,
         "stackable": false
     },
@@ -35,7 +35,7 @@
         "description": "Cada punto de este conjuro mejora las posibilidades de ataque de un arma punzante o de filo en 5% y suma 1 punto de daño, que se considerará daño mágico (no se dobla al empalar).",
         "range": "Toque",
         "duration": "Temporal",
-        "points": 4,
+        "points": 1,
         "pasive": false,
         "stackable": true
     },
@@ -61,7 +61,7 @@
     {
         "id": 7,
         "name": "Dardo Veloz",
-        "description": "Añade +15% a atacar a un arma arrojadiza. Se debe lanzar el mismo asalto que se dispara el proyectil, y se mantiene hasta el final de este.",
+        "description": "Añade +15% a atacar y +3 al daño a un arma arrojadiza. Se debe lanzar el mismo asalto que se dispara el proyectil, y se mantiene hasta el final de este.",
         "range": "Toque",
         "duration": "1 asalto de combate",
         "points": 1,

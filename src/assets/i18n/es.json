@@ -6,8 +6,11 @@
     "CANCEL": "Cancelar",
     "DETAIL": "Detalle",
     "IN_LOC_SHORT": "en la Loc.",
+    "PERCENTAGE": "Porcentaje",
+    "PERCENTAGE_SHORT": "%",
     "POINT": "Punto",
     "POINTS": "Puntos",
+    "POINTS_SHORT": "Pts.",
     "QUANTITY": "Cantidad",
     "QUANTITY_SHORT": "Cant.",
     "RESULT": "Resultado",
@@ -34,14 +37,18 @@
   "ACTIONS": {
     "ADD_COMBATANT": "Añadir nuevo luchador",
     "ADD_ARMOR": "Añadir armadura",
+    "ADD_EFFECT": "Añadir efecto",
     "ADD_WEAPON": "Añadir arma",
     "CREATE_CHAC": "Crear personaje",
     "DELETE_CONFIRM": "¿Si continuas {{name}} sera borrado permanentemente?",
     "REMOVE_CONFIRM": "¿Quieres eliminar a {{name}} del combate?",
     "ROLL_DICES": "Tirar dados",
     "SELECT_ARMOR_TYPE": "Selecciona un tipo de armadura",
+    "SELECT_INTENSITY": "Intensidad",
     "SELECT_LOCATIONS": "Selecciona las Localizaciones cubiertas",
     "SELECT_RACE": "Selecciona una raza",
+    "SELECT_SPELL": "Selecciona un hechizo",
+    "SELECT_SPELL_TYPE": "Selecciona un tipo de hechizo",
     "SELECT_WEAPON_TYPE": "Selecciona un tipo de arma",
     "SAVED_CHARACTERS": "Personajes guardados",
     "UTILS": {
@@ -159,6 +166,15 @@
       "CHA": "ASP"
     },
     "LOCATION": {
+      "TAIL": "Cola",
+      "RIGHT_BACK_LEG": "Pata Trasera D",
+      "LEFT_BACK_LEG": "Pata Trasera I",
+      "RIGHT_FRONT_LEG": "Pata Delantera D",
+      "LEFT_FRONT_LEG": "Pata Delantera I",
+      "FRONT_QUARTER": "Cuartos Delanteros",
+      "BACK_QUARTER": "Cuartos Traseros",
+      "RIGHT_WING": "Ala D",
+      "LEFT_WING": "Ala I",
       "RIGHT_LEG": "Pierna D",
       "LEFT_LEG": "Pierna I",
       "RIGHT_ARM": "Brazo D",
@@ -168,13 +184,14 @@
       "ABDOMEN": "Abdomen"
     },
     "RACES_TYPE":{
+      "AGIMORI": "Agimori",
+      "BROO": "Broo",
+      "DRAGON": "Dragón",
+      "DUCK": "Pato",
       "HUMAN": "Humano",
       "MOROCATH": "Morocante",
-      "DUCK": "Pato",
       "NEWLING": "Tritónido",
-      "AGIMORI": "Agimori",
-      "TUSK_RIDER": "Jinete de los colmillos",
-      "BROO": "Broo"
+      "TUSK_RIDER": "Jinete de los colmillos"
     },
     "SKILL_NAME":{
       "AGILITY": {
@@ -274,8 +291,6 @@
       "SPIRITUAL": "Magia espiritual",
       "DIVINE": "Magia divina",
       "SORCERY": "Hechicería",
-      "DRAGON": "Mágia de dragón",
-      "KI": "Habilidades ki",
       "OTHER": "Otra magia"
     },
     "SPELL_STATUS": {
@@ -285,6 +300,18 @@
     "SPELL_ACTION_TYPE": {
       "ACTIVE": "Activo",
       "PASSIVE": "Pasivo"
+    },
+    "SPELLS_NAMES":{
+      "FIREARROW": "Flecha ignea",
+      "FIREBLADE": "Cuchilla ignea",
+      "DULLBLADE": "Mellar armas",
+      "SPEED_DART": "Dardo veloz"
+    },
+    "WEAPON_POWER_SPELL_BY_TYPE": {
+      "SLASHING": "Cuchilla Afilada",
+      "PIERCING": "Cuchilla Afilada",
+      "BLUNT": "Garrotazo",
+      "NATURAL": "Mano de hierro"
     },
     "WEAPON_TYPES": {
       "AXE1H": "Hacha 1 mano",
@@ -418,13 +445,18 @@
       "POLE_LACE": "Lazo con palo",
       "WHIP": "Látigo",
       "STAFF": "Vara",
-      "THROWING_ROCK": "Piedra arrojadiza"
+      "THROWING_ROCK": "Piedra arrojadiza",
+      "FIREBREATHING": "Aliento de fuego",
+      "DRAGON_BITE": "Mordisco de dragón",
+      "DRAGON_CLAW": "Garra de dragón",
+      "DRAGON_TAIL": "Cola de dragón"
     }
   },
   "HINTS":{
     "DICES_STRING": "Nº dados D tipo Dado + mod",
     "ADD_COMBATANT": "Añadir nuevo luchador sin estadísticas",
     "ADD_SAVED_COMBATANT": "Añadir Personaje pregenerado",
-    "SELEC_SKILL_VALUE": "El valor de la habilidad"
+    "SELEC_SKILL_VALUE": "El valor de la habilidad",
+    "SELECT_INTENSITY": "La intensidad del hechizo"
   }
 }

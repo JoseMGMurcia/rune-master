@@ -81,7 +81,10 @@ export type WeaponNameType =
   WeaponNameEnum.WHIP |
   WeaponNameEnum.GREAT_AXE |
   WeaponNameEnum.STAFF |
-  WeaponNameEnum.JABELIN;
+  WeaponNameEnum.JABELIN |
+  WeaponNameEnum.FIREBREATHING |
+  WeaponNameEnum.BITE |
+  WeaponNameEnum.TAIL;
 
 export enum WeaponNameEnum {
   FIST = 'FIST',
@@ -162,8 +165,10 @@ export enum WeaponNameEnum {
   POLE_LACE = 'POLE_LACE',
   WHIP = 'WHIP',
   STAFF = 'STAFF',
-}
-
+  FIREBREATHING = 'FIREBREATHING',
+  BITE = 'BITE',
+  TAIL = 'TAIL',
+};
 
 export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: TranslateService): Weapon => {
   const literal = translate.instant( `PJ.WEAPON_NAME.${name}` );
@@ -198,6 +203,7 @@ export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: 
     if (name === WeaponNameEnum.FIST) {
       const weapon = new Weapon(literal, new DiceRoll(1,3),     DamageTypeEnum.BLUNT, 0, false, 0, 0 , '', false, 3, 3, false, WeaponTypeEnum.FIST, 0, 0, new DiceRoll(1,3), 25, 25);
       weapon.visible = false;
+      weapon.natural = true;
       return weapon;
     } else if (name === WeaponNameEnum.HEAVY_CESTUS) {
       return new Weapon(literal, new DiceRoll(1,3,2),   DamageTypeEnum.BLUNT, 1.5, false, 0, 0 , '', false, 8, 3, false, WeaponTypeEnum.FIST, 11, 0, new DiceRoll(1,3,2), 25, 25);
@@ -325,57 +331,60 @@ export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: 
     if (name === WeaponNameEnum.KICK) {
       const weapon = new Weapon(literal, new DiceRoll(1,6),  DamageTypeEnum.BLUNT, 0, false, 0, 0 , '', false, 3, 3, false, WeaponTypeEnum.KICK, 0, 0, new DiceRoll(1,6), 15, 15);
       weapon.visible = false;
+      weapon.natural = true;
       return weapon;    }
   } else if (type === WeaponTypeEnum.BRAWL) {
     if (name === WeaponNameEnum.BRAWL) {
       const weapon =  new Weapon(literal, new DiceRoll(1,6),  DamageTypeEnum.BLUNT, 0, false, 0, 0 , '', false, 3, 3, false, WeaponTypeEnum.BRAWL, 0, 0, new DiceRoll(1,6), 25, 25);
+      weapon.natural = true;
       weapon.visible = false;
       return weapon;    }
   } else if (type === WeaponTypeEnum.HORN) {
     if (name === WeaponNameEnum.HORN) {
       const weapon =  new Weapon(literal, new DiceRoll(1,4),  DamageTypeEnum.BLUNT, 0, false, 0, 0 , '', false, 3, 3, false, WeaponTypeEnum.HORN, 0, 0, new DiceRoll(1,4), 15, 15);
+      weapon.natural = true;
       weapon.visible = false;
       return weapon;    }
   } else if (type === WeaponTypeEnum.SHORT_BOW) {
     if (name === WeaponNameEnum.SHORT_BOW) {
-      return new Weapon(literal, new DiceRoll(1,6,1),  DamageTypeEnum.PIERCING, 0.5, true, 90, 120 , '1/MR', true, 0, 5, false, WeaponTypeEnum.SHORT_BOW, 9, 9, new DiceRoll(2,6,2), 5, 5);
+      return new Weapon(literal, new DiceRoll(1,6,1),  DamageTypeEnum.PIERCING, 0.5, true, 90, 120 , '1/MR', true, 5, 5, false, WeaponTypeEnum.SHORT_BOW, 9, 9, new DiceRoll(2,6,2), 5, 5);
     }
   } else if (type === WeaponTypeEnum.COMPOSITE_BOW) {
     if (name === WeaponNameEnum.COMPOSITE_BOW) {
-      return new Weapon(literal, new DiceRoll(1,8,1),  DamageTypeEnum.PIERCING, 0.5, true, 120, 225 , '1/MR', true, 0, 7, false, WeaponTypeEnum.COMPOSITE_BOW, 13, 9, new DiceRoll(2,8,2), 5, 5);
+      return new Weapon(literal, new DiceRoll(1,8,1),  DamageTypeEnum.PIERCING, 0.5, true, 120, 225 , '1/MR', true, 7, 7, false, WeaponTypeEnum.COMPOSITE_BOW, 13, 9, new DiceRoll(2,8,2), 5, 5);
     }
   } else if (type === WeaponTypeEnum.LONGBOW) {
     if (name === WeaponNameEnum.LONGBOW) {
-      return new Weapon(literal, new DiceRoll(1,8,1),  DamageTypeEnum.PIERCING, 0.5, true, 90, 275 , '1/MR', true, 0, 6, false, WeaponTypeEnum.LONGBOW, 11, 9, new DiceRoll(2,8,2), 5, 5);
+      return new Weapon(literal, new DiceRoll(1,8,1),  DamageTypeEnum.PIERCING, 0.5, true, 90, 275 , '1/MR', true, 6, 6, false, WeaponTypeEnum.LONGBOW, 11, 9, new DiceRoll(2,8,2), 5, 5);
     }
   } else if (type === WeaponTypeEnum.ATLATL) {
     //ATLATL mus be used with jabelins
     if (name === WeaponNameEnum.ATLATL) {
-      return new Weapon(literal, new DiceRoll(1,6),  DamageTypeEnum.PIERCING, 0.5, true, 10, 20 , '1/AC', true, 0, 6, false, WeaponTypeEnum.ATLATL, 7, 9, new DiceRoll(1,6), 5, 5);
+      return new Weapon(literal, new DiceRoll(1,6),  DamageTypeEnum.PIERCING, 0.5, true, 10, 20 , '1/AC', true, 6, 6, false, WeaponTypeEnum.ATLATL, 7, 9, new DiceRoll(1,6), 5, 5);
     }
   } else if (type === WeaponTypeEnum.HEAVY_CROSSBOW) {
     if (name === WeaponNameEnum.HEAVY_CROSSBOW) {
-      return new Weapon(literal, new DiceRoll(2,6,2),  DamageTypeEnum.PIERCING, 8, true, 55, 300 , '1/3AC', true, 0, 10, false, WeaponTypeEnum.HEAVY_CROSSBOW, 13, 7, new DiceRoll(4,6,4), 25, 5);
+      return new Weapon(literal, new DiceRoll(2,6,2),  DamageTypeEnum.PIERCING, 8, true, 55, 300 , '1/3AC', true, 10, 10, false, WeaponTypeEnum.HEAVY_CROSSBOW, 13, 7, new DiceRoll(4,6,4), 25, 5);
     }
   } else if (type === WeaponTypeEnum.LIGHT_CROSSBOW) {
     if (name === WeaponNameEnum.LIGHT_CROSSBOW) {
-      return new Weapon(literal, new DiceRoll(1,6,2),  DamageTypeEnum.PIERCING, 3.4, true, 40, 225 , '1/3AC', true, 0, 6, false, WeaponTypeEnum.LIGHT_CROSSBOW, 9, 7, new DiceRoll(2,6,4), 25, 5);
+      return new Weapon(literal, new DiceRoll(1,6,2),  DamageTypeEnum.PIERCING, 3.4, true, 40, 225 , '1/3AC', true, 6, 6, false, WeaponTypeEnum.LIGHT_CROSSBOW, 9, 7, new DiceRoll(2,6,4), 25, 5);
     }
   } else if (type === WeaponTypeEnum.MEDIUM_CROSSBOW) {
     if (name === WeaponNameEnum.MEDIUM_CROSSBOW) {
-      return new Weapon(literal, new DiceRoll(2,4,2),  DamageTypeEnum.PIERCING, 4.8, true, 50, 270 , '1/2AC', true, 0, 8, false, WeaponTypeEnum.MEDIUM_CROSSBOW, 11, 7, new DiceRoll(4,4,4), 25, 5);
+      return new Weapon(literal, new DiceRoll(2,4,2),  DamageTypeEnum.PIERCING, 4.8, true, 50, 270 , '1/2AC', true, 8, 8, false, WeaponTypeEnum.MEDIUM_CROSSBOW, 11, 7, new DiceRoll(4,4,4), 25, 5);
     }
   } else if (type === WeaponTypeEnum.REPEATING_CROSSBOW) {
     if (name === WeaponNameEnum.REPEATING_CROSSBOW) {
-      return new Weapon(literal, new DiceRoll(1,6,2),  DamageTypeEnum.PIERCING, 3.2, true, 60, 170 , '1/MR', true, 0, 6, false, WeaponTypeEnum.REPEATING_CROSSBOW, 9, 7, new DiceRoll(2,6,4), 25, 5);
+      return new Weapon(literal, new DiceRoll(1,6,2),  DamageTypeEnum.PIERCING, 3.2, true, 60, 170 , '1/MR', true, 6, 6, false, WeaponTypeEnum.REPEATING_CROSSBOW, 9, 7, new DiceRoll(2,6,4), 25, 5);
     }
   } else if (type === WeaponTypeEnum.ROCK_LAUNCHER) {
     if (name === WeaponNameEnum.ROCK_LAUNCHER) {
-      return new Weapon(literal, new DiceRoll(1,6,2),  DamageTypeEnum.PIERCING, 3.4, true, 60, 170 , '1/AC', true, 0, 6, false, WeaponTypeEnum.ROCK_LAUNCHER, 11, 7, new DiceRoll(2,6,4), 10, 5);
+      return new Weapon(literal, new DiceRoll(1,6,2),  DamageTypeEnum.PIERCING, 3.4, true, 60, 170 , '1/AC', true, 6, 6, false, WeaponTypeEnum.ROCK_LAUNCHER, 11, 7, new DiceRoll(2,6,4), 10, 5);
     }
   } else if (type === WeaponTypeEnum.BLOWGUN) {
     if (name === WeaponNameEnum.BLOWGUN) {
-      return new Weapon(literal, new DiceRoll(1,3),  DamageTypeEnum.PIERCING, 0.5, true, 30, 30 , '1/AC', true, 0, 4, false, WeaponTypeEnum.BLOWGUN, 0, 11, new DiceRoll(2,3), 10, 5);
+      return new Weapon(literal, new DiceRoll(1,3),  DamageTypeEnum.PIERCING, 0.5, true, 30, 30 , '1/AC', true, 4, 4, false, WeaponTypeEnum.BLOWGUN, 0, 11, new DiceRoll(2,3), 10, 5);
     }
   } else if (type === WeaponTypeEnum.SLING) {
     if (name === WeaponNameEnum.SLING) {
@@ -383,19 +392,19 @@ export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: 
     }
   } else if (type === WeaponTypeEnum.CROOK_SLING) {
     if (name === WeaponNameEnum.CROOK_SLING) {
-      return new Weapon(literal, new DiceRoll(1,10),  DamageTypeEnum.PIERCING, 0.5, true, 120, 120 , '1/AC', true, 0, 10, false, WeaponTypeEnum.CROOK_SLING, 9, 11, new DiceRoll(2,10), 10, 5);
+      return new Weapon(literal, new DiceRoll(1,10),  DamageTypeEnum.PIERCING, 0.5, true, 120, 120 , '1/AC', true, 10, 10, false, WeaponTypeEnum.CROOK_SLING, 9, 11, new DiceRoll(2,10), 10, 5);
     }
   } else if (type === WeaponTypeEnum.JABELIN) {
     if (name === WeaponNameEnum.JABELIN) {
-      return new Weapon(literal, new DiceRoll(1,8),  DamageTypeEnum.PIERCING, 1.5, true, 20, 50 , '1/MR', true, 0, 8, false, WeaponTypeEnum.JABELIN, 9, 9, new DiceRoll(2,8), 10, 5);
+      return new Weapon(literal, new DiceRoll(1,8),  DamageTypeEnum.PIERCING, 1.5, true, 20, 50 , '1/MR', true, 8, 8, false, WeaponTypeEnum.JABELIN, 9, 9, new DiceRoll(2,8), 10, 5);
     }
   } else if (type === WeaponTypeEnum.THROWING_AXE) {
     if (name === WeaponNameEnum.THROWING_AXE) {
-      return new Weapon(literal, new DiceRoll(1,6),  DamageTypeEnum.PIERCING, 0.5, true, 20, 20 , '1/MR', true, 0, 6, false, WeaponTypeEnum.THROWING_AXE, 9, 11, new DiceRoll(1,6), 10, 5);
+      return new Weapon(literal, new DiceRoll(1,6),  DamageTypeEnum.PIERCING, 0.5, true, 20, 20 , '1/MR', true, 6, 6, false, WeaponTypeEnum.THROWING_AXE, 9, 11, new DiceRoll(1,6), 10, 5);
     }
   } else if (type === WeaponTypeEnum.THROWING_KNIFE) {
     if (name === WeaponNameEnum.THROWING_KNIFE) {
-      return new Weapon(literal, new DiceRoll(1,4),  DamageTypeEnum.PIERCING, 0.2, true, 20, 20 , '1/MR', true, 0, 4, false, WeaponTypeEnum.THROWING_KNIFE, 0, 11, new DiceRoll(2,4), 5, 5);
+      return new Weapon(literal, new DiceRoll(1,4),  DamageTypeEnum.PIERCING, 0.2, true, 20, 20 , '1/MR', true, 4, 4, false, WeaponTypeEnum.THROWING_KNIFE, 0, 11, new DiceRoll(2,4), 5, 5);
     }
   } else if (type === WeaponTypeEnum.THROWING_ROCK) {
     if (name === WeaponNameEnum.THROWING_STONE) {
@@ -407,11 +416,11 @@ export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: 
     }
   } else if (type === WeaponTypeEnum.WAR_BOOMERANG) {
     if (name === WeaponNameEnum.WAR_BOOMERANG) {
-      return new Weapon(literal, new DiceRoll(1,8),  DamageTypeEnum.PIERCING, 1, true, 30, 50 , '1/AC', true, 0, 6, false, WeaponTypeEnum.WAR_BOOMERANG, 13, 9, new DiceRoll(1,8), 10, 5);
+      return new Weapon(literal, new DiceRoll(1,8),  DamageTypeEnum.PIERCING, 1, true, 30, 50 , '1/AC', true, 6, 6, false, WeaponTypeEnum.WAR_BOOMERANG, 13, 9, new DiceRoll(1,8), 10, 5);
     }
   } else if (type === WeaponTypeEnum.HUNTING_BOOMERANG) {
     if (name === WeaponNameEnum.HUNTING_BOOMERANG) {
-      return new Weapon(literal, new DiceRoll(1,4),  DamageTypeEnum.PIERCING, 1, true, 30, 50 , '1/MR', true, 0, 3, false, WeaponTypeEnum.HUNTING_BOOMERANG, 9, 11, new DiceRoll(1,4), 5, 5);
+      return new Weapon(literal, new DiceRoll(1,4),  DamageTypeEnum.PIERCING, 1, true, 30, 50 , '1/MR', true, 3, 3, false, WeaponTypeEnum.HUNTING_BOOMERANG, 9, 11, new DiceRoll(1,4), 5, 5);
     }
   } else if (type === WeaponTypeEnum.DART) {
     if (name === WeaponNameEnum.DART) {
@@ -423,7 +432,7 @@ export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: 
     }
   } else if (type === WeaponTypeEnum.ROPE_LACE) {
     if (name === WeaponNameEnum.ROPE_LACE) {
-      return new Weapon(literal, new DiceRoll(0,0),  DamageTypeEnum.PIERCING, 1, true, 10, 10 , '1/5AC', true, 0, 0, false, WeaponTypeEnum.ROPE_LACE, 9, 13, new DiceRoll(0,0), 5, 5);
+      return new Weapon(literal, new DiceRoll(0,0),  DamageTypeEnum.PIERCING, 1, true, 10, 10 , '1/5AC', true, 4, 0, false, WeaponTypeEnum.ROPE_LACE, 9, 13, new DiceRoll(0,0), 5, 5);
     }
   } else if (type === WeaponTypeEnum.POLE_LACE) {
     if (name === WeaponNameEnum.POLE_LACE) {
@@ -431,7 +440,7 @@ export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: 
     }
   } else if (type === WeaponTypeEnum.WHIP) {
     if (name === WeaponNameEnum.WHIP) {
-      return new Weapon(literal, new DiceRoll(1,4),  DamageTypeEnum.PIERCING, 3, true, 5, 5 , '1/AC', true, 0, 6, false, WeaponTypeEnum.WHIP, 9, 9, new DiceRoll(1,4), 10, 5);
+      return new Weapon(literal, new DiceRoll(1,4),  DamageTypeEnum.PIERCING, 3, true, 5, 5 , '1/AC', true, 6, 6, false, WeaponTypeEnum.WHIP, 9, 9, new DiceRoll(1,4), 10, 5);
     }
   }
   return new Weapon('No weapon', new DiceRoll(0,0),  DamageTypeEnum.PIERCING, 0, true, 0, 0 , '', true, 0, 0, false, WeaponTypeEnum.FIST, 0, 0, new DiceRoll(0,0), 5, 5);

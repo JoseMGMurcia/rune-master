@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1001,
+    "name": "Absorción",
+    "description": "Este conjuro Absorbe los conjuros enemigos, transformandolos en puntos mágicos que, a partir de ese momento estarán disponibles para el lanzador. Cada punto elimina 1 punto de magia divina o 2 de magia espiritual o de hechicería. Solo actua si puede absorber un cojuro completamente, si no no tendrá efecto. Cuando expira el plazo desaparecen los PM que excedan la PER del lanzador. Incompatible con Escudo.",
+    "range": "A distancia",
+    "duration": "Temporal",
+    "points": 1,
+    "stackable": true,
+    "reusable": true
+  },
+  {
+    "id": 1002,
+    "name": "(Arma) Auténtica)",
+    "description": "Dobla el daño de un arma del tipo indicado.",
+    "range": "A distancia",
+    "duration": "Temporal",
+    "points": 1,
+    "stackable": false,
+    "reusable": true
+  }
+]

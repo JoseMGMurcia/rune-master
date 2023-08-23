@@ -1,5 +1,5 @@
 import { NUMBERS } from '../constants/number.constants';
-import { Character, Location } from '../models/character.model';
+import { Character, Location, Weapon } from '../models/character.model';
 import { DiceRoll } from '../models/dices.model';
 
 export const getHp = (pj: Character): number =>
@@ -72,6 +72,11 @@ export const getMRSIZ = (pj: Character): number => {
 
 export const getMRCC = (pj: Character): number => {
   return getMRSIZ(pj) + getMRDES(pj);
+};
+
+export const getRangedMR = (pj: Character, weapon: Weapon): string => {
+  const mapper = ['', '1/5/9', '2/7', '3/9', '4'];
+  return weapon.fireRate.includes('1/MR') ? mapper[getMRDES(pj)] : `${getMRDES(pj)}`;
 };
 
 const getMod = (primary: number[], secondary: number[], negative: number[]): number => {
@@ -186,3 +191,11 @@ export const getWeaponList = (pj: Character): string[] => {
 
   return Array.from(new Set(weapons));
 };
+
+export const getSpiritualPercentage = (pj: Character): number => {
+  return getMagMod(pj) + pj.stats.POW.value * NUMBERS.N_5 - Math.ceil(getCAR(pj, true));
+}
+
+export const getDivinePercentage = (pj: Character): number => {
+  return getMagMod(pj) +  NUMBERS.N_100 - Math.ceil(getCAR(pj, true));
+}

@@ -4,23 +4,25 @@ export class RaceTypeClass {
 }
 
 export const RACES: RaceTypeClass[] = [
+  { id: 'AGIMORI', name: 'AGIMORI' },
+  { id: 'BROO', name: 'BROO'},
+  { id: 'DRAGON', name: 'DRAGON'},
+  { id: 'DUCK', name: 'DUCK' },
   { id: 'HUMAN',  name: 'HUMAN' },
   { id: 'MOROCATH', name: 'MOROCATH' },
-  { id: 'DUCK', name: 'DUCK' },
   { id: 'NEWLING', name: 'NEWLING' },
-  { id: 'AGIMORI', name: 'AGIMORI' },
   { id: 'TUSK_RIDER', name: 'TUSK_RIDER'},
-  { id: 'BROO', name: 'BROO'},
 ];
 
 export enum RaceTypeEnum {
+  AGIMORI = 'AGIMORI',
+  BROO = 'BROO',
+  DUCK = 'DUCK',
+  DRAGON = 'DRAGON',
   HUMAN = 'HUMAN',
   MOROCATH = 'MOROCATH',
-  DUCK = 'DUCK',
   NEWLING = 'NEWLING',
-  AGIMORI = 'AGIMORI',
   TUSK_RIDER = 'TUSK_RIDER',
-  BROO = 'BROO',
 }
 
-export type RaceType = 'HUMAN' | 'MOROCATH' | 'DUCK' | 'NEWLING' | 'AGIMORI' | 'TUSK_RIDER' | 'BROO';
+export type RaceType = RaceTypeEnum.AGIMORI | RaceTypeEnum.BROO | RaceTypeEnum.DUCK | RaceTypeEnum.DRAGON | RaceTypeEnum.HUMAN | RaceTypeEnum.MOROCATH | RaceTypeEnum.NEWLING | RaceTypeEnum.TUSK_RIDER;

@@ -101,6 +101,11 @@
 
   &-25 {
     width: 25%;
+
+    &-padding {
+      margin: 0.5rem;
+      width: calc(85% - 1rem);
+    }
   }
 
   &-30 {
@@ -326,6 +331,10 @@
 
   &-left {
     margin-left: 1rem;
+
+    &-mini {
+      margin: 0.5rem;
+    }
   }
 
   &-right {

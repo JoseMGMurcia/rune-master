@@ -19,6 +19,7 @@ import { ArmorDialogComponent } from './components/armor-dialog/armor-dialog.com
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { RaceDialogComponent } from './components/race-dialog/race-dialog.component';
 import { StatsDialogComponent } from './components/stats-dialog/stats-dialog.component';
+import { SpellsDialogComponent } from './components/spells-dialog/spells-dialog.component';
 
 export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,6 +40,7 @@ const components = [
   WeaponDialogComponent,
   ArmorDialogComponent,
   StatsDialogComponent,
+  SpellsDialogComponent,
 ];
 
 

@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { Character, CombatSkill, Location, Skill, WeaponType, Armor, Weapon } from '../models/character.model';
+import { Character, CombatSkill, Location, Skill, WeaponType, Armor, Weapon, Results } from '../models/character.model';
 import { NUMBERS } from '../constants/number.constants';
 import { WeaponNameType, createWeapon } from './equip.factory';
 import { ArmorType } from '../constants/equip/armor.const';
@@ -24,27 +24,35 @@ export const resetTemporals = (pj: Character): void => {
 
   pj.weapons = pj.weapons.map((weapon: Weapon) => {
     weapon.tempAP = NUMBERS.N_0;
+    weapon.showDetail = false;
+    weapon.useSustitutiveDMG = false;
+    weapon.increasedIntensity = 0;
+    weapon.dullBladeIntensity = 0;
+    weapon.sustitutiveDamage = {...weapon.damage, roll: weapon.damage.roll};
+    weapon.sustitutiveSpecialDamage = {...weapon.specialDamage, roll: weapon.specialDamage.roll};
     return weapon;
   });
+  pj.swShowResults = false;
+  pj.results = new Results();
 };
 
 export const getUniqueID = (name: string) => {
   return name + '_' + new Date().getTime();
 };
 
-export const addWeapon = ( pj: Character, type: WeaponType, name: WeaponNameType, translate: TranslateService, attack = NUMBERS.N_5, defence = NUMBERS.N_5): void => {
-  const weapon = createWeapon(type, name, translate);
-  weapon.inCombat = true;
-  if(!pj.weapons.some(w => w.name === weapon.name && w.weaponType === weapon.weaponType)){
-    pj.weapons.push(weapon);
+export const addWeapon = ( pj: Character, type: WeaponType, name: WeaponNameType, translate: TranslateService, attack = NUMBERS.N_5, defence = NUMBERS.N_5, weapon: Weapon | undefined = undefined): void => {
+  const weap = weapon ? weapon : createWeapon(type, name, translate);
+  weap.inCombat = true;
+  if(!pj.weapons.some(w => w.name === weap.name && w.weaponType === weap.weaponType)){
+    pj.weapons.push(weap);
   }
-  if(!pj.skills.ATTACK.some(s => s.weaponType === weapon.weaponType)) {
+  if(!pj.skills.ATTACK.some(s => s.weaponType === weap.weaponType)) {
     const types = translate.instant('PJ.WEAPON_TYPES');
-    pj.skills.ATTACK.push(new CombatSkill(types['type'], weapon.attackBS > attack ? weapon.attackBS : attack, weapon.weaponType));
+    pj.skills.ATTACK.push(new CombatSkill(types['type'], weap.attackBS > attack ? weap.attackBS : attack, weap.weaponType));
   }
-  if(!pj.skills.DEFENSE.some(s => s.weaponType === weapon.weaponType)) {
+  if(!pj.skills.DEFENSE.some(s => s.weaponType === weap.weaponType)) {
     const types = translate.instant('PJ.WEAPON_TYPES');
-    pj.skills.DEFENSE.push(new CombatSkill(types['type'], weapon.parryBS > defence ? weapon.parryBS : defence, weapon.weaponType));
+    pj.skills.DEFENSE.push(new CombatSkill(types['type'], weap.parryBS > defence ? weap.parryBS : defence, weap.weaponType));
   }
 };
 

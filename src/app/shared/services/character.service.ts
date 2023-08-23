@@ -31,6 +31,7 @@ export class CharactersService {
   }
 
   public updateOrAddCharacter(character: Character): void {
+    character.lastUpdate = new Date();
     this.db.saveData(DB_TABLES.PJS, [character]);
     this.updateCharacters();
   }

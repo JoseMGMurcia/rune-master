@@ -4,7 +4,7 @@ import { Character } from '../../models/character.model';
 import { TranslateService } from '@ngx-translate/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { RACES, RaceTypeEnum } from '../../models/races.model';
-import { setInitialHumanCharacter, transformToMorocath, transformToDuck, transformToNewLing, transformAgimori, transformTuskRider, transformToBroo } from '../../utils/races.utils';
+import { setInitialHumanCharacter, transformToMorocath, transformToDuck, transformToNewLing, transformAgimori, transformTuskRider, transformToBroo, transformToDragon } from '../../utils/races.utils';
 
 @Component({
   selector: 'app-race-dialog',
@@ -43,6 +43,9 @@ export class RaceDialogComponent {
 
     } else if (this.form.controls['race'].value === RaceTypeEnum.DUCK) {
       transformToDuck(this.data.character, this.translate);
+
+    } else if (this.form.controls['race'].value === RaceTypeEnum.DRAGON) {
+      transformToDragon(this.data.character, this.translate);
 
     } else if (this.form.controls['race'].value === RaceTypeEnum.NEWLING) {
       transformToNewLing(this.data.character, this.translate);

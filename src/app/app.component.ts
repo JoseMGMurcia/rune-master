@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private loadSpells() {
     this.jsonService.getSpiritSpells('../assets/i18n/spirit-magic.es.json').subscribe((data) => {
       data.sort((a, b) => a.name.localeCompare(b.name));
-      this.SpellService.setGiftData(data);
+      this.SpellService.setSpitirualSpellsData(data);
     });
   }
 }

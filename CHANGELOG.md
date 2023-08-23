@@ -49,6 +49,18 @@
  - Stats editor modal.
  - Race Type Ids added.
 
+## 0.3.1
+ - Results class added.
+ - No Dragon spell nor ki spell on character model, those spells went to 'other' category
+ - Spells displayed on combat component.
+ - Weapon states: spiritual enhance, firearrow, fireblade, speed dart & dull blade.
+ - Character last update value fixxed.
+ - Ranged weapons fire MR & AP.
+
+## 0.3.2
+
+
+
 ## Futute WalkThrough 
 - Add Broo Horn
 - Add Tritonid Trident

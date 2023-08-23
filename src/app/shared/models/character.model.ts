@@ -54,8 +54,10 @@ export class Character {
   public swShowLocs = true;
   public swShowUtils = false;
   public swCombat = false;
+  public swMagic = false;
   public swShowResults = false;
   public result = '';
+  public results = new Results();
 
   constructor(name: string, player = '') {
     this.id = getUniqueID(name);
@@ -63,6 +65,16 @@ export class Character {
     this.player = player;
     this.pnj = player ? false : true;
   }
+}
+
+export class Results {
+  public combat = '';
+  public magic = {
+    spiritual: '',
+    sorcery: '',
+    divine: '',
+    other: '',
+  };
 }
 
 export class Characteristics {
@@ -151,10 +163,17 @@ export class Spells {
   public SPIRITUAL: Spell[] = [];
   public SORCERY: Spell[] = [];
   public DIVINE: Spell[] = [];
-  public DRAGON: Spell[] = [];
-  public KI: Spell[] = [];
   public OTHER: Spell[] = [];
 }
+
+export enum SpellTypeEnum {
+  SPIRITUAL = 'SPIRITUAL',
+  SORCERY = 'SORCERY',
+  DIVINE = 'DIVINE',
+  OTHER = 'OTHER',
+};
+
+export type SpellType = 'SPIRITUAL' | 'SORCERY' | 'DIVINE' | 'OTHER';
 
 export class Spell {
   public id = 0;
@@ -174,6 +193,7 @@ export class Spell {
   public stackable = false;
   public memorized = false;
   public matrix = false;
+  public swShowDescription = false;
 
   constructor(name: string, points = NUMBERS.N_1, reusable = false, memoriced = true, skill = NUMBERS.N_0) {
     this.name = name;
@@ -181,6 +201,13 @@ export class Spell {
     this.reusable = reusable;
     this.memorized = memoriced;
     this.sorcerySkillValue = skill;
+  }
+
+  static createSorcerylSpell(name: string, skill: number ): Spell {
+    const spell = new Spell(name);
+    spell.reusable = true;
+    spell.sorcerySkillValue = skill;
+    return spell;
   }
 }
 
@@ -202,13 +229,15 @@ export class Equipment {
 export enum DamageTypeEnum {
   SLASHING = 'SLASHING',
   PIERCING = 'PIERCING',
-  BLUNT = 'BLUNT'
+  BLUNT = 'BLUNT',
+  FIRE = 'FIRE',
 }
 
 export type DamageType =
   DamageTypeEnum.SLASHING |
   DamageTypeEnum.PIERCING |
-  DamageTypeEnum.BLUNT;
+  DamageTypeEnum.BLUNT |
+  DamageTypeEnum.FIRE;
 
 export class Weapon extends Equipment {
   public damage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
@@ -226,6 +255,10 @@ export class Weapon extends Equipment {
   public weaponType: WeaponType = WeaponTypeEnum.AXE1H;
   public bonusAttack = NUMBERS.N_0;
   public bonusParry = NUMBERS.N_0;
+  public bonusDamage = NUMBERS.N_0;
+  public useSustitutiveDMG = false;
+  public sustitutiveDamage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
+  public sustitutiveSpecialDamage: DiceRoll = new DiceRoll(NUMBERS.N_0, NUMBERS.N_0);
   public minimumSTR = NUMBERS.N_0;
   public minimumDEX = NUMBERS.N_0;
   public attackBS = NUMBERS.N_5;
@@ -233,6 +266,9 @@ export class Weapon extends Equipment {
   public parryBS = NUMBERS.N_5;
   public parryTempBS = NUMBERS.N_0;
   public showDetail = false;
+  public increasedIntensity = NUMBERS.N_0;
+  public dullBladeIntensity = NUMBERS.N_0;
+  public natural = false;
 
   constructor(
     name: string,
@@ -342,6 +378,9 @@ export enum WeaponTypeEnum {
   POLE_LACE = 'POLE_LACE',
   NET = 'NET',
   WHIP = 'FLAIL',
+  FIREBREATHING = 'FIREBREATHING',
+  BITE = 'BITE',
+  TAIL = 'TAIL',
   OTHER = 'OTHER'
 }
 
@@ -396,7 +435,10 @@ export type WeaponType =
   WeaponTypeEnum.TOOL_HOE |
   WeaponTypeEnum.TOOL_SCYTHE |
   WeaponTypeEnum.TOOL_SICKLE |
-  WeaponTypeEnum.TOOL_SHOVEL;
+  WeaponTypeEnum.TOOL_SHOVEL |
+  WeaponTypeEnum.FIREBREATHING |
+  WeaponTypeEnum.BITE |
+  WeaponTypeEnum.TAIL;
 
 export enum hitpointsRatioEnum {
   X16 = 0.16,

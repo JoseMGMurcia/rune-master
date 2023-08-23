@@ -204,7 +204,7 @@
 
     <div class=" u-width-100-padding u-flex border-all " *ngIf="character.swShowResults && character.swCombat">
       <p class="u-width-30 u-flex u-flex-center u-flex-space-center rQItem"><b>{{ "COMMONS.RESULT" | translate }}:</b> </p>
-      <p class="u-width-60 u-flex u-flex-center u-flex-space-center rQItem">{{ character.result }}</p>
+      <p class="u-width-60 u-flex u-flex-center u-flex-space-center rQItem">{{ character.results.combat }}</p>
       <button mat-icon-button class="rQItem u-width-10" (click)="clearResult()">
         <mat-icon>clear</mat-icon>
       </button>
@@ -241,8 +241,8 @@
           </div>
           <div class="u-width-25 u-flex u-flex-center"><p>{{getNameString(weapon) }}</p></div>
           <div class="u-width-8 u-flex u-flex-center u-flex-space-center">
-            <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollD100(getTAttSkill(character, weapon.weaponType))">
-              {{ getTAttSkill(character, weapon.weaponType) + getFPAllMod() }}
+            <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollD100(getTAttSkill(character, weapon))">
+              {{ getTAttSkill(character, weapon) + getFPAllMod() }}
             </button>
           </div>
           <div class="u-width-8 u-flex u-flex-center u-flex-space-center">
@@ -268,8 +268,188 @@
           <div class="u-width-15 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.range }} / {{weapon.maxRange }}</p></div>
           <div class="u-width-15 u-flex u-flex-center u-flex-space-center"><p>{{ weapon.fireRate }}</p></div>
         </div>
-        <div class="u-width-100 u-text-center" *ngIf="weapon.showDetail">
-          <p class="u-width-100 u-flex border-all padding-top padding-bottom"><b>{{ "PJ.WEAPON_UTILS" | translate }}</b></p>
+        <div class="u-width-100 u-text-center u-flex" *ngIf="weapon.showDetail">
+          <div class="u-width-3" *ngIf="!weapon.ranged"></div>
+          <div class="u-width-15 u-flex u-flex-center u-flex-space-center" *ngIf="!weapon.ranged">
+            <p class="u-width-100"> {{ getWeaponEffectText(weapon)  }} </p>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addPowerWeaopnEffect(weapon, -1)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <div class="u-text-center"><p>{{ weapon.increasedIntensity }}</p></div>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addPowerWeaopnEffect(weapon, 1)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="u-width-3"  *ngIf="!weapon.natural && (weapon.damageType === 'SLASHING' || weapon.damageType === 'PIERCING' || weapon.ranged)"></div>
+          <div class="u-width-15 u-flex u-flex-center u-flex-space-center"
+            *ngIf="!weapon.natural && (weapon.damageType === 'SLASHING' || weapon.damageType === 'PIERCING' || weapon.ranged)">
+            <p class="u-width-100" *ngIf="!weapon.ranged"> {{ "PJ.SPELLS_NAMES.FIREBLADE" | translate  }} </p>
+            <p class="u-width-100" *ngIf="weapon.ranged"> {{ "PJ.SPELLS_NAMES.FIREARROW" | translate  }} </p>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="setFireBlade(weapon, true)">
+              <mat-icon>local_fire_department</mat-icon>
+            </button>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="setFireBlade(weapon, false)">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </div>
+          <div class="u-width-3" *ngIf="!weapon.natural"></div>
+          <div class="u-width-15 u-flex u-flex-center u-flex-space-center" *ngIf="!weapon.natural">
+            <p class="u-width-100"> {{ "PJ.SPELLS_NAMES.DULLBLADE" | translate  }} </p>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addDullBladeEffect(weapon, -1)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <div class="u-text-center"><p>{{ weapon.dullBladeIntensity }}</p></div>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addDullBladeEffect(weapon, 1)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div> 
+          <div class="u-width-3" *ngIf="weapon.ranged && !weapon.natural"></div>
+          <div class="u-width-15 u-flex u-flex-center u-flex-space-center" *ngIf="weapon.ranged && !weapon.natural">
+            <p class="u-width-100"> {{ "PJ.SPELLS_NAMES.SPEED_DART" | translate  }} </p>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="setSpeedDart(weapon, true)">
+              <mat-icon>double_arrow</mat-icon>
+            </button>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="setSpeedDart(weapon, false)">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="u-width-100-padding u-flex u-flex-column border-all">
+    <div class="u-flex listItem padding-all" (click)="character.swMagic = !character.swMagic">
+        <p class="u-width-100 u-flex u-flex-space-center"><b>{{ "PJ.MAGIC" | translate }}</b></p>
+    </div>
+
+    <div class="u-flex u-width-100-padding margin-top" *ngIf="character.swMagic">
+      <div class="u-width-25 border-all padding-all-mini margin-left-mini">
+        <div class="u-flex u-flex-center u-width-100">
+          <p class="u-width-50 u-text-center"><b>{{ "PJ.SPELL_TYPE.SPIRITUAL" | translate }}</b></p>
+          <div class="u-width-15 u-flex-center">
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addSpell()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="u-width-35" *ngIf="character.results.magic.spiritual"><p class="u-width-100 u-text-center" ><b>{{ "COMMONS.RESULT" | translate }}:</b> {{ character.results.magic.spiritual }}</p></div>
+        </div>
+        
+        <div class="u-flex u-width-100">
+          <p class="u-width-80 u-text-center"><b>{{ "PJ.NAME" | translate }}</b></p>
+          <p class="u-width-20 u-text-center"><b>{{ "COMMONS.PERCENTAGE_SHORT" | translate }}</b></p>
+        </div>
+        <div class="u-flex u-flex-column"
+          *ngFor="let spell of character.spells.SPIRITUAL let i = index"
+          [ngClass]="getLitsLineClass(i)">
+          <div class="u-width-100 u-flex">
+            <div class="u-width-5 u-text-center">
+              <mat-icon class="cardIconButton cardIconButton-mini" (click)="spell.swShowDescription = !spell.swShowDescription">remove_red_eye</mat-icon>
+            </div>
+            <p class="u-width-75 u-text-center">{{ getSpiritualString(spell) }}</p>
+            <div class="u-width-20 u-flex u-flex-center u-flex-space-center">
+              <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollSpitirualD100()">
+                {{ getSpiritualPertent() }}
+              </button>
+            </div>   
+          </div>
+          <div class="u-width-100" *ngIf="spell.swShowDescription">
+            <p class="u-width-100-padding-sides" *ngIf="spell.stackable">{{ "COMMONS.VARIABLE" | translate }}</p>
+            <p class="u-width-100-padding-sides" *ngIf="!spell.stackable"> {{ spell.points }} {{ "COMMONS.POINTS" | translate }}</p>
+            <p class="u-width-100-padding-sides padding-bottom-mini">{{ spell.range }}, {{ spell.duration }}, {{ getActiveText(spell) }}</p>
+            <p class="u-width-100-padding-sides padding-bottom justyfy">{{ spell.description }}</p>
+            
+          </div>
+        </div>
+      </div>
+      
+      <div class="u-width-25 border-all padding-all-mini margin-left-mini">
+        <div class="u-flex u-flex-center u-width-100">
+          <p class="u-width-50 u-text-center"><b>{{ "PJ.SPELL_TYPE.DIVINE" | translate }}</b></p>
+          <div class="u-width-15 u-flex-center">
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addSpell()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="u-width-35" *ngIf="character.results.magic.divine"><p class="u-width-100 u-text-center" ><b>{{ "COMMONS.RESULT" | translate }}:</b> {{ character.results.magic.divine }}</p></div>
+        </div>
+        
+        <div class="u-flex u-width-100">
+          <p class="u-width-80 u-text-center"><b>{{ "PJ.NAME" | translate }}</b></p>
+          <p class="u-width-20 u-text-center"><b>{{ "COMMONS.PERCENTAGE_SHORT" | translate }}</b></p>
+        </div>
+        <div class="u-flex u-flex-column"
+          *ngFor="let spell of character.spells.DIVINE let i = index"
+          [ngClass]="getLitsLineClass(i)">
+          <div class="u-width-100 u-flex">
+            <div class="u-width-5 u-text-center">
+              <mat-icon class="cardIconButton cardIconButton-mini" (click)="spell.swShowDescription = !spell.swShowDescription">remove_red_eye</mat-icon>
+            </div>
+            <p class="u-width-75 u-text-center">{{ getDivinelString(spell) }}</p>
+            <div class="u-width-20 u-flex u-flex-center u-flex-space-center">
+              <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollDivinelD100()">
+                {{ getDivinelPertent() }}
+              </button>
+            </div>   
+          </div>
+        </div>
+      </div>
+
+      <div class="u-width-25 border-all padding-all-mini margin-left-mini">
+        <div class="u-flex u-flex-center u-width-100">
+          <p class="u-width-50 u-text-center"><b>{{ "PJ.SPELL_TYPE.SORCERY" | translate }}</b></p>
+          <div class="u-width-15 u-flex-center">
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addSpell()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="u-width-35" *ngIf="character.results.magic.sorcery"><p class="u-width-100 u-text-center" ><b>{{ "COMMONS.RESULT" | translate }}:</b> {{ character.results.magic.sorcery }}</p></div>
+        </div>
+        
+        <div class="u-flex u-width-100">
+          <p class="u-width-80 u-text-center"><b>{{ "PJ.NAME" | translate }}</b></p>
+          <p class="u-width-20 u-text-center"><b>{{ "COMMONS.PERCENTAGE_SHORT" | translate }}</b></p>
+        </div>
+        <div class="u-flex u-flex-column"
+          *ngFor="let spell of character.spells.SORCERY let i = index"
+          [ngClass]="getLitsLineClass(i)">
+            <div class="u-width-100 u-flex">
+              <div class="u-width-5 u-text-center">
+                <mat-icon class="cardIconButton cardIconButton-mini" (click)="spell.swShowDescription = !spell.swShowDescription">remove_red_eye</mat-icon>
+              </div>
+              <p class="u-width-75 u-text-center">{{ spell.name }}</p>
+              <div class="u-width-20 u-flex u-flex-center u-flex-space-center">
+                <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollSorcery1D100()">
+                  {{ spell.sorcerySkillValue }}
+                </button>
+              </div>   
+            </div>
+          </div>
+      </div>
+
+      <div class="u-width-25 border-all padding-all-mini margin-left-mini">
+        <div class="u-flex u-flex-center u-width-100">
+          <p class="u-width-50 u-text-center"><b>{{ "PJ.SPELL_TYPE.OTHER" | translate }}</b></p>
+          <div class="u-width-15 u-flex-center">
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addSpell()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="u-width-35" *ngIf="character.results.magic.other"><p class="u-width-100 u-text-center" ><b>{{ "COMMONS.RESULT" | translate }}:</b> {{ character.results.magic.other }}</p></div>
+        </div>
+        
+        <div class="u-flex u-width-100">
+          <p class="u-width-100 u-text-center"><b>{{ "PJ.NAME" | translate }}</b></p>
+        </div>
+        <div class="u-flex u-flex-column"
+          *ngFor="let spell of character.spells.OTHER let i = index"
+          [ngClass]="getLitsLineClass(i)">
+            <div class="u-width-100 u-flex">
+              <div class="u-width-5 u-text-center">
+                <mat-icon class="cardIconButton cardIconButton-mini" (click)="spell.swShowDescription = !spell.swShowDescription">remove_red_eye</mat-icon>
+              </div>
+              <p class="u-width-95 u-text-center">{{ spell.name }}</p>  
+            </div>
         </div>
       </div>
     </div>

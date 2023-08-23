@@ -1,10 +1,11 @@
 import { TranslateService } from '@ngx-translate/core';
 import { NUMBERS } from '../constants/number.constants';
-import { Character, Location, Skill, WeaponTypeEnum, armorWeightRatioEnum, hitpointsRatioEnum } from '../models/character.model';
+import { Character, DamageTypeEnum, Location, Skill, Weapon, WeaponTypeEnum, armorWeightRatioEnum, hitpointsRatioEnum } from '../models/character.model';
 import { addNaturalArmor, addWeapon, editSkill } from './character-creation.utils';
 import { WeaponNameEnum } from './equip.factory';
 import { getTotal } from './dices.utils';
 import { RaceTypeEnum } from '../models/races.model';
+import { DiceRoll } from '../models/dices.model';
 
 export const setRandomHumanStats = (pj: Character): void => {
   pj.stats.STR.value = getTotal(['3d6']);
@@ -74,6 +75,16 @@ export const setRandomBrooStats = (pj: Character): void => {
   pj.stats.POW.value = getTotal(['3d6']);
   pj.stats.DEX.value = getTotal(['3d6']);
   pj.stats.CHA.value = getTotal(['2d6']);
+};
+
+export const setRandomDragonStats = (pj: Character): void => {
+  pj.stats.STR.value = getTotal(['20d6']);
+  pj.stats.CON.value = getTotal(['10d6']);
+  pj.stats.INT.value = getTotal(['10']);
+  pj.stats.SIZ.value = getTotal(['20d6']);
+  pj.stats.POW.value = getTotal(['4d6','+6']);
+  pj.stats.DEX.value = getTotal(['3d6']);
+  pj.stats.CHA.value = NUMBERS.N_0;
 };
 
 export const setInitialHumanCharacter = (pj: Character, translate: TranslateService): Character => {
@@ -230,6 +241,8 @@ export const transformToDuck = (pj: Character, translate: TranslateService): Cha
 export const transformToNewLing = (pj: Character, translate: TranslateService): Character => {
   pj.race = translate.instant('PJ.RACES_TYPE.NEWLING');
   pj.raceID = RaceTypeEnum.NEWLING;
+  pj.movement = NUMBERS.N_2;
+
   pj.age = NUMBERS.N_3;
 
   const agiSkills =  translate.instant('PJ.SKILL_NAME.AGILITY');
@@ -249,6 +262,8 @@ export const transformToNewLing = (pj: Character, translate: TranslateService): 
   
   const steSkills =  translate.instant('PJ.SKILL_NAME.STEALTH');
   editSkill( new Skill(steSkills.HIDE, NUMBERS.N_50) ,pj.skills.STEALTH );
+
+  pj.locations = [new Location(translate.instant('PJ.LOCATION.TAIL'), hitpointsRatioEnum.X25), ...pj.locations];
  
   return pj;
 };
@@ -308,6 +323,58 @@ export const transformToBroo = (pj: Character, translate: TranslateService): Cha
   return pj;
 };
 
+export const transformToDragon = (pj: Character, translate: TranslateService): Character => {
+  pj.race = translate.instant('PJ.RACES_TYPE.DRAGON');
+  pj.raceID = RaceTypeEnum.DRAGON;
+  pj.age = NUMBERS.N_50;
+
+  const agiSkills =  translate.instant('PJ.SKILL_NAME.AGILITY');
+  editSkill( new Skill(agiSkills.RIDE, NUMBERS.N_75) ,pj.skills.AGILITY );
+
+
+  const perSkills =  translate.instant('PJ.SKILL_NAME.AWARENESS');
+  editSkill( new Skill(perSkills.LISTEN, NUMBERS.N_50) ,pj.skills.AWARENESS );
+  editSkill( new Skill(perSkills.FIND, NUMBERS.N_50) ,pj.skills.AWARENESS );
+
+  const locations =  translate.instant('PJ.LOCATION');
+  pj.locations = [
+    new Location(locations.TAIL, hitpointsRatioEnum.X25),
+    new Location(locations.RIGHT_BACK_LEG, hitpointsRatioEnum.X33),
+    new Location(locations.LEFT_BACK_LEG, hitpointsRatioEnum.X33),
+    new Location(locations.BACK_QUARTER, hitpointsRatioEnum.X40),
+    new Location(locations.FRONT_QUARTER, hitpointsRatioEnum.X40),
+    new Location(locations.RIGHT_WING, hitpointsRatioEnum.X25),
+    new Location(locations.LEFT_WING, hitpointsRatioEnum.X25),
+    new Location(locations.RIGHT_FRONT_LEG, hitpointsRatioEnum.X33),
+    new Location(locations.LEFT_FRONT_LEG, hitpointsRatioEnum.X33),
+    new Location(locations.HEAD, hitpointsRatioEnum.X33)
+  ];
+  addNaturalArmor(pj, NUMBERS.N_24);
+
+  pj.skills.ATTACK = [];
+  pj.skills.DEFENSE = [];
+  pj.weapons = [];
+ 
+  const literals = translate.instant('PJ.WEAPON_NAME');
+  const firebreath = new Weapon(literals.FIREBREATHING, new DiceRoll(4,6), DamageTypeEnum.FIRE, 0, true, 0, 0 , '', false, 0, 0, false, WeaponTypeEnum.FIREBREATHING, 0, 0, new DiceRoll(4,6), 60, 5);
+  firebreath.visible = false;
+  firebreath.natural = true;
+  addWeapon(pj, WeaponTypeEnum.FIREBREATHING, WeaponNameEnum.FIREBREATHING, translate, firebreath.attackBS, firebreath.parryBS, firebreath);
+  const bite = new Weapon(literals.DRAGON_BITE, new DiceRoll(3,6), DamageTypeEnum.PIERCING, 0, false, 0, 0 , '', false, 0, 0, false, WeaponTypeEnum.FIREBREATHING, 0, 0, new DiceRoll(3,6), 25, 25);
+  bite.visible = false;
+  bite.natural = true;
+  addWeapon(pj, WeaponTypeEnum.BITE, WeaponNameEnum.BITE, translate, bite.attackBS, bite.parryBS, bite);
+  const claw = new Weapon(literals.DRAGON_CLAW, new DiceRoll(1,6), DamageTypeEnum.PIERCING, 0, false, 0, 0 , '', false, 0, 0, false, WeaponTypeEnum.FIREBREATHING, 0, 0, new DiceRoll(1,6), 25, 25);
+  claw.visible = false;
+  claw.natural = true;
+  addWeapon(pj, WeaponTypeEnum.CLAW, WeaponNameEnum.CLAW, translate, claw.attackBS, claw.parryBS, claw);
+  const tail = new Weapon(literals.DRAGON_TAIL, new DiceRoll(1,6), DamageTypeEnum.BLUNT, 0, false, 0, 0 , '', false, 0, 0, false, WeaponTypeEnum.FIREBREATHING, 0, 0, new DiceRoll(1,6), 25, 25);
+  tail.visible = false;
+  tail.natural = true;
+  addWeapon(pj, WeaponTypeEnum.TAIL, WeaponNameEnum.TAIL, translate, tail.attackBS, tail.parryBS, tail);
+
+  return pj;
+};
 
 const addHumanoidLocs = (pj: Character, translate: TranslateService) => {
   const locations =  translate.instant('PJ.LOCATION');
