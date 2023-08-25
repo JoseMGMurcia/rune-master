@@ -14,6 +14,7 @@ import { isRollMsg } from 'src/app/shared/utils/message.utils';
 export class CombatMainComponent implements OnInit, OnDestroy {
 
   public dicesResult = '';
+  public dicesRoll = '';
   public turn = NUMBERS.N_1;
   public swShowResult = false;
   public characters: Character[] = [];
@@ -64,6 +65,10 @@ export class CombatMainComponent implements OnInit, OnDestroy {
     this.characters.splice(this.characters.findIndex((pj) => pj.id === character.id), NUMBERS.N_1);
   }
 
+  public addCharacter(character: Character) {
+    this.characters.push(character);
+  }
+
   public addSavedCharacter() {
     const savedId = this.dicesForm.controls['savedPJ'].value;
     const pJ = this.savedCharacters.find((pj) => pj.id === savedId);
@@ -72,22 +77,21 @@ export class CombatMainComponent implements OnInit, OnDestroy {
     }
   }
 
-  public addTurn() {
-    this.turn++;
-  }
-
-  public substractTurn() {
-    if (this.turn > 1) {
-      this.turn--;
-    }
+  public moveTurn(mod: number) {
+    this.turn = this.turn + mod > NUMBERS.N_0 ? this.turn + mod : this.turn;
   }
 
   public rollDices() {
     const roll = this.dicesForm.controls['dices'].value;
+    this.doRoll(roll);
+  }
+
+  public doRoll(roll: string): void {
     if (isRollMsg(roll)) {
       const total: number = manageRolls(roll);
       this.swShowResult = true;
       this.dicesResult = total.toString();
+      this.dicesRoll = roll;
     }
   }
 

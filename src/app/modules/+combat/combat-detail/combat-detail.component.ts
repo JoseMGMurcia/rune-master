@@ -10,7 +10,7 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
 import { getDMGMod, getDivinePercentage, getMRCC, getMRDES, getMRSIZ, getManMod, getRangedMR, getSpiritualPercentage } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getAgiMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getArmorByLocation, getArmorTypeByLocation, getCAR, getFP, getHp, getHpByLocation, getMP } from 'src/app/shared/utils/character-calculated.-fields.utils';
-import { resetTemporals } from 'src/app/shared/utils/character-creation.utils';
+import { cloneCharacter, removeWeapon, resetTemporals } from 'src/app/shared/utils/character-creation.utils';
 import { getFumbleTarget, getTotal } from 'src/app/shared/utils/dices.utils';
 import { cutDicesRolls } from 'src/app/shared/utils/message.utils';
 import { setRandomAgimoriStats, setRandomBrooStats, setRandomDragonStats, setRandomDuckStats, setRandomHumanStats, setRandomMorocathStats, setRandomNewLingStats, setRandomTuskRiderStats } from 'src/app/shared/utils/races.utils';
@@ -25,6 +25,7 @@ export class CombatDetailComponent {
 
   @Output() swichCharacter = new EventEmitter<number>();
   @Output() removeCharacter = new EventEmitter<Character>();
+  @Output() addCharacter = new EventEmitter<Character>();
 
   constructor(
     private translate: TranslateService,
@@ -152,8 +153,22 @@ export class CombatDetailComponent {
     this.dialogService.openArmorDialog(this.character);
   }
 
+  public copySpells() {
+    this.dialogService.openSpellsCopyDialog(this.character);
+  }
+
   public editStats() {
     this.dialogService.openStatsDialog(this.character);
+  }
+
+  public editName() {
+    this.dialogService.openEditNameDialog(this.character);
+  }
+
+  public cloneCharacter() {
+    const clone = cloneCharacter(this.character);
+    this.addCharacter.emit(clone);
+    this.dialogService.openEditNameDialog(clone);
   }
 
   public setRandomStats() {
@@ -248,7 +263,7 @@ export class CombatDetailComponent {
     weapon.increasedIntensity = set ? NUMBERS.N_3 : NUMBERS.N_0;
     this.setWeaponDamages(weapon);
   }
-  
+
   public addDullBladeEffect(weapon: Weapon, intensity: number) {
     weapon.dullBladeIntensity += intensity;
     weapon.dullBladeIntensity = weapon.dullBladeIntensity < NUMBERS.N_0 ? NUMBERS.N_0 : weapon.dullBladeIntensity
@@ -261,6 +276,13 @@ export class CombatDetailComponent {
     weapon.sustitutiveDamage.modifier = weapon.damage.modifier + weapon.increasedIntensity - weapon.dullBladeIntensity;
     weapon.sustitutiveSpecialDamage = JSON.parse(JSON.stringify(weapon.specialDamage));
     weapon.sustitutiveSpecialDamage.modifier = weapon.specialDamage.modifier + weapon.increasedIntensity - weapon.dullBladeIntensity;
+  }
+
+  public removeWeapon(weapon: Weapon) {
+    const text = this.translate.instant('ACTIONS.DELETE_CONFIRM_WEAPON', {name: weapon.name});
+    this.dialogService.openEasyDialog(text , () => {
+      removeWeapon(this.character, weapon);
+    });
   }
 
   public getDodgeLine(pj: Character): string {
@@ -278,7 +300,7 @@ export class CombatDetailComponent {
     return Math.floor(value + getAgiMod(pj) - getCAR(pj) + this.getFPAllMod());
   }
 
-  getActiveText(spell: Spell): string {
+  public getActiveText(spell: Spell): string {
     const texts = this.translate.instant('PJ.SPELL_ACTION_TYPE');
     return spell.pasive ? texts.PASSIVE : texts.ACTIVE;
   }
@@ -341,5 +363,5 @@ export class CombatDetailComponent {
     }
   }
 
-  
+
 }

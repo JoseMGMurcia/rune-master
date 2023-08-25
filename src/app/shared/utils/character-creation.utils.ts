@@ -40,6 +40,13 @@ export const getUniqueID = (name: string) => {
   return name + '_' + new Date().getTime();
 };
 
+export const cloneCharacter = (pj: Character): Character => {
+  const clone = JSON.parse(JSON.stringify(pj));
+  clone.id = getUniqueID(clone.name);
+  clone.name = clone.id;
+  return clone;
+}
+
 export const addWeapon = ( pj: Character, type: WeaponType, name: WeaponNameType, translate: TranslateService, attack = NUMBERS.N_5, defence = NUMBERS.N_5, weapon: Weapon | undefined = undefined): void => {
   const weap = weapon ? weapon : createWeapon(type, name, translate);
   weap.inCombat = true;
@@ -54,6 +61,15 @@ export const addWeapon = ( pj: Character, type: WeaponType, name: WeaponNameType
     const types = translate.instant('PJ.WEAPON_TYPES');
     pj.skills.DEFENSE.push(new CombatSkill(types['type'], weap.parryBS > defence ? weap.parryBS : defence, weap.weaponType));
   }
+};
+
+export const removeWeapon = ( pj: Character, weapon: Weapon): void => {
+  pj.weapons = pj.weapons.filter(w => w.name !== weapon.name);
+    const isSkillStillused = pj.weapons.some(w => w.weaponType === weapon.weaponType);
+    if(!isSkillStillused) {
+      pj.skills.ATTACK = pj.skills.ATTACK.filter(s => s.weaponType !== weapon.weaponType);
+      pj.skills.DEFENSE = pj.skills.DEFENSE.filter(s => s.weaponType !== weapon.weaponType);
+    }
 };
 
 export const addArmor = ( pj: Character, type: ArmorType, locations: string[], translate: TranslateService): void => {
@@ -78,7 +94,7 @@ export const addArmor = ( pj: Character, type: ArmorType, locations: string[], t
 export const addNaturalArmor = (pj: Character, armor: number): void  =>{
   pj.locations = pj.locations.map((loc: Location) => {
     const location = new Location(loc.name, loc.hitpointsRatio, armor);
-    location.armorWeightRario = loc.armorWeightRario; 
+    location.armorWeightRario = loc.armorWeightRario;
     return location;
   });
 };

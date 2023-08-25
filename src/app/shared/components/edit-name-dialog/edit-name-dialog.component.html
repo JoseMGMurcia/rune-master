@@ -1,0 +1,18 @@
+<div class="light-back padding-all">
+    <p class="rQItem title">{{ "ACTIONS.EDIT_NAME" | translate  }}</p>
+    <form [formGroup]="form" class="rQItem u-flex u-flex-column u-width-100">
+
+      <mat-form-field appearance="fill" class="rQItem u-width-100-padding">
+        <mat-label>{{ "PJ.NAME" | translate }}</mat-label>
+        <input matInput type="text" [value]="" formControlName="name">
+        <mat-hint>{{ "HINTS.CHARACTER_NEW_NAME" | translate }}</mat-hint>
+      </mat-form-field>
+
+
+    </form>
+
+    <div class="rQItem u-flex u-flex-end">
+      <button mat-button color="primary" (click)="handleCancel()"class="rQItem">{{ 'COMMONS.CANCEL' | translate }}</button>
+      <button [disabled]="!form.valid" mat-raised-button color="primary" (click)="handleConfirm()" class="rQItem">{{ 'COMMONS.CONFIRM' | translate }}</button>
+    </div>
+  </div>

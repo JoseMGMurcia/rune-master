@@ -8,6 +8,8 @@ import { ArmorDialogComponent } from '../components/armor-dialog/armor-dialog.co
 import { RaceDialogComponent } from '../components/race-dialog/race-dialog.component';
 import { StatsDialogComponent } from '../components/stats-dialog/stats-dialog.component';
 import { SpellsDialogComponent } from '../components/spells-dialog/spells-dialog.component';
+import { CopySpellsDialogComponent } from '../components/copy-spells-dialog/copy-spells-dialog.component';
+import { EditNameDialogComponent } from '../components/edit-name-dialog/edit-name-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +61,18 @@ export class DialogService {
 
   openSpellsDialog(character: Character): void {
     this.dialog.open(SpellsDialogComponent, {
+      data: { character }
+    });
+  }
+
+  openSpellsCopyDialog(character: Character): void {
+    this.dialog.open(CopySpellsDialogComponent, {
+      data: { character }
+    });
+  }
+
+  openEditNameDialog(character: Character): void {
+    this.dialog.open(EditNameDialogComponent, {
       data: { character }
     });
   }

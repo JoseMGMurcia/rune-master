@@ -20,6 +20,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { RaceDialogComponent } from './components/race-dialog/race-dialog.component';
 import { StatsDialogComponent } from './components/stats-dialog/stats-dialog.component';
 import { SpellsDialogComponent } from './components/spells-dialog/spells-dialog.component';
+import { CopySpellsDialogComponent } from './components/copy-spells-dialog/copy-spells-dialog.component';
+import { EditNameDialogComponent } from './components/edit-name-dialog/edit-name-dialog.component';
 
 export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,6 +43,8 @@ const components = [
   ArmorDialogComponent,
   StatsDialogComponent,
   SpellsDialogComponent,
+  CopySpellsDialogComponent,
+  EditNameDialogComponent,
 ];
 
 

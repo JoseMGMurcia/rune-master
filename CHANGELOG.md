@@ -58,9 +58,24 @@
  - Ranged weapons fire MR & AP.
 
 ## 0.3.2
-
-
+ - Copy spells utility added.
+ - Status service added.
+ - Last target of spells copy status added.
+ - Edit name dialog.
+ - Clone character utility.
+ - Remove weapon buttón added.
+ - D100 dice roll.
+ - D20 dice roll.
 
 ## Futute WalkThrough 
-- Add Broo Horn
-- Add Tritonid Trident
+- Add Weapond: Broo Horn, Tritonid Trident.
+- Edit Combat skill.
+- Common Divine Spells.
+- Sorcery Spells.
+- Custom divine Spells.
+- Delete Spell buttón.
+- Edit Spells.
+- Character spell statuses: Protection, Fanatism, Streng, Coordination, Vigor, movility.
+
+- Main utilities section in combat page:
+  - Save all.

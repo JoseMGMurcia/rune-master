@@ -13,6 +13,7 @@
     "POINTS_SHORT": "Pts.",
     "QUANTITY": "Cantidad",
     "QUANTITY_SHORT": "Cant.",
+    "REMOVE": "Quitar",
     "RESULT": "Resultado",
     "TOTAL": "Total",
     "TURN": "Turno",
@@ -39,11 +40,16 @@
     "ADD_ARMOR": "Añadir armadura",
     "ADD_EFFECT": "Añadir efecto",
     "ADD_WEAPON": "Añadir arma",
+    "COPY_SPELLS": "Copiar hechizos",
     "CREATE_CHAC": "Crear personaje",
     "DELETE_CONFIRM": "¿Si continuas {{name}} sera borrado permanentemente?",
+    "DELETE_CONFIRM_WEAPON": "La siguiente arma será eliminada: {{name}}",
+    "DELETE WEAPON": "Borrar arma",
+    "EDIT_NAME": "Editar nombre",
     "REMOVE_CONFIRM": "¿Quieres eliminar a {{name}} del combate?",
     "ROLL_DICES": "Tirar dados",
     "SELECT_ARMOR_TYPE": "Selecciona un tipo de armadura",
+    "SELECT_CHARACTER": "Selecciona un personaje",
     "SELECT_INTENSITY": "Intensidad",
     "SELECT_LOCATIONS": "Selecciona las Localizaciones cubiertas",
     "SELECT_RACE": "Selecciona una raza",
@@ -59,6 +65,10 @@
       "RND_STATS": "Caracts. aleatorias",
       "RESEL_ALL": "Reset"
     }
+  },
+  "DICES_TYPES": {
+    "D_20": "D20",
+    "D_100": "D100"
   },
   "PJ": {
     "1H": "1M",
@@ -457,6 +467,8 @@
     "ADD_COMBATANT": "Añadir nuevo luchador sin estadísticas",
     "ADD_SAVED_COMBATANT": "Añadir Personaje pregenerado",
     "SELEC_SKILL_VALUE": "El valor de la habilidad",
-    "SELECT_INTENSITY": "La intensidad del hechizo"
+    "SELECT_INTENSITY": "La intensidad del hechizo",
+    "SEARCH_CHARACTER": "Filtra nombres de personajes",
+    "CHARACTER_NEW_NAME": "Nuevo nombre del personaje"
   }
 }

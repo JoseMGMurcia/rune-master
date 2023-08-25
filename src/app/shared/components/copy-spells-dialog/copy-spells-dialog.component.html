@@ -1,0 +1,26 @@
+<div class="light-back padding-all">
+    <p class="rQItem title">{{ "ACTIONS.COPY_SPELLS" | translate  }}</p>
+    <form [formGroup]="form" class="rQItem u-flex u-flex-column u-width-100">
+
+      <mat-form-field appearance="fill" class="rQItem u-width-100-padding">
+        <mat-label>{{ "PJ.NAME" | translate }}</mat-label>
+        <input matInput type="text" [value]="" formControlName="filter">
+        <mat-hint>{{ "HINTS.SEARCH_CHARACTER" | translate }}</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="rQItem u-width-100-padding">
+        <mat-label>{{ "ACTIONS.SELECT_CHARACTER" | translate }}</mat-label>
+        <mat-select formControlName="character">
+          <mat-option *ngFor="let pj of filteredCharacters" [value]="pj.id">
+            {{ pj.name  }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </form>
+
+    <div class="rQItem u-flex u-flex-end">
+      <button mat-button color="primary" (click)="handleCancel()"class="rQItem">{{ 'COMMONS.CANCEL' | translate }}</button>
+      <button [disabled]="!form.valid" mat-raised-button color="primary" (click)="handleConfirm()" class="rQItem">{{ 'COMMONS.CONFIRM' | translate }}</button>
+    </div>
+  </div>
