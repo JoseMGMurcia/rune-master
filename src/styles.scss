@@ -92,7 +92,12 @@ button {
     width: 1.75em;
 
     &.wide {
-      width: 3.65em;
+      padding: 0 0.5em;
+      width: min-content;
+
+      mat-icon {
+        scale: 0.6;
+      }
     }
 
     &-mini {
@@ -100,12 +105,22 @@ button {
     }
   }
 
+  &.dice-button {
+    background-color: colors.$background-sec;
+    border-radius: 50px;
+    box-shadow: 1px 4px 4px 1px rgba(0, 0, 0, 0.2);
+    color: colors.$white-100;
+
+  }
+
+  &.dice-button:hover {
+    box-shadow: 1px 8px 8px 1px rgba(0, 0, 0, 0.2);
+  }
+
   &.card-button:hover {
     background-color: colors.$background-tertiary-hover;
     box-shadow: 1px 8px 8px 1px rgba(0, 0, 0, 0.2);
   }
-
-  
 }
 
 // ANGULAR MATERIAL REDESING STYLES
@@ -167,6 +182,41 @@ button {
       border-color: colors.$tema-contrast-dark !important;
     }
   }
+}
+
+.mat-mdc-form-field {
+  background-color: colors.$background-light;
+  border-radius: 8px;
+
+  .mdc-text-field{
+    background-color: colors.$background-sec;
+    border-radius: 8px 8px 0 0;
+    color: colors.$white-200;
+
+
+    .mat-mdc-form-field-flex {
+      .mat-mdc-form-field-infix {
+        label {
+          color: colors.$white-200;
+        }
+      }
+    }
+  }
+}
+.mdc-menu-surface {
+  background-color: colors.$background-sec;
+}
+
+.mat-mdc-select-arrow {
+  color: colors.$white-100;
+}
+
+.mat-mdc-option {
+  background-color: colors.$background-sec;
+}
+
+.mat-mdc-option-active {
+  background-color: colors.$background-sec-hover;
 }
 
 .medium-viewport {
