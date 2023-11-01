@@ -44,7 +44,9 @@
           </button>
         </div>
         <div class="u-width-14 u-flex u-flex-center u-flex-space-center">
-
+          <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.CON, -1)">
+            <mat-icon>remove</mat-icon>
+          </button>
           <p class="u-text-center">{{ character.stats.CON.value + character.stats.CON.tempMod  }}</p>
           <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="addStatMod(character.stats.CON, 1)">
             <mat-icon>add</mat-icon>
@@ -177,22 +179,30 @@
                 </button>
               </div>
             </div>
-            <div class="u-width-35 u-flex u-flex-center">
+            <div class="u-width-40 u-flex u-flex-center">
               <p class="margin-none" [matTooltip]="getArmorTypeByLocation(character, loc)">{{ getArmorTypeByLocation(character, loc) }}</p>
             </div>
             <div class="u-width-5 u-flex u-flex-center">
               <p class="margin-none">{{ getArmorByLocation(character, loc) }}</p>
             </div>
           </div>
-          <div class=" u-width-100-padding u-flex border-all rQItem">
-            <p class="u-width-50 u-flex u-flex-center u-flex-space-center"><b>{{ "PJ.ARMOR_BONUS" | translate }}:</b> </p>
-            <div class="u-width-50 u-flex u-flex-center u-flex-space-center">
-              <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addApMod(-1)">
-                <mat-icon>remove</mat-icon>
-              </button>
-              <p class="u-text-center">{{ character.tempAPMod }}</p>
-              <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addApMod(1)">
-                <mat-icon>add</mat-icon>
+          <div class="u-width-100 u-flex">
+            <div class="u-width-75 u-flex border-all rQItem">
+              <p class="u-width-65 u-flex u-flex-center u-flex-space-center"><b>{{ "PJ.ARMOR_BONUS" | translate }}:</b> </p>
+              <div class="u-width-25 u-flex u-flex-center u-flex-space-center">
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addApMod(-1)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <p class="u-text-center">{{ character.tempAPMod }}</p>
+                <button mat-mini-fab class="card-button u-flex u-flex-space-center u-flex-center" (click)="addApMod(1)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="u-width-35 u-flex u-flex-center u-flex-space-center">
+              <button class="card-button wide text u-flex u-flex-space-center u-flex-center" (click)="removeAllArmor()">
+                <mat-icon>clear</mat-icon>
+                <p> {{ "COMMONS.REMOVE" | translate  }} </p>
               </button>
             </div>
           </div>
@@ -216,12 +226,19 @@
 
     <div class="u-flex u-width-100-padding u-flex-column margin-top" *ngIf="character.swCombat">
       <div class="u-width-100 rQItem u-flex u-flex-center">
-        <p><b>{{ "PJ.SKILL_NAME.AGILITY.DODGE" | translate }}:</b></p>
-        <p class="padding-left-mini">{{ getDodgeLine(character) }}</p>
-        <div class="u-width-5 u-flex padding-left-mini">
-          <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollD100(getDodge(character))">
-            {{ getDodge(character) }}
-          </button>
+        <div class="u-width-50 u-flex u-flex-center">
+          <p><b>{{ "PJ.SKILL_NAME.AGILITY.DODGE" | translate }}:</b></p>
+          <p class="padding-left-mini">{{ getDodgeLine(character) }}</p>
+          <div class="u-width-5 u-flex padding-left-mini">
+            <button class="card-button u-flex u-flex-space-center u-flex-center" (click)="rollD100(getDodge(character))">
+              {{ getDodge(character) }}
+            </button>
+          </div>
+        </div>
+
+        <div class="u-width-50 u-flex u-flex-center">
+          <p><b>{{ "PJ.MOVEMENT" | translate }}:</b></p>
+          <p class="padding-left-mini">{{character.movement }}</p>
         </div>
       </div>
 
@@ -296,6 +313,20 @@
               <mat-icon>clear</mat-icon>
             </button>
           </div>
+
+          <div class="u-width-15 u-flex u-flex-center u-flex-space-center" *ngIf="!weapon.natural && !weapon.ranged">
+            <p class="u-width-100"> {{ "PJ.SPELLS_NAMES.TRUE_WEAPON" | translate  }} </p>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="setTrueWeaponDamage(weapon, true)">
+              <mat-icon>keyboard_double_arrow_up</mat-icon>
+            </button>
+            <button mat-mini-fab class="card-button card-button-mini u-flex u-flex-space-center u-flex-center" (click)="setTrueWeaponDamage(weapon, false)">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </div>
+
+
+
+
           <div class="u-width-3" *ngIf="!weapon.natural"></div>
           <div class="u-width-15 u-flex u-flex-center u-flex-space-center" *ngIf="!weapon.natural">
             <p class="u-width-100"> {{ "PJ.SPELLS_NAMES.DULLBLADE" | translate  }} </p>
@@ -318,6 +349,12 @@
             </button>
           </div>
           <div class="u-width-15 u-flex u-flex-center u-flex-space-center">
+            <button class="card-button wide text u-flex u-flex-space-center u-flex-center" (click)="editWeaponSkill(weapon)">
+              <mat-icon>edit</mat-icon>
+              <p class="u-width-100"> {{ "COMMONS.EDIT" | translate  }} </p>
+            </button>
+          </div>
+          <div class="u-width-15 u-flex u-flex-center u-flex-space-center" *ngIf="!weapon.natural">
             <button class="card-button wide text u-flex u-flex-space-center u-flex-center" (click)="removeWeapon(weapon)">
               <mat-icon>clear</mat-icon>
               <p class="u-width-100"> {{ "COMMONS.REMOVE" | translate  }} </p>
@@ -367,8 +404,13 @@
             <p class="u-width-100-padding-sides" *ngIf="spell.stackable">{{ "COMMONS.VARIABLE" | translate }}</p>
             <p class="u-width-100-padding-sides" *ngIf="!spell.stackable"> {{ spell.points }} {{ "COMMONS.POINTS" | translate }}</p>
             <p class="u-width-100-padding-sides padding-bottom-mini">{{ spell.range }}, {{ spell.duration }}, {{ getActiveText(spell) }}</p>
-            <p class="u-width-100-padding-sides padding-bottom justyfy">{{ spell.description }}</p>
-
+            <p class="u-width-100-padding-sides padding-bottom-mini justyfy">{{ spell.description }}</p>
+            <div class="u-width-50 u-flex u-flex-center u-flex-space-center margin-bottom-sm">
+              <button class="card-button wide text u-flex u-flex-space-center u-flex-center" (click)="removeSpell(character.spells.SPIRITUAL, spell)">
+                <mat-icon>clear</mat-icon>
+                <p class="u-width-100"> {{ "COMMONS.REMOVE" | translate  }} </p>
+              </button>
+            </div>
           </div>
         </div>
       </div>

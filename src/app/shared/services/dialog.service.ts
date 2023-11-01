@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { EasyDialogComponent } from '../components/easy-dialog/easy-dialog.component';
 import { WeaponDialogComponent } from '../components/weapon-dialog/weapon-dialog.component';
-import { Character } from '../models/character.model';
+import { Character, Weapon } from '../models/character.model';
 import { ArmorDialogComponent } from '../components/armor-dialog/armor-dialog.component';
 import { RaceDialogComponent } from '../components/race-dialog/race-dialog.component';
 import { StatsDialogComponent } from '../components/stats-dialog/stats-dialog.component';
@@ -38,6 +38,12 @@ export class DialogService {
   openWeaponDialog(character: Character): void {
     this.dialog.open(WeaponDialogComponent, {
       data: { character }
+    });
+  }
+
+  openEditWeaponDialog(character: Character, weapon: Weapon): void {
+    this.dialog.open(WeaponDialogComponent, {
+      data: { character, weapon, swEditing: true }
     });
   }
 

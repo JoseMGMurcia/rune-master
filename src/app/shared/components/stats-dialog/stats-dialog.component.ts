@@ -2,7 +2,7 @@ import {Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Character } from '../../models/character.model';
 import { TranslateService } from '@ngx-translate/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-stats-dialog',
@@ -32,7 +32,7 @@ export class StatsDialogComponent{
     this.form.controls[stat].setValue(this.form.controls[stat].value + value);
   }
 
-  
+
 
   handleConfirm() {
     const values = this.form.getRawValue();
@@ -45,7 +45,7 @@ export class StatsDialogComponent{
     this.data.character.stats.CHA.value = values.cha;
     this.dialogRef.close();
   }
- 
+
   handleCancel() {
     this.dialogRef.close();
   }

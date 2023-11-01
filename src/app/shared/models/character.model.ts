@@ -171,7 +171,7 @@ export enum SpellTypeEnum {
   SORCERY = 'SORCERY',
   DIVINE = 'DIVINE',
   OTHER = 'OTHER',
-};
+}
 
 export type SpellType = 'SPIRITUAL' | 'SORCERY' | 'DIVINE' | 'OTHER';
 
@@ -268,6 +268,7 @@ export class Weapon extends Equipment {
   public showDetail = false;
   public increasedIntensity = NUMBERS.N_0;
   public dullBladeIntensity = NUMBERS.N_0;
+  public trueWeapon = false;
   public natural = false;
 
   constructor(

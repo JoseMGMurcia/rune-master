@@ -67,15 +67,22 @@
  - D100 dice roll.
  - D20 dice roll.
 
+## 0.3.3
+ - Better form styling.
+ - No remove button on natural weapons.
+ - Edit weapons and combat skills.
+ - Movement included in combat section.
+ - Remove all armor from a character buttón.
+ - Delete Spell buttón.
+ - True weapon button.
+ - Add weapon types alphabetically ordered.
+
 ## Futute WalkThrough 
-- Add Weapond: Broo Horn, Tritonid Trident.
-- Edit Combat skill.
+- Add Weapons: Broo Horn, Tritonid Trident.
 - Common Divine Spells.
 - Sorcery Spells.
 - Custom divine Spells.
-- Delete Spell buttón.
 - Edit Spells.
 - Character spell statuses: Protection, Fanatism, Streng, Coordination, Vigor, movility.
-
 - Main utilities section in combat page:
   - Save all.

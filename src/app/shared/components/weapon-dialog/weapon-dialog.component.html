@@ -5,14 +5,14 @@
     <mat-form-field appearance="fill" class="rQItem u-width-95 ">
       <mat-label>{{ "ACTIONS.SELECT_WEAPON_TYPE" | translate }}</mat-label>
       <mat-select formControlName="type">
-        <mat-option *ngFor="let name of weapontypes | keyvalue" [value]="name.value">
-          {{ 'PJ.WEAPON_TYPES.' + name.key | translate }}
+        <mat-option *ngFor="let type of weapontypes" [value]="type.weaponKey">
+          {{ type.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="rQItem u-width-95" *ngIf="typeSelected">
-      <mat-label>{{ "ACTIONS.SELECT_WEAPON_TYPE" | translate }}</mat-label>
+      <mat-label>{{ "ACTIONS.SELECT_WEAPON" | translate }}</mat-label>
       <mat-select formControlName="name">
         <mat-option *ngFor="let name of weaponNames" [value]="name">
           {{ 'PJ.WEAPON_NAME.' + name | translate }}
@@ -32,10 +32,7 @@
         <mat-hint>{{ "HINTS.SELEC_SKILL_VALUE" | translate }}</mat-hint>
       </mat-form-field>
     </div>
-    
-
   </form>
-
 
   <div class="rQItem u-flex u-flex-end  u-width-100">
     <button mat-button color="primary" (click)="handleCancel()"class="rQItem">{{ 'COMMONS.CANCEL' | translate }}</button>

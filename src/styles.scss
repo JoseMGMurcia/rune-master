@@ -79,6 +79,7 @@ body {
 
 .listLine-card-even {
   background-color: colors.$card-background-even;
+  border-radius: 0.35em;
 }
 
 button {
@@ -193,6 +194,13 @@ button {
     border-radius: 8px 8px 0 0;
     color: colors.$white-200;
 
+    &--focused{
+      background-color: colors.$background-sec !important;
+
+      .mat-mdc-text-field-wrapper{
+
+      }
+    }
 
     .mat-mdc-form-field-flex {
       .mat-mdc-form-field-infix {
@@ -213,10 +221,41 @@ button {
 
 .mat-mdc-option {
   background-color: colors.$background-sec;
+
+  &:hover {
+    background-color:colors.$background-sec-contrast !important;
+  }
+
+  &-active {
+    background-color: colors.$background-sec-hover !important;
+
+    &:hover {
+      background-color:colors.$background-sec-contrast !important;
+    }
+  }
+
+  &.mdc-list-item--selected {
+    background-color: colors.$background-sec-hover !important;
+    color: colors.$white-100 !important;
+
+    &:hover {
+      background-color:colors.$background-sec-contrast !important;
+    }
+  }
+
+  .mdc-list-item__primary-text {
+    color: colors.$white-100 !important;
+  }
+
+  .mat-mdc-option-pseudo-checkbox {
+    &::after {
+      color: colors.$white-100 !important;
+    }
+  }
 }
 
-.mat-mdc-option-active {
-  background-color: colors.$background-sec-hover;
+.mat-mdc-select-arrow {
+  color: colors.$white-100 !important;
 }
 
 .medium-viewport {

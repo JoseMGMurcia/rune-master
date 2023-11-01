@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NUMBERS } from 'src/app/shared/constants/number.constants';
-import { Characteristic, Results, Spell } from 'src/app/shared/models/character.model';
+import { Characteristic, Spell } from 'src/app/shared/models/character.model';
 import { Character, Location, Weapon } from 'src/app/shared/models/character.model';
 import { DiceRoll } from 'src/app/shared/models/dices.model';
 import { RaceTypeEnum } from 'src/app/shared/models/races.model';
@@ -10,7 +10,7 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
 import { getDMGMod, getDivinePercentage, getMRCC, getMRDES, getMRSIZ, getManMod, getRangedMR, getSpiritualPercentage } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getAgiMod } from 'src/app/shared/utils/character-calculated.-fields.utils';
 import { getArmorByLocation, getArmorTypeByLocation, getCAR, getFP, getHp, getHpByLocation, getMP } from 'src/app/shared/utils/character-calculated.-fields.utils';
-import { cloneCharacter, removeWeapon, resetTemporals } from 'src/app/shared/utils/character-creation.utils';
+import { cloneCharacter, removeAllArmor, removeWeapon, resetTemporals } from 'src/app/shared/utils/character-creation.utils';
 import { getFumbleTarget, getTotal } from 'src/app/shared/utils/dices.utils';
 import { cutDicesRolls } from 'src/app/shared/utils/message.utils';
 import { setRandomAgimoriStats, setRandomBrooStats, setRandomDragonStats, setRandomDuckStats, setRandomHumanStats, setRandomMorocathStats, setRandomNewLingStats, setRandomTuskRiderStats } from 'src/app/shared/utils/races.utils';
@@ -161,8 +161,24 @@ export class CombatDetailComponent {
     this.dialogService.openStatsDialog(this.character);
   }
 
+  public removeSpell(Spells: Spell[], spell: Spell) {
+    const index = Spells.findIndex(s => s.id === spell.id);
+    Spells.splice(index, NUMBERS.N_1);
+  }
+
   public editName() {
     this.dialogService.openEditNameDialog(this.character);
+  }
+
+  public editWeaponSkill(weapon: Weapon): void {
+    this.dialogService.openEditWeaponDialog(this.character, weapon);
+  }
+
+  public removeAllArmor(): void {
+    this.dialogService.openEasyDialog(
+      this.translate.instant('ACTIONS.REMOVE_ALL_ARMOR_CONFIRM', { name: this.character.name }),
+      () => removeAllArmor(this.character)
+    );
   }
 
   public cloneCharacter() {
@@ -255,7 +271,7 @@ export class CombatDetailComponent {
 
   public addPowerWeaopnEffect(weapon: Weapon, intensity: number) {
     weapon.increasedIntensity += intensity;
-    weapon.increasedIntensity = weapon.increasedIntensity < NUMBERS.N_0 ? NUMBERS.N_0 : weapon.increasedIntensity
+    weapon.increasedIntensity = weapon.increasedIntensity < NUMBERS.N_0 ? NUMBERS.N_0 : weapon.increasedIntensity;
     this.setWeaponDamages(weapon);
   }
 
@@ -266,12 +282,16 @@ export class CombatDetailComponent {
 
   public addDullBladeEffect(weapon: Weapon, intensity: number) {
     weapon.dullBladeIntensity += intensity;
-    weapon.dullBladeIntensity = weapon.dullBladeIntensity < NUMBERS.N_0 ? NUMBERS.N_0 : weapon.dullBladeIntensity
+    weapon.dullBladeIntensity = weapon.dullBladeIntensity < NUMBERS.N_0 ? NUMBERS.N_0 : weapon.dullBladeIntensity;
     this.setWeaponDamages(weapon);
   }
 
   private setWeaponDamages(weapon: Weapon) {
-    weapon.useSustitutiveDMG = weapon.increasedIntensity > NUMBERS.N_0 || weapon.dullBladeIntensity > NUMBERS.N_0;
+    weapon.useSustitutiveDMG = weapon.increasedIntensity > NUMBERS.N_0 || weapon.dullBladeIntensity > NUMBERS.N_0 || weapon.trueWeapon;
+    if (weapon.trueWeapon) {
+      this.setTrueWeaponDamage(weapon, true);
+      return;
+    }
     weapon.sustitutiveDamage = JSON.parse(JSON.stringify(weapon.damage));
     weapon.sustitutiveDamage.modifier = weapon.damage.modifier + weapon.increasedIntensity - weapon.dullBladeIntensity;
     weapon.sustitutiveSpecialDamage = JSON.parse(JSON.stringify(weapon.specialDamage));
@@ -363,5 +383,19 @@ export class CombatDetailComponent {
     }
   }
 
-
+  public setTrueWeaponDamage(weapon: Weapon, aplyDamage: boolean): void {
+    weapon.trueWeapon = aplyDamage;
+    if( aplyDamage ){
+      weapon.useSustitutiveDMG = true;
+      weapon.sustitutiveDamage = new DiceRoll(weapon.damage.dice * NUMBERS.N_2, weapon.damage.sides);
+      weapon.sustitutiveDamage.modifier = weapon.damage.modifier * NUMBERS.N_2 + weapon.increasedIntensity - weapon.dullBladeIntensity;
+      weapon.sustitutiveSpecialDamage = new DiceRoll(weapon.specialDamage.dice * NUMBERS.N_2, weapon.specialDamage.sides);
+      weapon.sustitutiveSpecialDamage.modifier = weapon.specialDamage.modifier * NUMBERS.N_2 + weapon.increasedIntensity - weapon.dullBladeIntensity;
+    } else {
+      weapon.sustitutiveDamage = JSON.parse(JSON.stringify(weapon.damage));
+      weapon.sustitutiveDamage.modifier = weapon.damage.modifier + weapon.increasedIntensity - weapon.dullBladeIntensity;
+      weapon.sustitutiveSpecialDamage = JSON.parse(JSON.stringify(weapon.specialDamage));
+      weapon.sustitutiveSpecialDamage.modifier = weapon.specialDamage.modifier + weapon.increasedIntensity - weapon.dullBladeIntensity;
+    }
+  }
 }

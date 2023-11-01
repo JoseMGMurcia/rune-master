@@ -5,6 +5,7 @@
     "COST": "Coste",
     "CANCEL": "Cancelar",
     "DETAIL": "Detalle",
+    "EDIT": "Editar",
     "IN_LOC_SHORT": "en la Loc.",
     "PERCENTAGE": "Porcentaje",
     "PERCENTAGE_SHORT": "%",
@@ -13,7 +14,7 @@
     "POINTS_SHORT": "Pts.",
     "QUANTITY": "Cantidad",
     "QUANTITY_SHORT": "Cant.",
-    "REMOVE": "Quitar",
+    "REMOVE": "Eliminar",
     "RESULT": "Resultado",
     "TOTAL": "Total",
     "TURN": "Turno",
@@ -46,6 +47,7 @@
     "DELETE_CONFIRM_WEAPON": "La siguiente arma será eliminada: {{name}}",
     "DELETE WEAPON": "Borrar arma",
     "EDIT_NAME": "Editar nombre",
+    "REMOVE_ALL_ARMOR_CONFIRM": "Si continuas eliminaràs toda la armadura de {{name}}?",
     "REMOVE_CONFIRM": "¿Quieres eliminar a {{name}} del combate?",
     "ROLL_DICES": "Tirar dados",
     "SELECT_ARMOR_TYPE": "Selecciona un tipo de armadura",
@@ -56,6 +58,7 @@
     "SELECT_SPELL": "Selecciona un hechizo",
     "SELECT_SPELL_TYPE": "Selecciona un tipo de hechizo",
     "SELECT_WEAPON_TYPE": "Selecciona un tipo de arma",
+    "SELECT_WEAPON": "Selecciona un arma",
     "SAVED_CHARACTERS": "Personajes guardados",
     "UTILS": {
       "UTILS": "Utilidades",
@@ -105,6 +108,7 @@
     "MAGICAL_SKILLS": "Habilidades mágicas",
     "MAX_STUDENTS": "Máx. estudiantes",
     "MIN_COST": "Coste mínimo",
+    "MOVEMENT": "Movimiento",
     "MR": "MR",
     "MRCC": "MMR-CC",
     "MRDEX": "MMR-DES",
@@ -315,7 +319,8 @@
       "FIREARROW": "Flecha ignea",
       "FIREBLADE": "Cuchilla ignea",
       "DULLBLADE": "Mellar armas",
-      "SPEED_DART": "Dardo veloz"
+      "SPEED_DART": "Dardo veloz",
+      "TRUE_WEAPON": "Arma auténtica"
     },
     "WEAPON_POWER_SPELL_BY_TYPE": {
       "SLASHING": "Cuchilla Afilada",
@@ -326,6 +331,7 @@
     "WEAPON_TYPES": {
       "AXE1H": "Hacha 1 mano",
       "AXE2H": "Hacha 2 manos",
+      "BITE": "Mordisco",
       "DAGGER": "Dagas",
       "PEASANT_MACE1M": "Maza campesinas 1 mano",
       "PEASANT_MACE2M": "Maza campesinas 2 manos",
@@ -350,7 +356,9 @@
       "THROWING_AXE": "Hacha arrojadiza",
       "THROWING_KNIFE": "Cuchillo arrojadizo",
       "THROWING_ROCK": "Piedra arrojadiza",
+      "FIREBREATHING": "Aliento de fuego",
       "FIST": "Puño",
+      "FLAIL": "Mazas con cadena",
       "KICK": "Patada",
       "CLAW": "Garra",
       "BRAWL": "Lucha",
@@ -373,6 +381,7 @@
       "ROPE_LACE": "Lazo de cuerda",
       "POLE_LACE": "Lazo de palo",
       "NET": "Red",
+      "TAIL": "Cola",
       "WHIP": "Látigo",
       "OTHER": "Otras"
     },

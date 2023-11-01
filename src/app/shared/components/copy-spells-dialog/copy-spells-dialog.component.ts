@@ -83,7 +83,7 @@ export class CopySpellsDialogComponent implements OnInit, OnDestroy {
   }
 
   private getLastTarget(): void {
-      // TODO start loading
+    // TODO start loading
     this.statusService.targetOfSpellsCopy
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((targetId) => {

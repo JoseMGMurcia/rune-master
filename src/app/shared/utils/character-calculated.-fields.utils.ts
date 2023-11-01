@@ -194,8 +194,8 @@ export const getWeaponList = (pj: Character): string[] => {
 
 export const getSpiritualPercentage = (pj: Character): number => {
   return getMagMod(pj) + pj.stats.POW.value * NUMBERS.N_5 - Math.ceil(getCAR(pj, true));
-}
+};
 
 export const getDivinePercentage = (pj: Character): number => {
   return getMagMod(pj) +  NUMBERS.N_100 - Math.ceil(getCAR(pj, true));
-}
+};

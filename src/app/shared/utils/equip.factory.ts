@@ -168,7 +168,7 @@ export enum WeaponNameEnum {
   FIREBREATHING = 'FIREBREATHING',
   BITE = 'BITE',
   TAIL = 'TAIL',
-};
+}
 
 export const createWeapon = (type: WeaponType, name: WeaponNameType, translate: TranslateService): Weapon => {
   const literal = translate.instant( `PJ.WEAPON_NAME.${name}` );
